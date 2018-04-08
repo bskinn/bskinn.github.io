@@ -4,12 +4,21 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
+I'm a Ph.D. chemical engineer, working in electrochemical process R&D (electropolishing,
+electroplating, etc.).  I've been programming for over twenty years, first in
+TI-BASIC, then in VBA, *then* a bit in Java, and (finally!) for the last few years in Python.
 
-### More Information
+I have a handful of things up on [PyPI](https://pypi.org/user/bskinn/),
+with more Python and VBA projects on my [GitHub](https://github.com/bskinn?tab=repositories).
 
-A place to include any other types of information that you'd like to include about yourself.
+I'm also running [quantum chemical computations](https://orcaforum.cec.mpg.de) for fun in my spare time.
+My strongest sub-field is vibrational analysis, learned in the course of starting
+work on [`opan`](https://github.com/bskinn/opan) (which is still far from done).
+Some sense of my interests in this area can be gained from my
+[Chem.SE answers](https://chemistry.stackexchange.com/search?q=%5Bquantum-chemistry%5D+or+%5Bcomputational-chemistry%5D+user%3A11367)
+on the topic.
 
 ### Contact me
 
-[email@domain.com](mailto:email@domain.com)
+Feel free to [email me](mailto:bskinn@alum.mit.edu), or reach out
+on LinkedIn or Twitter.
