@@ -4,6 +4,10 @@ title: About
 permalink: /about/
 ---
 
+<img src="{{ site.baseurl }}/images/brian_skinn_436x574.jpg" alt="Brian Skinn headshot" style="width: 160px;"/>
+
+Hi! I'm Brian.
+
 I'm a Ph.D. chemical engineer, working in electrochemical process R&D (electropolishing,
 electroplating, etc.).  I've been programming for over twenty years, first in
 TI-BASIC, then in VBA, *then* a bit in Java, and (finally!) for the last few years in Python.
