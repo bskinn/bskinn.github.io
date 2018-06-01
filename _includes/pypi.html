@@ -1,0 +1,1 @@
+{% if include.project %} <a href="https://pypi.org/project/{{- include.project -}}{% if include.version %}{{- include.version | prepend: "/" -}}{% endif %}"><img src="{{ site.baseurl }}/images/pypi_icon.png" width="20"></a>{% endif %}
