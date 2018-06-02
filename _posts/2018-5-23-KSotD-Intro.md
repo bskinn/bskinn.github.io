@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Keyboard Shortcut of the Day (KSotD): Introduction'
+tags: ksotd administrative
 ---
 
 A significant part of my day-to-day productivity is the heavy use of keyboard shortcuts. Mousing is valuable in a lot of situations, but when selecting/executing a specific command while typing, the time involved in mousing is a major slowdown:

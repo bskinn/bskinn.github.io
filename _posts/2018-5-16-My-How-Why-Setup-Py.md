@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'My How and Why: setup.py'
+tags: python how-why packaging
 ---
 
 When I was first figuring out how to publish a project to [PyPI](https://pypi.org), one of the more confusing things about the process was the purpose of all the various arguments to [`setuptools.setup`](http://setuptools.readthedocs.io/en/latest/setuptools.html#new-and-changed-setup-keywords).  `requires` versus `install_requires`, `packages` versus `provides`, that huge list of [trove classifiers](https://pypi.org/classifiers/)... it was really hard to figure out what arguments I needed to include, and what I should put in them.

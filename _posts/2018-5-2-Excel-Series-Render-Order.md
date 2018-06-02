@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'Excel: Series Rendering Order'
+tags: excel visualization
 ---
 
 Excel renders series in a chart in the order they're listed in the `Select Data Source` dialog:

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: 'sphobjinv: Impending v2.0 Release'
+tags: sphobjinv python
 ---
 
 As a heads-up for anyone out there who might be using `sphobjinv` {% include gh.html gh_user="bskinn" gh_repo="sphobjinv" %}, my tool for inspecting and manipulating Sphinx `objects.inv` files, I'm working to put out a v2.0 release.  **The API has completely changed from v1.0.** If you depend on it, you'll definitely want to pin your version in the near future. The project will bump to production v2.0 once I get the docs finished.
