@@ -283,6 +283,22 @@ footer {
   text-align: center;
 }
 
+.taglist {
+  font-size: 80%;
+  color: #0f3b21;
+  letter-spacing: 1px;
+}
+
+.tagsingle {
+  white-space: nowrap;
+  hyphens: none;
+  background-color: #effadc;
+}
+
+a.tag {
+  color: inherit;
+}
+
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
 @import "highlights";

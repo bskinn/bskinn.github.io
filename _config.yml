@@ -86,3 +86,10 @@ exclude:
   - LICENSE
   - README.md
   - CNAME
+
+# Add collection(s)
+collections:
+  tagpages:
+    output: true
+    permalink: /tag/:name
+
