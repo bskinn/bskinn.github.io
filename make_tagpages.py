@@ -26,30 +26,30 @@ def main():
     base = Path().resolve()
 
     # Find the repo root, in case not executed there
-    while (not (base / '_tagpages').exists()
+    # Could fall through to filesystem root in
+    # pathological situations.
+    while (not (base / '_posts').exists()
            and not base == base.parent):
         base = base.parent
-
-    # This ensures it didn't crash through to the root,
-    # also also is a sanity check
-    if not (base / '_tagpages').is_dir():
-        print("Cannot find '_tagpages' directory")
-        sys.exit(1)
-
-    # Sanity check also
-    if not (base / '_posts').is_dir():
-        print("Cannot find '_posts' directory")
-        sys.exit(1)
 
     # Useful dirs
     tpdir = base / '_tagpages'
     postdir = base / '_posts'
 
+    # Sanity check; should always exist, if the above
+    # repo root search was successful.
+    if not postdir.is_dir():
+        print("Cannot find '_posts' directory")
+        sys.exit(1)
+
+    # Create '_tagpages' dir if not existing
+    tpdir.mkdir(exist_ok=True)
+
     # Scrub tag pages in case a tag got eliminated
     for f in (_ for _ in tpdir.iterdir() if str(_).endswith('.md')):
         f.unlink()
 
-    # Search the _posts for all tags. Set behavior handy here.
+    # Search the _posts for all tags. Set behavior is handy here.
     taglist = set()
     for f in (_ for _ in postdir.iterdir() if str(_).endswith('.md')):
         m = p_yamltags.search(f.read_text())
