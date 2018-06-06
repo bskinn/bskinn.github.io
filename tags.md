@@ -18,7 +18,7 @@ permalink: /tags/
   {% for t in site.tags %}
     {% if t[0] == tagname %}{% assign numposts = t[1] | size %}{% endif %}
   {% endfor %}
-  <p class="taglist"><a class="tag" href="{{ tagurl }}"><span class="tagsingle"><strong>{{ tagname }}</strong></span> <em>{% include tagdesc.html tagname=tagname %} ({{ numposts }})</em></a></p>
+  <p class="taglist" style="font-size: 90%;"><a class="tag" href="{{ tagurl }}"><span class="tagsingle"><strong>{{ tagname }}</strong></span> <em>{% include tagdesc.html tagname=tagname %} ({{ numposts }})</em></a></p>
 {% endfor %}
 </div>
 
