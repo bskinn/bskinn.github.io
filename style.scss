@@ -311,8 +311,9 @@ kbd {
   padding: 3px;
   font-size: 75%;
   font-weight: 475;
-  background-color: #f8f8f8;
+  background-color: #f0f0f0;
   margin: 2px;
+  white-space: nowrap;
 }
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
