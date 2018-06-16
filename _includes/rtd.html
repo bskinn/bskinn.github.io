@@ -1,0 +1,1 @@
+{% if include.project %}<a href="http://{{ include.project }}.readthedocs.io{% if include.ver %}{{ include.ver | prepend: "/en/" | append: "/" }}{% endif %}"><img src="{{ site.baseurl }}/images/rtd_icon.png" width="16"></a>{% endif %}
