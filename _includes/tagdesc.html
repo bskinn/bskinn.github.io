@@ -1,17 +1,19 @@
-{% if include.tagname=="administrative" %}Site administration{% endif %}
-{% if include.tagname=="cli" %}Command-line interfaces{% endif %}
-{% if include.tagname=="excel" %}That spreadsheet thing{% endif %}
-{% if include.tagname=="how-why" %}How and why I set up tooling, workflow, etc.{% endif %}
-{% if include.tagname=="jekyll" %}Jekyll itself, plus Liquid templating, Markdown, CSS, etc.{% endif %}
-{% if include.tagname=="ksotd" %}Keyboard Shortcut of the Day{% endif %}
-{% if include.tagname=="outlook" %}That email client{% endif %}
-{% if include.tagname=="packaging" %}Mostly PyPI{% endif %}
-{% if include.tagname=="python" %}That one programming language{% endif %}
-{% if include.tagname=="sphinx" %}That documentation tool{% endif %}
-{% if include.tagname=="stdio-mgr" %}Context manager for mocking/wrapping stdin/stdout/stderr{% endif %}
-{% if include.tagname=="sphobjinv" %}Python package/CLI tool for Sphinx objects.inv files{% endif %}
-{% if include.tagname=="testing" %}That thing you should do to avoid accidentally breaking something{% endif %}
-{% if include.tagname=="vba" %}For when you want to automate Office{% endif %}
-{% if include.tagname=="visualization" %}Charts, diagrams, graphs, etc.{% endif %}
-{% if include.tagname=="win-explorer" %}Windows built-in filesystem navigator{% endif %}
-{% if include.tagname=="xl-budgetbackup" %}Excel VBA tool for organizing supporting files for materials budgets{% endif %}
+{% case include.tagname %}
+{% when "administrative" %}Site administration
+{% when "cli" %}Command-line interfaces
+{% when "excel" %}That spreadsheet thing
+{% when "how-why" %}How and why I set up tooling, workflow, etc.
+{% when "jekyll" %}Jekyll itself, plus Liquid templating, Markdown, CSS, etc.
+{% when "ksotd" %}Keyboard Shortcut of the Day
+{% when "outlook" %}That email client
+{% when "packaging" %}Mostly PyPI
+{% when "python" %}That one programming language
+{% when "sphinx" %}That documentation tool
+{% when "stdio-mgr" %}Context manager for mocking/wrapping stdin/stdout/stderr
+{% when "sphobjinv" %}Python package/CLI tool for Sphinx objects.inv files
+{% when "testing" %}That thing you should do to avoid accidentally breaking something
+{% when "vba" %}For when you want to automate Office
+{% when "visualization" %}Charts, diagrams, graphs, etc.
+{% when "win-explorer" %}Windows built-in filesystem navigator
+{% when "xl-budgetbackup" %}Excel VBA tool for organizing supporting files for materials budgets
+{% endcase %}
