@@ -26,4 +26,5 @@ To my eye, the second figure is much less visually intuitive and much harder to 
 
 Proper selection of the series rendering order allows tweaking figures to exploit this sort of thing.
 
-<br><br><small>*This post was written with [StackEdit](https://stackedit.io).*</small>
+{% include stackedit.html %}
+

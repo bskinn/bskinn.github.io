@@ -18,4 +18,5 @@ Thus: *Keyboard shortcuts are **amazing***.
 I search out built-in shortcuts for every application I use regularly, mostly on Windows and in Microsoft Office, but not limited to those.  I also make heavy use of Word's ability to assign keystroke combinations both to internal functions and to custom macros.  This "KSotD" feature will recur regularly (though probably not *daily*), and will highlight the shortcuts I use to speed up my workflows. To be clear, some of these shortcuts will involve 'keyboard-modified mouse clicks', breaking the paradigm of the title a bit, but ... whatever.
 
 
-<br><br><small>*This post was written with [StackEdit](https://stackedit.io).*</small>
+{% include stackedit.html %}
+

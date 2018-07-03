@@ -25,4 +25,5 @@ kbd {
 }
 ```
 
-<br><br><small>*This post was written with [StackEdit](https://stackedit.io).*</small>
+{% include stackedit.html %}
+

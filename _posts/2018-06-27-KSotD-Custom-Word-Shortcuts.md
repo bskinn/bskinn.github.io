@@ -39,5 +39,5 @@ Note that Word supports two-step key combinations, such as <kbd>Ctrl</kbd>+<kbd>
 Hugely, hugely helpful. Many of the entries in the KSotD series will be custom-defined shortcuts, some to built-in Word functionality and some to custom macros.
 
 
-<br><br><small>*This post was written with [StackEdit](https://stackedit.io).*</small>
+{% include stackedit.html %}
 

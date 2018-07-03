@@ -11,5 +11,5 @@ A pre-release is already up on PyPI {%- include pypi.html project="sphobjinv" ve
 Across the board, though, I highly recommend to upgrade: the new version fixes some pretty serious bugs (what was I **thinking**, [putting `sys.exit()` in an API function](https://github.com/bskinn/sphobjinv/blob/v1.0.post1/sphobjinv/sphobjinv.py#L207)??), and introduces a proper object model for handling inventory and object data.
 
 
-<br><br><small>*This post was written with [StackEdit](https://stackedit.io).*</small>
+{% include stackedit.html %}
 
