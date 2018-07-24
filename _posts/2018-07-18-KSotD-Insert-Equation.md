@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'KSotD: Alt-N-E-I or Ctrl+Alt+Q (Word)'
+title: 'KSotD (Word): Insert Equation -- Alt-N-E-I or Ctrl+Alt+Q'
 tags: ksotd word
 ---
 

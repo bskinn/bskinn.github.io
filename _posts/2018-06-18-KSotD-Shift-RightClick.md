@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'KSotD: Shift + RightClick (Explorer)'
+title: 'KSotD (Explorer): Copy as Path -- Shift + RightClick'
 tags: ksotd win-explorer
 ---
 
