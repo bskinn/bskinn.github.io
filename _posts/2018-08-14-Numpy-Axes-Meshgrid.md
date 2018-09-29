@@ -10,7 +10,7 @@ The axes of `numpy` arrays are identified by integer indices; for a 2-D array, t
 
 Where problems have typically started to arise for me is when contemplating plotting data that's mapped across such a 2-D array. Which `axis` should correspond to the $$x$$-axis of the plot?  On one hand, since 2-D data is usually plotted as $$\left(x,y\right)$$, one might think that `axis=0` would correspond to $$x$$. On the other hand, since $$x$$ is usually plotted along the horizontal axis (i.e., as the *column* number changes along a grid), it might make more sense to identify `axis=1` as the $$x$$-axis.
 
-My inclination has always been to keep to the former convention, as it's more natural for me to associated the first index to the array with the $$x$$-axis. It turns out, though, that in certain cases `numpy` takes the latter convention by default. Where this has historically confused me most significantly is in the use of the `meshgrid` function.  Consider the following:
+My inclination has always been to keep to the former convention, as it's more natural for me to associate the first index to the array with the $$x$$-axis. It turns out, though, that in certain cases `numpy` takes the latter convention by default. Where this has historically confused me most significantly is in the use of the `meshgrid` function.  Consider the following:
 
 ```
 >>> import numpy as np
@@ -50,5 +50,5 @@ array([[0, 1],
 
 The shapes match, and the $$x$$-values advance along `axis=0`.
 
-Time to trawl back through all my various code and clean up this confusion....
+Time to trawl back through all my various profilometry analysis code and clean up this confusion....
 
