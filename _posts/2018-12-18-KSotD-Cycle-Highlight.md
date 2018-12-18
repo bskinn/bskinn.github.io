@@ -41,5 +41,10 @@ Sub RotateHighlight()
 End Sub
 ```
 
-With it, just select whatever text you want highlighted, press the shortcut key however many times, and boom: highlighted.  Further, if you want to remove the highlighting from anything, just select the highlighted text plus a bit of additional content before/after it and then press the shortcut key.
+With it, just select whatever text you want highlighted, press the shortcut key however many times, and boom: highlighted:
 
+{% include img.html path="ksotd/CAS_H-2.png" alt="Progression of highlights" width="500px" %}
+
+Further, if you want to remove the highlighting from anything, just select the highlighted text plus a bit of additional content before or after it and then press the shortcut key:
+
+{% include img.html path="ksotd/CAS_H-3.png" alt="Showing quick highlight removal" width="430px" %}
