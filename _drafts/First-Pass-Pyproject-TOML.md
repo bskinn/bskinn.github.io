@@ -283,6 +283,13 @@ addopts = -p no:warnings --doctest-glob="README.rst"
 
 [Aside from changes relating to shifting source to `src`, no revisions here.]
 
+Major things to note are the
+[path hijinks](https://github.com/bskinn/stdio-mgr/blob/fe9555897fdcd7a408abc33a412c47333b08ac68/setup.py#L5-L8)
+to enable `__version__` import,
+since the package hasn't been built/installed yet when `setup.py` is imported/run; and, the
+[package searching machinery](https://github.com/bskinn/stdio-mgr/blob/fe9555897fdcd7a408abc33a412c47333b08ac68/setup.py#L19-L20),
+switched to automatic w/`find_packages`.
+
 Could have moved a bunch of setup stuff to `setup.cfg`, but I'd rather not
 create yet another new file for only a single purpose. If `setuptools` gets
 modified to where `setup.py` info could be sited in `pyproject.toml` instead
