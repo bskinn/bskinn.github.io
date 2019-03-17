@@ -1,22 +1,19 @@
 ---
 layout: post
-title: 'REVISE: My How and Why: First-Pass pyproject.toml &c.'
+title: 'My How and Why: pyproject.toml and `src` Code Layout'
 tags: python how-why packaging testing
 ---
 
 At various points over the last year or so, I'd heard or seen various things
-about the new `pyproject.toml` file and how it interacts with Python packaging.
-In particular, I'd listened to the
+about the new `pyproject.toml` file and how it interacts with Python packaging---in
+particular, I'd listened to the
 [Python Bytes](https://pythonbytes.fm/episodes/show/100/the-big-100-with-special-guests)
 {% include tw.html user="pythonbytes" %}
 and [Test and Code](https://testandcode.com/52)
 {% include tw.html user="testandcode" %} episodes that covered it.
 I'd also paid passing attention to the various debates about the merits of
 the `src` and non-`src` approaches to organizing code within a package
-under development. I'd tried moving my code to `src` a couple of times, but
-it promptly broke things every time (in retrospect, because I'd failed to
-correctly revise my `setup.py`... &#128563;) and so I just never wanted to bother with it.
-The most compelling argument I'd seen for `src` was made by
+under development. The most compelling argument I'd seen for `src` was made by
 [Hynek Schlawack](https://hynek.me/articles/testing-packaging/)
 {% include tw.html user="hynek" %}:
 
@@ -25,79 +22,47 @@ title="You /dev/null-ed my father. Prepare to die."
 alt="Inigo has opinions about testing."
 width="300px"/>
 
-So, when I recently came across Bernat Gabor's
+I'd tried moving my code to `src` a couple of times, but
+it promptly broke things every time and I never cared enough to bother with figuring it out.
+When I recently came across Bernat Gabor's
 [three-part series](https://www.bernat.tech/pep-517-and-python-packaging/)
-on the state of Python packaging (which has just recently been covered on
-[Python Bytes](https://pythonbytes.fm/episodes/show/117/is-this-the-end-of-python-virtual-environments),
-btw), it got me curious enough to seriously attempt a conversion to
+on the state of Python packaging (covered not long ago on
+[Python Bytes](https://pythonbytes.fm/episodes/show/117/is-this-the-end-of-python-virtual-environments)),
+though, it got me curious enough to seriously attempt a conversion both to
 `pyproject.toml` and a `src` project layout. I needed to tweak one of my
 Python packages and put out a new patch version anyways (`stdio-mgr`
 {% include pypi.html project="stdio-mgr" %}
 {% include gh.html user="bskinn" repo="stdio-mgr" %}),
 so it seemed like a natural time
-to put in the work to finally figure all of this out. The main
-resources I used to figure this out were Bernat's series, the above
+to put in the work to finally get it all to work. The main
+resources I used in this process were Bernat's series, the above
 article by Hynek, and [Brett Cannon's article](https://snarky.ca/clarifying-pep-518/)
 on PEP 517/518.
 
------
+In the end, as far as I can tell my problems boiled down to two things:
 
+ 1. I hadn't paid close enough attention to the instructions in Hynek's article
+    for the `src` layout conversion, and had failed to set `package_dir` in addition
+    to `packages` in the `setuptools.setup()` call.
+ 2. The exact chicken-and-egg problem that motivated PEP 517/518, where
+    the dependencies needed to run `setup.py` are defined dynamically
+    within `setup.py`.
 
-As I said above, I had previously attempted to move to a `src` project layout.
-However, even after correctly updating the `packages` and `package_dir` arguments
-to `setuptools.setup`, my `python setup.py` invocations would always break
-because I currently use
-[`from pkg import __version__`](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/setup.py#L6)
-to introspect the package version for injection into `setup(version=...)`.
-As best I could determine (can't find the source that suggested it... :-/),
-the correct fix for this was temporarily modifying the
-path by adding `src/` before the import and removing it afterwards,
-[like so](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/setup.py#L5-L8):
+Ultimately, what makes me *really* glad I looked into this was realizing that
+I had been shipping broken sdists to PyPI. (Time for some fun with `pip install --no-binary`,
+\*sigh\*...) Turns out it was a highly useful thing that
+tox builds and installs the package to test from *sdist*, as opposed to just installing from
+a wheel, because it made it very clear to me that I had been doing The Wrong Thing&#153;.
 
-```
-sys.path.append(os.path.abspath("src"))
-from stdio_mgr import __version__
-sys.path.pop()
-```
+An unanticipated knock-on benefit from making both of these changes has been that I can now
+just include `-e .` explicitly in my `requirements-dev.txt` to install the project in
+developer mode as part of my dev virtualenv. Thus, I only need to invoke one command,
+`pip install -r requirements-dev.txt`, to set up the virtualenv, instead of having to
+then follow with a `pip install -e .` (I'm sticking with the `requirements.txt` paradigm
+mainly because I don't know how otherwise to specify custom dependencies for Read the Docs.)
 
-This works fine; but, FWIW, given that some of my packages require heavyweight imports like `numpy`,
-I'm seriously considering moving to a different single-source versioning
-approach, that doesn't require a full package import... #3 and #4 in the
-[PyPA 'recommended approaches' list](https://packaging.python.org/guides/single-sourcing-package-version/)
-seem most appealing at present. OTOH, requiring a complete import of the entire
-dependency set at install time *does* notify the user of problems sooner....
-Ah, tradeoffs.
-
-In any event, another thing I discovered in the course of all this, which was a problem
-*regardless* of the `src` versus non-`src` configuration, is that
-this introspection of the package version in `setup.py` ***completely breaks installs
-from sdists***. This is because of the usual chicken-and-egg problem that
-was one of the motivations for PEP 517/518: sdists have to be built before install,
-which with `setuptools` requires a `python setup.py` invocation; but this means
-that all of the package import dependencies have to be available at build time
-because my version introspection imports the package; but absent PEP 517/518 and
-`pyproject.toml` there's no way for `setuptools` to know what it needs to
-install before running `setup.py` because those requirements are specified
-dynamically (and, even then, potentially imperfectly!) in the `install_requires` argument
-to `setuptools.setup`. (This problem is actually identified quite clearly
-under #6 in that same
-[PyPA 'recommended approaches' list](https://packaging.python.org/guides/single-sourcing-package-version/).)
-
-==== RESUME
-
-However, `tox` installs the package from sdist, and so this above was a blocking problem.
-
-So, I wanted to fix this, to gain the confidence of knowing tox was testing
-*built* packages, to actually have my sdists be *installable* into a fresh
-environment. One unanticipated further benefit has been that I can now
-include the `-e .` explicitly in my `requirements-dev.txt` (not `-travis.txt`,
-unfortunately, since I'm
-still trying to support old Python versions, which misbehave)
-for setting up a new development environment, and thus only need the one
-`pip install -r requirements-dev.txt` command to get started.
-
-Below is some commentary on the various files relevant to this
-configuration. Files below are in the state of
+Below is some commentary on the various files relevant to the changes I made.
+The files below are in the state of
 [this commit](https://github.com/bskinn/stdio-mgr/tree/8b09adb2ae98d3753ce6ee00015a10b520d48ec2).
 
 -----
@@ -118,14 +83,18 @@ build-backend = "setuptools.build_meta"
 
 I'm still just using the `setuptools` build workflow, so `wheel` and
 `setuptools` naturally are build requirements.  I also need `attrs` so
-that `from stdio_mgr import __version__` doesn't break when
-`setup.py` is executed.
+that [`from stdio_mgr import __version__`](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/setup.py#L6)
+doesn't break when `setup.py` is executed. (To note, this is approach #6 for single-sourcing
+a package version from the
+[Python Packaging Guide](https://packaging.python.org/guides/single-sourcing-package-version/)...
+I'm not really a fan of the path manipulation hijinks required to make the import work
+in the `src` configuration, so I'm strongly considering switching to #3 or #4 at some point.)
 
 If I weren't enabling `isolated_build` in `tox.ini` (see below), I wouldn't
 *need* to specify `build-backend` here, as PEP 517
 [specifies](https://www.python.org/dev/peps/pep-0517/#source-trees) to fall back
 to the `setuptools`/`setup.py` backend configuration if `build-backend` is
-missing. However, tox *really* doesn't like
+missing. However, tox doesn't like
 it if `build-backend` isn't explicitly specified when `isolated_build`
 is enabled:
 
@@ -215,7 +184,7 @@ Command "python setup.py egg_info" failed with error code 1 in /.../
 
 **`tox.ini`**
 
-To have the tox build of the package be isolated from the filesystem, added:
+***REVISE*** To have the tox build of the package be isolated from the filesystem, added:
 
 ```
 [tox]
