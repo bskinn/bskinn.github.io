@@ -8,7 +8,8 @@ The default Word keyboard shortcuts for cursor movement usually work pretty well
 I realized today that one thing that's really been bugging me is the inefficiency of
 selecting the word under the cursor using only the keyboard. I find that I'm often
 wanting to select a specific word to then, e.g., toggle its highlight with my
-**CUSTOM HIGHLIGHT CYCLER MACRO {LINK TO THING}**. With the mouse, a simple
+<kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd>
+[custom macro]({% post_url 2018-12-18-KSotD-Cycle-Highlight %}). With the mouse, a simple
 double-left-click is all that's needed; with the keyboard, though, unless there's
 a shortcut/command I don't know about, I have to:
 
@@ -21,14 +22,14 @@ a shortcut/command I don't know about, I have to:
 The muscle memory for this is pretty well established by now, but ... there has to be a better way.
 So: ***Macro time!***
 
-I slapped together the following and bound it to <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>W</kbd>,
-which appears to be unbound by default:
+I slapped together the following and assigned <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>W</kbd> to it,
+which AFAICT is unbound by default:
 
 ```
 Sub SelectCurrentWord()
 
     Dim rxSpace As New RegExp
-    
+
     With rxSpace
         .Global = False
         .IgnoreCase = True
@@ -37,11 +38,11 @@ Sub SelectCurrentWord()
     End With
 
     Selection.Expand wdWord
-    
+
     Do While rxSpace.Test(Selection.Characters(Selection.Characters.Count))
         Selection.MoveEnd wdCharacter, -1
     Loop
-    
+
 End Sub
 ```
 
@@ -51,18 +52,18 @@ end of the selection forward to the nearest *start*-of-word boundary.  This latt
 leads to an annoying result due to how Word structures word boundaries.  If I interpret things
 correctly, Word treats at least the following as the start of a word:
 
- * (Most?) punctuation characters
+ * (Most?) punctuation characters, *including* tabs
  * The first letter of a grouping of letters following whitespace
 
-So, when executed with the cursor within a word in the middle of a sentence, `Selection.Expand wdWord` 
+So, when executed with the cursor within a word in the middle of a sentence, `Selection.Expand wdWord`
 expands the selection to *include* the whitespace following that word.
 
 &#128544;
 
 I'm pretty sure I basically *never* want this behavior. Thus, enter the regex and the while loop.
-The `\W` regex pattern matches a single non-word character **RESUME, WITH LINK TO** 
-https://www.regular-expressions.info/shorthand.html **AND CONTINUE ABOUT WHY THE WHILE LOOP**
-
+The `\W` regex pattern [matches a single non-word character](https://www.regular-expressions.info/shorthand.html),
+and I used a `Do While` instead of a simple `If` so that cases with multiple whitespace characters
+are handled properly.
 
 If I end up using this regularly, will probably end up creating similar macros and
 keyboard shortcuts to select the current sentence (<kbd>Ctrl</kbd>+**FINISH THIS**
