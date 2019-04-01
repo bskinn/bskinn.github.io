@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Excel Addin: Sheet-Scoped Name Generator'
-tags: excel vba
+tags: excel vba add-ins
 ---
 
 ## Background
