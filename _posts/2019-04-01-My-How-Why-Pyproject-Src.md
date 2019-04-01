@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'My How and Why: pyproject.toml and `src` Code Layout'
+title: 'My How and Why: pyproject.toml &amp; the &#39;src&#39; Project Structure'
 tags: python how-why packaging testing
 ---
 
@@ -12,8 +12,8 @@ particular, I'd listened to the
 and [Test and Code](https://testandcode.com/52)
 {% include tw.html user="testandcode" %} episodes that covered it.
 I'd also paid passing attention to the various debates about the merits of
-the `src` and non-`src` approaches to organizing code within a package
-under development. The most compelling argument I'd seen for `src` was made by
+the `src` and non-`src` approaches to structuring projects.
+The most compelling argument I'd seen for `src` was made by
 [Hynek Schlawack](https://hynek.me/articles/testing-packaging/)
 {% include tw.html user="hynek" %}:
 
@@ -34,7 +34,7 @@ Python packages and put out a new patch version anyways (`stdio-mgr`
 {% include pypi.html project="stdio-mgr" %}
 {% include gh.html user="bskinn" repo="stdio-mgr" %}),
 so it seemed like a natural time
-to put in the work to finally get it all to work. The main
+to put in the work to get these in place. The main
 resources I used in this process were Bernat's series, the above
 article by Hynek, and [Brett Cannon's article](https://snarky.ca/clarifying-pep-518/)
 on PEP 517/518.
@@ -59,7 +59,8 @@ just include `-e .` explicitly in my `requirements-dev.txt` to install the proje
 developer mode as part of my dev virtualenv. Thus, I only need to invoke one command,
 `pip install -r requirements-dev.txt`, to set up the virtualenv, instead of having to
 then follow with a `pip install -e .` (I'm sticking with the `requirements.txt` paradigm
-mainly because I don't know how otherwise to specify custom dependencies for Read the Docs.)
+mainly because I don't know how otherwise to specify custom dependencies for
+Read the Docs builds.)
 
 Below is some commentary on the various files relevant to the changes I made.
 The files below are in the state of
@@ -68,7 +69,7 @@ The files below are in the state of
 -----
 
 
-**`pyproject.toml`**
+[**`pyproject.toml`**](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/pyproject.toml)
 
 Per the [PEP 517](https://www.python.org/dev/peps/pep-0517/)
 and [PEP 518](https://www.python.org/dev/peps/pep-0518/) specs, the following two lines
@@ -82,16 +83,19 @@ build-backend = "setuptools.build_meta"
 ```
 
 I'm still just using the `setuptools` build workflow, so `wheel` and
-`setuptools` naturally are build requirements.  I also need `attrs` so
+`setuptools` naturally are build requirements.  I also needed `attrs` at the
+time I attempted this conversion so
 that [`from stdio_mgr import __version__`](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/setup.py#L6)
-doesn't break when `setup.py` is executed. (To note, this is approach #6 for single-sourcing
-a package version from the
+didn't break when `setup.py` is executed. (This import-via-the-package approach 
+to single-sourcing the version number is #6 in the list put out in the
 [Python Packaging Guide](https://packaging.python.org/guides/single-sourcing-package-version/)...
-I'm not really a fan of the path manipulation hijinks required to make the import work
-in the `src` configuration, so I'm strongly considering switching to #3 or #4 at some point.)
+I'm not really a fan of the path manipulation hijinks required to make this method work
+in the `src` configuration, though (see `setup.py`, below), so I've actually [already
+switched to option #3](https://github.com/bskinn/stdio-mgr/blob/1f57ca198fcb45e5df891be3910279cf8c89fa65/setup.py#L5-L6)
+in the `dev` branch of the project.)
 
 If I weren't enabling `isolated_build` in `tox.ini` (see below), I wouldn't
-*need* to specify `build-backend` here, as PEP 517
+*have* to specify `build-backend` here, as PEP 517
 [specifies](https://www.python.org/dev/peps/pep-0517/#source-trees) to fall back
 to the `setuptools`/`setup.py` backend configuration if `build-backend` is
 missing. However, tox doesn't like
@@ -103,43 +107,64 @@ $ tox -e sdist_install
 ERROR: missing build-backend key at build-system section inside /.../pyproject.toml
 ```
 
-***black config*** (fine; still have to `black .`; use ''';
-recursive search pulls everything, then culls anything matching `exclude`
-regex, then only processes things that match `include` regex;
-the thing being matched is the *full relative path* (from ...where?),
-starting with `/`)
+I found it distinctly handy to be able to
+[include my `black` configuration](https://black.readthedocs.io/en/stable/pyproject_toml.html)
+in here as well; specifying line length and include/exclude patterns:
 
-***NOT tox config*** (coarsely implemented, and pytest doesn't find it)
+```
+[tool.black]
+line-length = 79
+include = '''
+(
+    ^/tests/
+  | ^/src/stdio_mgr/
+  | ^/setup[.]py
+  | ^/conftest[.]py
+)
+'''
+exclude = '''
+(
+    __pycache__
+)
+'''
+```
 
-***NOT pytest config*** (not supported at all yet)
+`black` uses a regex filter, so that `__pycache__` in `exclude` matches
+*any* cache folder throughout the project. Note also that the names of items
+as generated from `black`'s search algoritm always
+have a leading backslash, which has to be accounted for when constructing
+regexes anchored at the project root. (As an aside, I *really* like this
+formatting for multiline regexes with alternative patterns
+(`(...|...|...)`), and will be stealing it wholesale.)
+
+I briefly considered also moving my `tox` config into `pyproject.toml`,
+but there's only a string-key
+[legacy method](https://tox.readthedocs.io/en/latest/example/basic.html#pyproject-toml-tox-legacy-ini)
+implemented at the moment, and `pytest` isn't able to find its config info
+within that `legacy_tox_ini` string.
 
 -----
 
 
-**`MANIFEST.in`**
+[**`MANIFEST.in`**](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/MANIFEST.in)
 
-Must have `pyproject.toml` in an `include` line, so that it's packaged
-into the sdist and thus available for a subsequent clean build.
+It looks like recent versions of `setuptools` automatically add `pyproject.toml`
+to the sdist build manifest, along with LICENSE, README, and CHANGELOG-like files.
+But, for my peace of mind I like to include them explicitly:
 
 ```
 include LICENSE.txt README.rst CHANGELOG.md pyproject.toml
 ```
 
-I don't generally package my libraries such that they're testable from an sdist
-(if you want to hack on it, clone the
-{% include gh.html user="bskinn" repo="stdio-mgr" %}!), so it's probably
-superfluous to include those extra files, but... whatever.
-
-
 -----
 
-**`requirements-xyz.txt`**
+[**`requirements-xyz.txt`**](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/requirements-dev.txt)
 
 As noted above, since my build requirements are now successfully specified
 in `pyproject.toml`, and `pyproject.toml` is bundled with the sdist by
-being included in `MANIFEST.in`, I can include `-e .` in my
-`requirements-xyz.txt`s and (barring weird compatibility issues with old
-versions of Python/`pip`/`setuptools`) a
+being included in `MANIFEST.in` (or by default), I can include `-e .` in my
+`requirements-xyz.txt`s and (barring some weird compatibility issues with old
+versions of Python/`pip`/`setuptools` I've encountered on CI) a
 `pip install -r requirements-dev.txt` just *works*:
 
 ```
@@ -179,12 +204,12 @@ Obtaining file:///... (from -r requirements-dev.txt (line 12))
 Command "python setup.py egg_info" failed with error code 1 in /.../
 ```
 
-
 -----
 
-**`tox.ini`**
+[**`tox.ini`**](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/tox.ini)
 
-***REVISE*** To have the tox build of the package be isolated from the filesystem, added:
+In order to have `tox` build the package under test in isolation from the development
+code, I added the standard:
 
 ```
 [tox]
@@ -219,8 +244,10 @@ deps=
     attrs_latest:   pytest
 ```
 
-This has the potential to mask any problems arising
-from an incorrectly-specified build environment, because tox
+In the absence of `pyproject.toml` and `isolated_build=True`, 
+this has the potential to mask any problems arising
+from an incorrectly-specified build environment, because
+with `isolated_build=False`, `tox`
 installs everything in the `deps` ***BEFORE*** it installs the built package
 to be tested.
 
@@ -295,29 +322,51 @@ ________________________________________________________________________________
 
 ```
 
-FWIW, I also have just included my pytest configuration in `tox.ini`, rather
-than creating a new `pytest.ini` or `setup.cfg`, since for this project
-my pytest config is pretty minimal:
+FWIW, as a final point I'll note that I also just folded my `pytest` configuration into `tox.ini`, rather
+than creating a new `pytest.ini` or `setup.cfg`:
 
 ```
 [pytest]
 addopts = -p no:warnings --doctest-glob="README.rst"
 ```
 
+I figure I'll probably keep `pytest` config in here in general, even if it grows, to avoid creating
+the extra file.
+
 -----
 
-**`setup.py`**
+[**`setup.py`**](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/setup.py)
 
-[Aside from changes relating to shifting source to `src`, no revisions here.]
+Only minor things to point out here, save for noting again that it was critical to define `package_dir`
+in order for `setuptools` to grok the project source correctly.
 
-Major things to note are the
-[path hijinks](https://github.com/bskinn/stdio-mgr/blob/fe9555897fdcd7a408abc33a412c47333b08ac68/setup.py#L5-L8)
-to enable `__version__` import,
-since the package hasn't been built/installed yet when `setup.py` is imported/run; and, the
-[package searching machinery](https://github.com/bskinn/stdio-mgr/blob/fe9555897fdcd7a408abc33a412c47333b08ac68/setup.py#L19-L20),
-switched to automatic w/`find_packages`.
+```
+setup(
+    ...
+    packages=find_packages("src"),
+    package_dir={"": "src"},
+    ...
+)
+```
 
-Could have moved a bunch of setup stuff to `setup.cfg`, but I'd rather not
-create yet another new file for only a single purpose. If `setuptools` gets
-modified to where `setup.py` info could be sited in `pyproject.toml` instead
-of in `setup.cfg`, I would almost certainly do that.
+Since I was still using the import-through-the-project approach to single-source versioning
+at the particular commit I'm talking about here, I did have to do some path hijinks
+in order to access the `__version__` defined within `src/stdio_mgr/__init__.py`:
+
+```
+sys.path.append(os.path.abspath("src"))
+from stdio_mgr import __version__
+sys.path.pop()
+```
+
+As noted above, I have since switched to single-source-version option [#3](https://github.com/bskinn/stdio-mgr/blob/1f57ca198fcb45e5df891be3910279cf8c89fa65/setup.py#L5-L6)
+in the `dev` branch of the project:
+
+```
+with open(osp.join(*["src", "stdio_mgr", "version.py"])) as f:
+    exec(f.read())
+```
+
+I could have moved a bunch of the configuration options to `setup` into `setup.cfg`, but I'd rather not
+create yet another new file for only this single purpose. If `setuptools` gets an update such that
+arguments to `setup` could be sited in `pyproject.toml`, I would strongly consider shifting them over there.
