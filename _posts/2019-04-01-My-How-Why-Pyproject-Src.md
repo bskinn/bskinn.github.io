@@ -4,6 +4,16 @@ title: 'My How and Why: pyproject.toml &amp; the &#39;src&#39; Project Structure
 tags: python how-why packaging testing
 ---
 
+**UPDATE (26 Apr 2019):** Just like with many others in the Python ecosystem, I was
+caught by the switch to rigorous observance of PEP517 in `pip` 19.1,
+which prohibits editable installs in projects declaring PEP517 compliance via
+the presence of `pyproject.toml`. However, I discovered that switching from a
+`pip`-mediated editable install to a `setuptools`-mediated 'develop' install
+(via `python setup.py develop`) seems to have bypassed the problem. Edits/updates have
+been made below where relevant.
+
+-----
+
 At various points over the last year or so, I'd heard or seen various things
 about the new `pyproject.toml` file and how it interacts with Python packaging---in
 particular, I'd listened to the
@@ -60,11 +70,17 @@ developer mode as part of my dev virtualenv. Thus, I only need to invoke one com
 `pip install -r requirements-dev.txt`, to set up the virtualenv, instead of having to
 then follow with a `pip install -e .` (I'm sticking with the `requirements.txt` paradigm
 mainly because I don't know how otherwise to specify custom dependencies for
-Read the Docs builds.)
+Read the Docs builds.) **UPDATE:** With the `pip` 19.1 behavior change, I have **removed**
+`-e .` from my requirements files, and instead run `python setup.py develop` to install
+the package working tree into the relevant environment after calling `pip install`.
+For my local working directory, I just run the command manually; for CI, I insert it as a
+[separate command](https://github.com/bskinn/stdio-mgr/blob/dff9f326528aac67d7ca0dc0a86ce3dffa3e0d39/.travis.yml#L4)
+in the pre-test phase of the build (`install` for Travis).
 
 Below is some commentary on the various files relevant to the changes I made.
 The files below are in the state of
-[this commit](https://github.com/bskinn/stdio-mgr/tree/8b09adb2ae98d3753ce6ee00015a10b520d48ec2).
+[this commit](https://github.com/bskinn/stdio-mgr/tree/8b09adb2ae98d3753ce6ee00015a10b520d48ec2),
+except where revised due to the `pip` 19.1 strict enforcement of PEP517.
 
 -----
 
@@ -162,10 +178,10 @@ include LICENSE.txt README.rst CHANGELOG.md pyproject.toml
 
 As noted above, since my build requirements are now successfully specified
 in `pyproject.toml`, and `pyproject.toml` is bundled with the sdist by
-being included in `MANIFEST.in` (or by default), I can include `-e .` in my
+being included in `MANIFEST.in` (or by default), I <strike>can</strike> used to be able to include `-e .` in my
 `requirements-xyz.txt`s and (barring some weird compatibility issues with old
 versions of Python/`pip`/`setuptools` I've encountered on CI) a
-`pip install -r requirements-dev.txt` just *works*:
+`pip install -r requirements-dev.txt` just <strike><em>works</em></strike> *worked*:
 
 ```
 (fresh-env) $ pip install -r requirements-dev.txt
@@ -184,7 +200,7 @@ Successfully installed {packages} stdio-mgr {more packages}
 ```
 
 
-OTOH, if I delete `pyproject.toml` and try to install, it does *NOT* work:
+OTOH, if I delete `pyproject.toml` and try to install, it <strike>does</strike> did *NOT* work:
 
 ```
 (fresh-env) $ pip install -r requirements-dev.txt
@@ -203,6 +219,51 @@ Obtaining file:///... (from -r requirements-dev.txt (line 12))
     ----------------------------------------
 Command "python setup.py egg_info" failed with error code 1 in /.../
 ```
+
+**UPDATE:** As noted above, the strict enforcement of PEP517 in `pip` 19.1 disallows editable installs:
+
+```
+>pip install -e .
+Obtaining file:///.../stdiomgr
+ERROR: Error installing 'file:///.../stdiomgr': editable mode is not supported for pyproject.toml
+-style projects. This project is being processed as pyproject.toml-style because it has a pyproject.
+toml file with a "build-backend" key in the "build_system" value. See PEP 517 for the relevant speci
+fication.
+```
+
+In some (many? most?) cases, a separate invocation of `python setup.py develop` will work as
+an alternative to the `pip`-mediated `-e .` editable install:
+
+```
+>python setup.py develop
+running develop
+running egg_info
+writing src\stdio_mgr.egg-info\PKG-INFO
+writing dependency_links to src\stdio_mgr.egg-info\dependency_links.txt
+writing requirements to src\stdio_mgr.egg-info\requires.txt
+writing top-level names to src\stdio_mgr.egg-info\top_level.txt
+reading manifest file 'src\stdio_mgr.egg-info\SOURCES.txt'
+reading manifest template 'MANIFEST.in'
+writing manifest file 'src\stdio_mgr.egg-info\SOURCES.txt'
+running build_ext
+Creating c:\...\stdiomgr\env\lib\site-packages\stdio-mgr.egg-link (link to src)
+Adding stdio-mgr 1.0.2.dev1 to easy-install.pth file
+
+Installed c:\...\stdiomgr\src
+Processing dependencies for stdio-mgr==1.0.2.dev1
+Searching for attrs==19.1.0
+Best match: attrs 19.1.0
+Adding attrs 19.1.0 to easy-install.pth file
+
+Using c:\...\stdiomgr\env\lib\site-packages
+Finished processing dependencies for stdio-mgr==1.0.2.dev1
+```
+
+So far, this approach has worked smoothly for both of my projects that I've already converted
+to the `src` layout and PEP517 build system. As noted above, I've just run the `setup.py develop` command
+manually for my local development trees, and added it as an extra `install` step in
+[`.travis.yml`](https://github.com/bskinn/stdio-mgr/blob/dff9f326528aac67d7ca0dc0a86ce3dffa3e0d39/.travis.yml#L4)
+for CI.
 
 -----
 
