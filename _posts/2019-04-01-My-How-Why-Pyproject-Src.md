@@ -4,6 +4,13 @@ title: 'My How and Why: pyproject.toml &amp; the &#39;src&#39; Project Structure
 tags: python how-why packaging testing
 ---
 
+**UPDATE 2 (16 May 2019):** With the release of pip v19.1.1
+{% include pypi.html project="pip" version="19.1.1" %}, editable installs are
+again allowed in the presence of `pyproject.toml`. Both the `pip install -e .` and
+`python setup.py develop` approaches should now work.
+[Discussion is ongoing](https://discuss.python.org/t/specification-of-editable-installation/1564)
+on a more robust, `setuptools`-independent specification of editable installs.
+
 **UPDATE (26 Apr 2019):** Just like with many others in the Python ecosystem, I was
 caught by the switch to rigorous observance of PEP517 in `pip` 19.1,
 which prohibits editable installs in projects declaring PEP517 compliance via
@@ -102,7 +109,7 @@ I'm still just using the `setuptools` build workflow, so `wheel` and
 `setuptools` naturally are build requirements.  I also needed `attrs` at the
 time I attempted this conversion so
 that [`from stdio_mgr import __version__`](https://github.com/bskinn/stdio-mgr/blob/8b09adb2ae98d3753ce6ee00015a10b520d48ec2/setup.py#L6)
-didn't break when `setup.py` is executed. (This import-via-the-package approach 
+didn't break when `setup.py` is executed. (This import-via-the-package approach
 to single-sourcing the version number is #6 in the list put out in the
 [Python Packaging Guide](https://packaging.python.org/guides/single-sourcing-package-version/)...
 I'm not really a fan of the path manipulation hijinks required to make this method work
@@ -305,7 +312,7 @@ deps=
     attrs_latest:   pytest
 ```
 
-In the absence of `pyproject.toml` and `isolated_build=True`, 
+In the absence of `pyproject.toml` and `isolated_build=True`,
 this has the potential to mask any problems arising
 from an incorrectly-specified build environment, because
 with `isolated_build=False`, `tox`
