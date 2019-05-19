@@ -1,9 +1,13 @@
 #! /bin/bash
 
+# Must scrub the index, else pages for tags that get eliminated on a given commit
+# will not be removed
 git rm  _tagpages/* > /dev/null 2>&1
 
+# Sniff for Linux vs Windows and exec tagpage script accordingly
 which python3 > /dev/null 2>&1 && python3 make_tagpages.py || python make_tagpages.py
 
+# Collapse failed exits to a 1 code
 if [[ $? > 0 ]]
 then
   exit 1
