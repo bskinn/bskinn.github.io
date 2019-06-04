@@ -13,7 +13,7 @@ say hello to the big Python podcasters,
 Michael Kennedy {% include tw.html user="mkennedy" %},
 Brian Okken {% include tw.html user="brianokken" %}, and
 Tobias Macey {% include tw.html user="tobiasmacey" %}, as well as
-Travis Oliphant {% include tw.html user="teoliphant" %},
+Travis Oliphant {% include tw.html user="teoliphant" -%},
 Ernest Durbin {% include tw.html user="ewdurbin" %},
 Brett Cannon {% include tw.html user="brettsky" %}, and numerous
 other well-known figures in the Python universe.  I also had the chance to
@@ -32,7 +32,8 @@ everything into a few sets of loosely-related bullets/sections.
 **Lightning Talk**
 
 I got to give a lightning talk! I submitted `pent`
-{% include gh.html user="bskinn" repo="pent" %},
+{% include gh.html user="bskinn" repo="pent" -%}
+{%- include pypi.html project="pent" %},
 my early-stage side project for extraction of structured data from free text,
 and was slotted into the Saturday PM session.  I thought it went quite well,
 especially given that I made a live code demo of it. (Typing accurately through
@@ -102,7 +103,13 @@ mini-summit content in the Doc, and I filled in some gaps/details where I could.
 
 **Talks**
 
-*list of talks*
+*Friday*
+
+- [Keynote, Russell Keith-Magee](https://www.youtube.com/watch?v=ftP5BQh1-YM) --
+*[black swans, unpredicted things leading to Python succeeding, and what things might
+further Python's future adoption, or hinder it]*
+
+- ...
 
 **Misc Connections/Events**
 
@@ -143,10 +150,45 @@ Julian Berman {% include tw.html user="JulianWasTaken" %} {% include gh.html use
 This proved serendipitous, given Jonas's generosity in loaning his laptop
 for my lightning talk.
 
-- Sun PM dinner
+- During the job fair/poster session on Sunday, I saw
+Russell Keith-Magee {% include tw.html user="freakboy3742" %}
+and chatted with him a bit, mostly about his
+[keynote](https://www.youtube.com/watch?v=ftP5BQh1-YM)
+and what the future of [BeeWare](https://beeware.org) in particular, and Python in general,
+might look like.
+
+- After the closing keynotes on Sunday, I ran into
+Meredydd Luff {% include tw.html user="meredydd" %} and
+Ian Davies {% include tw.html user="daviesian_cam" %} of 
+[Anvil fame](https://anvil.works) {% include tw.html user="anvil_works" %},
+and talked to Ian for a little while. I'd talked to Meredydd a bit at
+PyCon 2018, and it was good to learn more from Ian about how Anvil works
+under the hood and how things are going for them.  The Anvil booth
+was consistently **packed** this year, so they've clearly gotten
+a lot of people's attention!
+
+- This conversation with Ian was fortuitous, because during the course of it
+a group of people convened in the vicinity and started making dinner plans.
+One of them was Pradyun {% include tw.html user="pradyunsg" %},
+who very kindly invited me along.  So, I ended up getting dinner and
+ice cream with Pradyun,
+Sumana {% include tw.html user="brainwane" %},
+Nathaniel Smith {% include tw.html user="vorpalsmith" %},
+Josh Oreman {% include gh.html user="oremanj" %}, and
+Sviatoslav Sydorenko {% include tw.html user="webKnjaZ" %},
+which was a really great time.
+There was an unexpectedly prolific amount of 
+[ST:TNG](https://en.wikipedia.org/wiki/Star_Trek:_The_Next_Generation) and
+[Square One TV](https://en.wikipedia.org/wiki/Square_One_Television)/
+[Mathnet](https://en.wikipedia.org/wiki/Mathnet) geeking-out
+with Sumana, which was **awesome**.
 
 - During the brief 'Python packaging newcomers' session Monday morning,
 I met someone who'd bookmarked my
 [pyproject.toml/src post]({% post_url 2019-04-01-My-How-Why-Pyproject-Src %})
 for later use---THAT was simultaneously a cool and also a decidedly *odd*
 experience ... "Somebody I don't know actually read my thing!"
+
+- At lunch on Monday, I happened to sit at the same table as
+Anthony Sottile {% include tw.html user="codewithanthony" %} {% include gh.html user="asottile" %},
+and it was great to have the chance to talk to him in person for a bit.
