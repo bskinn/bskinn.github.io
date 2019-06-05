@@ -4,7 +4,7 @@ title: 'PyCon 2019 Recap'
 tags: pycon
 ---
 
-Two years ago, I was delighted to learn that PyCon was going to be in Cleveland
+Two years or so ago, I was delighted to learn that PyCon was going to be in Cleveland
 for both the 2018 and 2019 meetings, putting it only about a 3-hour drive from
 my house. I'd been hacking on Python stuff for a few years by that point,
 and was excited to have the chance to rub elbows with some of the
@@ -103,15 +103,93 @@ mini-summit content in the Doc, and I filled in some gaps/details where I could.
 
 **Talks**
 
-*Friday*
+CAVEAT: I'm writing these summaries a month after I actually attended the talks,
+so sincere apologies if I get details wrong.  Correct me
+@pylogging {% include tw.html user="pylogging" %}. &lt;grin&gt;
 
-- [Keynote, Russell Keith-Magee](https://www.youtube.com/watch?v=ftP5BQh1-YM) --
-*[black swans, unpredicted things leading to Python succeeding, and what things might
-further Python's future adoption, or hinder it]*
+- **[Keynote, Russell Keith-Magee](https://www.youtube.com/watch?v=ftP5BQh1-YM)**  
+*Fri AM*  
+The overall theme of the talk centered on the 'Black Swan' concept of significant events
+that are unpredictable in advance but seem obvious in retrospect,
+based on the [book of the same title](https://books.google.com/books?id=gWW4SkJjM08C)
+by Nassim Nicholas Taleb, as applied to Python.  Russell highlighted four hypothetical
+black swans, phrased as assumptions that are likely wrong, and perhaps badly so:  
+&nbsp;  
+(1) Everyone uses a laptop  
+(2) Python can stay on the server  
+(3) Installation is a solved problem  
+(4) Code distribution doesn't matter.  
+&nbsp;  
+He described some of his experiences
+in trying to address the above four potential black swans
+through his work on the BeeWare project. 
+He specifically made the point, though, that the most important Python black swan
+over the next decade may well be something that no one has thought of yet.  
+&nbsp;  
+As a transition into how Python and the Python community might think about the
+process of moving the language into the future, he used some of the history of the
+[America's Cup](https://en.wikipedia.org/wiki/America%27s_Cup) of yacht racing
+as an illustrative example. In particular, he described how the
+[winged keel](https://en.wikipedia.org/wiki/America%27s_Cup#/media/File:Australia_II_winged_keel.JPG)
+of the *Australia&nbsp;II* yacht represents a case study in how new technologies can become
+positive black swans by triggering re-examination of existing paradigms/assumptions.
+His takeaway lessons from the America's cup and the *Australia&nbsp;II*, as potentially relevant to the
+future of Python and the Python community, were:  
+&nbsp;  
+(1) abcd ***RESUME***  
+(2) abcd  
+(3) andd  
+(4) ksjdf  
+&nbsp;  
+***STUFF***
 
-- ...
+- **["Wily Python: Writing simpler and more maintainable Python", Anthony Shaw](https://www.youtube.com/watch?v=dqdsNoApJ80)**  
+*Fri PM*  
+I'd heard about
+`wily` {% include pypi.html project="wily" %}
+before, probably on either Talk Python or Python Bytes, and so I stopped into Anthony's
+talk to learn a bit more. I still don't fully grok cyclomatic complexity, and I'd definitely have to
+do a bunch more detailed reading to understand the math behind the metrics `wily` uses,
+but I definitely feel like I'd have a pretty solid idea of the meaning behind the metrics
+if I ever decided to add `wily` onto any of my projects.
 
-**Misc Connections/Events**
+- **Keynote, Shadeed "Sha" Wallace-Stepter** *(no video available)*  
+*Sat AM*  
+I ended up getting to the convention center on the late side Saturday morning, so I only caught
+part of Sha's keynote. The main hall was *packed*, so I ended up listening from the
+rebroadcast area in the trade show area and probably missed a number of details.
+What partsI *did*
+
+- [Keynote, Jessica McKellar]() (Sat AM) --
+*[]*
+
+- ["Floats are Friends: making the most of IEEE754.00000000000000002", David Wolever]() (Sat AM) --
+*[]*
+
+- ["8 things that happen at the dot: Attribute Access & Descriptors", Andy Fundinger]() (Sat PM) --
+*[]*
+
+- [Keynote, Python Steering Council]() (Sun AM) --
+*[]*
+
+- [Poster, "Exploring Scientific Databases with Python", Andrey Smelter](https://us.pycon.org/2019/schedule/posters/list/#presentation-144)
+(Sun AM) --
+*[]*
+
+- ["A New Era in Python Governance", Shauna Gordon-McKeon]() (Sun PM) --
+*[]*
+
+- ["Lowering the Stakes of Failure with Pre-mortems and Post-mortems", Liz Sander]() (Sun PM) --
+*[]*
+
+- ["Escape from auto-manual testing with Hypothesis!", Zac Hatfield-Dodds]() (Sun PM) --
+*[]*
+
+- [Keynote, ***TITLE***, Nina Zakharenko]() (Sun PM) --
+*[]*
+
+
+**Events/Connections/Conversations**
 
 - I ended up spending a fair amount of time at the JetBrains booth on the
 trade show floor, where I:
