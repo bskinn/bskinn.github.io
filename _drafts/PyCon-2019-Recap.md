@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'PyCon 2019 Recap'
-tags: pycon
+tags: pycon python pent
 ---
 
 Two years or so ago, I was delighted to learn that PyCon was going to be in Cleveland
@@ -107,7 +107,8 @@ CAVEAT: I'm writing these summaries a month after I actually attended the talks,
 so sincere apologies if I get details wrong.  Correct me
 @pylogging {% include tw.html user="pylogging" %}. &lt;grin&gt;
 
-- **[Keynote, Russell Keith-Magee](https://www.youtube.com/watch?v=ftP5BQh1-YM)**  
+- **[Keynote, Russell Keith-Magee](https://www.youtube.com/watch?v=ftP5BQh1-YM)**
+{% include tw.html user="freakboy3742" %}  
 *Fri AM*  
 The overall theme of the talk centered on the 'Black Swan' concept of significant events
 that are unpredictable in advance but seem obvious in retrospect,
@@ -143,7 +144,7 @@ future of Python and the Python community, were:
 &nbsp;  
 ***STUFF***
 
-- **["Wily Python: Writing simpler and more maintainable Python", Anthony Shaw](https://www.youtube.com/watch?v=dqdsNoApJ80)**  
+- **["Wily Python: Writing simpler and more maintainable Python", Anthony Shaw](https://www.youtube.com/watch?v=dqdsNoApJ80)** {% include tw.html user="anthonypjshaw" %}  
 *Fri PM*  
 I'd heard about
 `wily` {% include pypi.html project="wily" %}
@@ -153,18 +154,42 @@ do a bunch more detailed reading to understand the math behind the metrics `wily
 but I definitely feel like I'd have a pretty solid idea of the meaning behind the metrics
 if I ever decided to add `wily` onto any of my projects.
 
-- **Keynote, Shadeed "Sha" Wallace-Stepter** *(no video available)*  
+- **Keynote, Shadeed "Sha" Wallace-Stepter** {% include linkedin.html user="sha-stepter-828647183" %}
+*(no video available)*  
 *Sat AM*  
 I ended up getting to the convention center on the late side Saturday morning, so I only caught
 part of Sha's keynote. The main hall was *packed*, so I ended up listening from the
-rebroadcast area in the trade show area and probably missed a number of details.
-What partsI *did*
+overflow area in the trade show area and probably missed a number of details.
+What parts I *did* catch were really impressive. Sha was fortunate to have
+so many resources made available to him through the prison system he was in,
+and did a great job making and sticking to a plan for trying to build a new
+life. Sha's keynote covered far more ground, though; check out Jessica McKellar's
+recap Twitter thread {% include tw.html user="jessicamckellar" id="1127639822640660482" %}
+for a more complete overview.
 
-- [Keynote, Jessica McKellar]() (Sat AM) --
-*[]*
+- **Keynote, Jessica McKellar** {% include tw.html user="jessicamckellar" %} *(no video available)*  
+*Sat AM*  
+I heard Jessica's talk from the overflow area also, and thus probably also missed
+a number of details here, too.  However, she made a compelling case that the US prison
+system, as currently constituted, (1) does a decidedly poor job of providing
+rehabilitated individuals the resources and connections they need to actually
+get clear of a cycle of release and reincarceration, and (2) operates in
+a manner that leads to substantial racial disparities. She posed a challenge
+to everyone in the room, to make a concrete difference in their local
+context prior to PyCon 2020; see her Twitter thread
+recap {% include tw.html user="jessicamckellar" id="1127640196256677890" %}
+for more details.
 
-- ["Floats are Friends: making the most of IEEE754.00000000000000002", David Wolever]() (Sat AM) --
-*[]*
+- **["Floats are Friends: making the most of IEEE754.00000000000000002",
+David Wolever](https://youtube.com/watch/v=zguLmgYWhM0)** {% include tw.html user="wolever" %}  
+*Sat AM*  
+This talk definitely won my "cleverest title" award for the meeting.
+I use variations on Dory's "Just Keep Swimming!" all the time, so I was an immediate
+sucker for 'floats are friends' in particular.  I also was interested in the
+technical aspects of the talk, though--I knew generally that floats
+can't represent the entire number line
+to arbitrary precision and that this behavior can cause subtle problems,
+but I very much appreciated this overview of the details of float implementation.
 
 - ["8 things that happen at the dot: Attribute Access & Descriptors", Andy Fundinger]() (Sat PM) --
 *[]*
