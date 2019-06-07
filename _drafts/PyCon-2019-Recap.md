@@ -78,7 +78,10 @@ community ... that all it really takes is being nice and expressing a desire to 
 Pretty straightforward!
 
 The mini-summit started up mid-morning, broke over lunch, and wrapped up in the
-early afternoon. Requests for topics to discuss had been solicited through a
+early afternoon.
+Paul Ganssle {% include tw.html user="pganssle" %}
+led most (all?) of the summit, ceding the floor to domain experts as relevant.
+Requests for topics to discuss had been solicited through a
 [discuss.python.org](https://discuss.python.org/t/packaging-mini-summit-pycon-us-2019-topic-suggestions/1534)
 post, with priority decided based on the combined number of likes on each topic at
 the discuss.python post plus the number of in-person 'in favor' votes. The following topics
@@ -167,6 +170,12 @@ do a bunch more detailed reading to understand the math behind the metrics `wily
 but I definitely feel like I'd have a pretty solid idea of the meaning behind the metrics
 if I ever decided to add `wily` onto any of my projects.
 
+
+- **[Lightning Talks, Friday PM] (NEED LINK)**  
+I caught part of the lightning talks Friday afternoon; out of all of them, the one that
+stuck most in memory described a Scratch-like modular language built on Python.
+
+
 - **Keynote, Shadeed "Sha" Wallace-Stepter** {% include linkedin.html user="sha-stepter-828647183" %}
 *(no video available)*  
 *Sat AM*  
@@ -204,26 +213,30 @@ can't represent the entire number line
 to arbitrary precision and that this behavior can cause subtle problems,
 but I very much appreciated this overview of the details of float implementation.
 
-- ["8 things that happen at the dot: Attribute Access & Descriptors", Andy Fundinger]() (Sat PM) --
+- **["8 things that happen at the dot: Attribute Access & Descriptors",
+Andy Fundinger](https://youtube.com/watch/v=6cDtA_uzqg0)**  
+*Sat PM*  
 *[]*
 
-- [Keynote, Python Steering Council]() (Sun AM) --
+- [Keynote, Python Steering Council](https://youtube.com/watch/v=8dDp-UHBJ_A) (Sun AM) --
 *[]*
 
 - [Poster, "Exploring Scientific Databases with Python", Andrey Smelter](https://us.pycon.org/2019/schedule/posters/list/#presentation-144)
 (Sun AM) --
 *[]*
 
-- ["A New Era in Python Governance", Shauna Gordon-McKeon]() (Sun PM) --
+- ["A New Era in Python Governance", Shauna Gordon-McKeon](https://youtube.com/watch/v=mAC83JVDzL8) (Sun PM) --
 *[]*
 
-- ["Lowering the Stakes of Failure with Pre-mortems and Post-mortems", Liz Sander]() (Sun PM) --
+- **["Lowering the Stakes of Failure with Pre-mortems and Post-mortems",
+Liz Sander](https://youtube.com/watch/v=bmMBA6SDirU)**  
+*Sun PM*  
 *[]*
 
-- ["Escape from auto-manual testing with Hypothesis!", Zac Hatfield-Dodds]() (Sun PM) --
+- ["Escape from auto-manual testing with Hypothesis!", Zac Hatfield-Dodds](https://youtube.com/watch/v=KcyGUVzL7HA) (Sun PM) --
 *[]*
 
-- [Keynote, ***TITLE***, Nina Zakharenko]() (Sun PM) --
+- [Keynote, Nina Zakharenko](https://youtube.com/watch/v=35mXD40SvXM) (Sun PM) --
 *[]*
 
 
