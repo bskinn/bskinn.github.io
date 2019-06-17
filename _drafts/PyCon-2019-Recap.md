@@ -200,23 +200,37 @@ call cascade and described how it can be tweaked/hijacked for fun and/or profit 
 mischief.
 
 - **[Keynote, Python Steering Council](https://youtube.com/watch/v=8dDp-UHBJ_A)**
-(Sun AM)
-I frankly don't recall a lot of the details from this keynote
+*Sun AM*
+I frankly don't recall a lot of the specifics from this keynote, but I definitely enjoyed it.
+With the transition in Python governance to the Steering Council model,
+I think it was valuable and important for the Council to have this opportunity
+to introduce people to themselves. The laid-back, conversational format worked
+really well, I thought.  I'll reiterate here what I said on
+Twitter {% include tw.html user="bskinn" id="1092579298303717376" %}
+back in February: I was really glad to hear that
+Guido {% include tw.html user="gvanrossum" %} was willing to be a member of the
+Council, and that the stresses leading to his stepping back as BDFL hadn't
+turned him off from a prominent role in Python leadership.
+
 
 - [Poster, "Exploring Scientific Databases with Python", Andrey Smelter](https://us.pycon.org/2019/schedule/posters/list/#presentation-144)
 (Sun AM) --
 *[]*
 
+
 - ["A New Era in Python Governance", Shauna Gordon-McKeon](https://youtube.com/watch/v=mAC83JVDzL8) (Sun PM) --
 *[]*
+
 
 - **["Lowering the Stakes of Failure with Pre-mortems and Post-mortems",
 Liz Sander](https://youtube.com/watch/v=bmMBA6SDirU)**
 *Sun PM*
 *[]*
 
+
 - ["Escape from auto-manual testing with Hypothesis!", Zac Hatfield-Dodds](https://youtube.com/watch/v=KcyGUVzL7HA) (Sun PM) --
 *[]*
+
 
 - [Keynote, Nina Zakharenko](https://youtube.com/watch/v=35mXD40SvXM) (Sun PM) --
 *[]*

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'RKM Keynote PyCon 2019
+title: 'RKM Keynote PyCon 2019'
 tags: pycon python
 ---
 
