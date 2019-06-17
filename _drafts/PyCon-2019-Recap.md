@@ -111,57 +111,27 @@ so sincere apologies if I get details wrong.  Correct me
 @pylogging {% include tw.html user="pylogging" %}. &lt;grin&gt;
 
 - **[Keynote, Russell Keith-Magee](https://www.youtube.com/watch?v=ftP5BQh1-YM)**
-{% include tw.html user="freakboy3742" %}  
-*Fri AM*  
+{% include tw.html user="freakboy3742" %}
+*Fri AM*
 The overall theme of the talk centered on the 'Black Swan' concept of significant events
 that are unpredictable in advance but seem obvious in retrospect,
 based on the [book of the same title](https://books.google.com/books?id=gWW4SkJjM08C)
-by Nassim Nicholas Taleb, as applied to Python.  Russell highlighted four hypothetical
-Black Swans, phrased as assumptions that are likely wrong, and perhaps badly so:  
-&nbsp;  
-(1) Everyone uses a laptop.  
-(2) Python can stay on the server.  
-(3) Installation is a solved problem.  
-(4) Code distribution doesn't matter.  
-&nbsp;  
-He described some of his experiences
-in trying to address the above four potential Black Swans
-through his work on the BeeWare project. 
+by Nassim Nicholas Taleb, as applied to Python.  Russell highlighted a few
+possible Python Black Swans, and described some of his experiences
+in trying to address them through his work on the BeeWare project.
 He specifically made the point, though, that the most important Python Black Swan
-over the next decade may well be something that no one has thought of yet.  
-&nbsp;  
-As a transition into how Python and the Python community might think about the
-process of moving the language into the future, he used some of the history of the
-[America's Cup](https://en.wikipedia.org/wiki/America%27s_Cup) of yacht racing
-as an illustrative example. In particular, he described how the
-[winged keel](https://en.wikipedia.org/wiki/America%27s_Cup#/media/File:Australia_II_winged_keel.JPG)
-of the *Australia&nbsp;II* yacht represents a case study in how new technologies can become
-positive Black Swans by triggering re-examination of existing paradigms/assumptions,
-and how genuinely fair competition requires more than following the existing rules,
-if those rules aren't themselves fair.
-His takeaway lessons from the America's cup and the *Australia&nbsp;II*, as potentially relevant to the
-future of Python and the Python community, were:  
-&nbsp;  
-(1) *(paraphrased)* Don't just follow the rules; work to change the rules if they're unfair.  
-(2) Watch out for Black Swans (maybe Python on WASM...?).  
-(3) The team matters (think beyond the developers).  
-(4) Money makes things happen (open-source is an engineering model, *not* a business model).  
-&nbsp;  
-Russell wound down his talk by describing the engineering accomplishments of
-[C. Y. O'Connor](https://en.wikipedia.org/wiki/C._Y._O%27Connor),
-as well as the extremely negative public criticism of his character and actions,
-and analogized this example to the occasionally-toxic interactions that can occur
-within the open-source community. He closed with five calls to action:  
-&nbsp;  
-(1) Start thinking about Black Swans.  
-(2) Improve resourcing of maintenance and R&D efforts.  
-(3) Value contributors and their contributions.  
-(4) Get out your wallets.  
-(5) Contribute.
+over the next decade may well be something that no one has thought of yet.
+He used the stories of the
+[*Australia&nbsp;II* yacht](https://en.wikipedia.org/wiki/America%27s_Cup#1956%E2%80%931987:_The_Twelve-Metre_Rule)
+and
+[C. Y. O'Connor](https://en.wikipedia.org/wiki/C._Y._O%27Connor)
+as examples/metaphors providing food for thought on the nature of open source in
+general, and Python in particular, and inspiring a handful of calls to action.
 
 
-- **["Wily Python: Writing simpler and more maintainable Python", Anthony Shaw](https://www.youtube.com/watch?v=dqdsNoApJ80)** {% include tw.html user="anthonypjshaw" %}  
-*Fri PM*  
+- **["Wily Python: Writing simpler and more maintainable Python",
+Anthony Shaw](https://www.youtube.com/watch?v=dqdsNoApJ80)** {% include tw.html user="anthonypjshaw" %}
+*Fri PM*
 I'd heard about
 `wily` {% include pypi.html project="wily" %}
 before, probably on either Talk Python or Python Bytes, and so I stopped into Anthony's
@@ -171,14 +141,21 @@ but I definitely feel like I'd have a pretty solid idea of the meaning behind th
 if I ever decided to add `wily` onto any of my projects.
 
 
-- **[Lightning Talks, Friday PM] (NEED LINK)**  
+- **[Lightning Talks, Friday PM](https://www.youtube.com/watch?v=yFcCuinRVnU)**
 I caught part of the lightning talks Friday afternoon; out of all of them, the one that
-stuck most in memory described a Scratch-like modular language built on Python.
+stuck most in memory was by
+Anthony Lupinetti {% include gh.html user="lupinetti" %} {% include gh.html user="opensourcekids" %},
+[which described](https://www.youtube.com/watch?v=yFcCuinRVnU&t=2850s)
+a Scratch-like modular language built on Python and Google's
+`blockly` {% include gh.html user="google" repo="blockly" %}, called
+[Snappy Code](http://snappycode.org). I suspect our older son will be at an age soon
+where programming will start to interest him, and Snappy Code seems like it has
+the potential to be a great starting point.
 
 
 - **Keynote, Shadeed "Sha" Wallace-Stepter** {% include linkedin.html user="sha-stepter-828647183" %}
-*(no video available)*  
-*Sat AM*  
+*(no video available)*
+*Sat AM*
 I ended up getting to the convention center on the late side Saturday morning, so I only caught
 part of Sha's keynote. The main hall was *packed*, so I ended up listening from the
 overflow area in the trade show area and probably missed a number of details.
@@ -189,8 +166,8 @@ life. Sha's keynote covered far more ground, though; check out Jessica McKellar'
 recap Twitter thread {% include tw.html user="jessicamckellar" id="1127639822640660482" %}
 for a more complete overview.
 
-- **Keynote, Jessica McKellar** {% include tw.html user="jessicamckellar" %} *(no video available)*  
-*Sat AM*  
+- **Keynote, Jessica McKellar** {% include tw.html user="jessicamckellar" %} *(no video available)*
+*Sat AM*
 I heard Jessica's talk from the overflow area also, and thus probably also missed
 a number of details here, too.  However, she made a compelling case that the US prison
 system, as currently constituted, (1) does a decidedly poor job of providing
@@ -203,8 +180,8 @@ recap {% include tw.html user="jessicamckellar" id="1127640196256677890" %}
 for more details.
 
 - **["Floats are Friends: making the most of IEEE754.00000000000000002",
-David Wolever](https://youtube.com/watch/v=zguLmgYWhM0)** {% include tw.html user="wolever" %}  
-*Sat AM*  
+David Wolever](https://youtube.com/watch/v=zguLmgYWhM0)** {% include tw.html user="wolever" %}
+*Sat AM*
 This talk definitely won my "cleverest title" award for the meeting.
 I use variations on Dory's "Just Keep Swimming!" all the time, so I was an immediate
 sucker for 'floats are friends' in particular.  I also was interested in the
@@ -214,12 +191,17 @@ to arbitrary precision and that this behavior can cause subtle problems,
 but I very much appreciated this overview of the details of float implementation.
 
 - **["8 things that happen at the dot: Attribute Access & Descriptors",
-Andy Fundinger](https://youtube.com/watch/v=6cDtA_uzqg0)**  
-*Sat PM*  
-*[]*
+Andy Fundinger](https://youtube.com/watch/v=6cDtA_uzqg0)**
+*Sat PM*
+This is probably the talk that I'm most likely to re-watch repeatedly for my own
+edification. Attribute access kicks off a ***crazy-complicated*** series of
+context-dependent dunder method calls, and AFAICT this talk neatly both summarized that
+call cascade and described how it can be tweaked/hijacked for fun and/or profit and/or
+mischief.
 
-- [Keynote, Python Steering Council](https://youtube.com/watch/v=8dDp-UHBJ_A) (Sun AM) --
-*[]*
+- **[Keynote, Python Steering Council](https://youtube.com/watch/v=8dDp-UHBJ_A)**
+(Sun AM)
+I frankly don't recall a lot of the details from this keynote
 
 - [Poster, "Exploring Scientific Databases with Python", Andrey Smelter](https://us.pycon.org/2019/schedule/posters/list/#presentation-144)
 (Sun AM) --
@@ -229,8 +211,8 @@ Andy Fundinger](https://youtube.com/watch/v=6cDtA_uzqg0)**
 *[]*
 
 - **["Lowering the Stakes of Failure with Pre-mortems and Post-mortems",
-Liz Sander](https://youtube.com/watch/v=bmMBA6SDirU)**  
-*Sun PM*  
+Liz Sander](https://youtube.com/watch/v=bmMBA6SDirU)**
+*Sun PM*
 *[]*
 
 - ["Escape from auto-manual testing with Hypothesis!", Zac Hatfield-Dodds](https://youtube.com/watch/v=KcyGUVzL7HA) (Sun PM) --
@@ -266,7 +248,7 @@ parametrizing pytest fixtures.  I had tried just applying
 prompted me to take a closer look at the pytest docs, whereupon I
 learned that you have to [pass the parametrization iterable to the
 *params* argument of
-`@pytest.fixture()`](https://docs.pytest.org/en/latest/fixture.html#parametrizing-fixtures). 
+`@pytest.fixture()`](https://docs.pytest.org/en/latest/fixture.html#parametrizing-fixtures).
 I of course promptly [reorganized some rather smelly test
 code](https://github.com/bskinn/sphobjinv/commit/4f0c43afcd535a535ef2952a7023070633537ea6)
 in one of my packages, `sphobjinv`
@@ -288,7 +270,7 @@ might look like.
 
 - After the closing keynotes on Sunday, I ran into
 Meredydd Luff {% include tw.html user="meredydd" %} and
-Ian Davies {% include tw.html user="daviesian_cam" %} of 
+Ian Davies {% include tw.html user="daviesian_cam" %} of
 [Anvil fame](https://anvil.works) {% include tw.html user="anvil_works" %},
 and talked to Ian for a little while. I'd talked to Meredydd a bit at
 PyCon 2018, and it was good to learn more from Ian about how Anvil works
@@ -306,7 +288,7 @@ Nathaniel Smith {% include tw.html user="vorpalsmith" %},
 Josh Oreman {% include gh.html user="oremanj" %}, and
 Sviatoslav Sydorenko {% include tw.html user="webKnjaZ" %},
 which was a really great time.
-There was an unexpectedly prolific amount of 
+There was an unexpectedly prolific amount of
 [ST:TNG](https://en.wikipedia.org/wiki/Star_Trek:_The_Next_Generation) and
 [Square One TV](https://en.wikipedia.org/wiki/Square_One_Television)/
 [Mathnet](https://en.wikipedia.org/wiki/Mathnet) geeking-out
