@@ -4,6 +4,12 @@ title: 'PyCon 2019 Recap'
 tags: pycon python pent
 ---
 
+***DON'T FORGET TO ADD LINEBREAK TWO-SPACES TO END OF ALL LINES THAT NEED IT!!!***
+
+*TITLE ON FIRST LINE, WITH yt ICON LINK*  
+*PRESENTER ON SECOND LINE, WITH CONNECTION ICON LINK*  
+*TIMEFRAME ON THIRD LINE, NO ICON LINK*
+
 Two years or so ago, I was delighted to learn that PyCon was going to be in Cleveland
 for both the 2018 and 2019 meetings, putting it only about a 3-hour drive from
 my house. I'd been hacking on Python stuff for a few years by that point,
@@ -35,12 +41,14 @@ I got to give a lightning talk! I submitted `pent`
 {% include gh.html user="bskinn" repo="pent" -%}
 {%- include pypi.html project="pent" %},
 my early-stage side project for extraction of structured data from free text,
-and was slotted into the Saturday PM session.  I thought it went quite well,
+and was slotted into the Saturday PM session {% include yt.html id="sRwHWPDJBnk" time="1050" %}.
+I thought it went quite well,
 especially given that I made a live code demo of it. (Typing accurately through
-stage nerves is an ... interesting...  challenge.) The video is
-[up on YouTube](https://youtu.be/sRwHWPDJBnk?t=1050), starting at 17:30.
-As I mentioned in the talk, the are still in [docs](https://pent.readthedocs.io)
-progress...they're the next thing on my list after I finish this post.
+stage nerves is an ... interesting...  challenge.)
+As I mentioned in the talk, the [docs](https://pent.readthedocs.io)
+are still in progress...they're the next thing on my list after I finish this post...
+*and* after I take care of my slides for
+[PyOhio](https://www.pyohio.org/2019/presentations/137)(!!) :-D
 
 I need to make particular note here, though: the talk wouldn't have happened
 if not for the generosity of Jonas Neubert
@@ -110,6 +118,7 @@ CAVEAT: I'm writing these summaries a month after I actually attended the talks,
 so sincere apologies if I get details wrong.  Correct me
 @pylogging {% include tw.html user="pylogging" %}. &lt;grin&gt;
 
+
 - **[Keynote, Russell Keith-Magee](https://www.youtube.com/watch?v=ftP5BQh1-YM)**
 {% include tw.html user="freakboy3742" %}
 *Fri AM*
@@ -166,6 +175,7 @@ life. Sha's keynote covered far more ground, though; check out Jessica McKellar'
 recap Twitter thread {% include tw.html user="jessicamckellar" id="1127639822640660482" %}
 for a more complete overview.
 
+
 - **Keynote, Jessica McKellar** {% include tw.html user="jessicamckellar" %} *(no video available)*
 *Sat AM*
 I heard Jessica's talk from the overflow area also, and thus probably also missed
@@ -179,6 +189,7 @@ context prior to PyCon 2020; see her Twitter thread
 recap {% include tw.html user="jessicamckellar" id="1127640196256677890" %}
 for more details.
 
+
 - **["Floats are Friends: making the most of IEEE754.00000000000000002",
 David Wolever](https://youtube.com/watch/v=zguLmgYWhM0)** {% include tw.html user="wolever" %}
 *Sat AM*
@@ -190,14 +201,16 @@ can't represent the entire number line
 to arbitrary precision and that this behavior can cause subtle problems,
 but I very much appreciated this overview of the details of float implementation.
 
+
 - **["8 things that happen at the dot: Attribute Access & Descriptors",
-Andy Fundinger](https://youtube.com/watch/v=6cDtA_uzqg0)**
+Andy Fundinger](https://youtube.com/watch/v=6cDtA_uzqg0)** {% include tw.html user="Andriod" %}
 *Sat PM*
 This is probably the talk that I'm most likely to re-watch repeatedly for my own
 edification. Attribute access kicks off a ***crazy-complicated*** series of
 context-dependent dunder method calls, and AFAICT this talk neatly both summarized that
 call cascade and described how it can be tweaked/hijacked for fun and/or profit and/or
 mischief.
+
 
 - **[Keynote, Python Steering Council](https://youtube.com/watch/v=8dDp-UHBJ_A)**
 *Sun AM*
@@ -213,19 +226,35 @@ Council, and that the stresses leading to his stepping back as BDFL hadn't
 turned him off from a prominent role in Python leadership.
 
 
-- [Poster, "Exploring Scientific Databases with Python", Andrey Smelter](https://us.pycon.org/2019/schedule/posters/list/#presentation-144)
-(Sun AM) --
-*[]*
+- **[Poster, "Exploring Scientific Databases with Python", Andrey Smelter](https://us.pycon.org/2019/schedule/posters/list/#presentation-144)**
+{% include tw.html user="smelandr" %}
+*Sun AM*
+Here, Andrey presented on some work he had done to develop a robust method for importing a particular
+chemoinformatics data format (can't remember which one...). It struck close to home,
+being along similar lines to `pent` {% include gh.html user="bskinn" repo="pent" %},
+and I enjoyed learning a bit about why and how he'd put his tool together.
 
 
-- ["A New Era in Python Governance", Shauna Gordon-McKeon](https://youtube.com/watch/v=mAC83JVDzL8) (Sun PM) --
-*[]*
+- **["A New Era in Python Governance", Shauna Gordon-McKeon](https://youtube.com/watch/v=mAC83JVDzL8)**
+{% include tw.html user="shauna_gm" %}
+*Sun PM*
+In this talk, Shauna provided an overview of the mechanics of the transition to the
+Steering Council model, after Guido's {% include tw.html user="gvanrossum" %} stepping back
+from the BDFL role last year.  It was a great counterpart to the Steering Council keynote
+earlier in the day. I had kept an eye on the process as it developed,
+so I was familiar with most of the high-level content,
+but there were some smaller details I hadn't been aware of.
+For anyone who didn't follow the transition, though, I expect it was
+quite informative.
 
 
 - **["Lowering the Stakes of Failure with Pre-mortems and Post-mortems",
 Liz Sander](https://youtube.com/watch/v=bmMBA6SDirU)**
-*Sun PM*
-*[]*
+{% include tw.html user="sander_liz" %}  
+*Sun PM*  
+Not being a professional developer, I haven't had the experience of debriefs
+after the emergence of major problems with a piece of code.
+So, those aspects were interesting to me as a window into *RESUME*
 
 
 - ["Escape from auto-manual testing with Hypothesis!", Zac Hatfield-Dodds](https://youtube.com/watch/v=KcyGUVzL7HA) (Sun PM) --

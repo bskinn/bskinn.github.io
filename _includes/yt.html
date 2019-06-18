@@ -1,0 +1,4 @@
+{%- if include.id -%}
+  <a href="https://www.youtube.com/watch?v={{- include.id -}}{%- if include.time -%}&t={{- include.time -}}{%- endif -%}
+  "><img src="{{- site.baseurl -}}/images/yt_icon.png" width="16"></a>
+{%- endif -%}
