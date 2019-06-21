@@ -70,6 +70,7 @@ a PyPA/packaging meet-and-greet open space had been scheduled for first-thing Fr
 I briefly met Carol Willing
 {% include tw.html user="WillingCarol" %},
 Sumana Harihareswara {% include tw.html user="brainwane" %},
+Chris Jerdonek {% include tw.html user="cjerdonek" %},
 and Pradyun Gedam {% include tw.html user="pradyunsg" %} there,
 as well as at least 3-4 other people whose names I didn't get.
 The mini-summit was scheduled to be part of the packaging sprints,
@@ -254,7 +255,20 @@ Liz Sander](https://youtube.com/watch/v=bmMBA6SDirU)**
 *Sun PM*  
 Not being a professional developer, I haven't had the experience of debriefs
 after the emergence of major problems with a piece of code.
-So, those aspects were interesting to me as a window into *RESUME*
+So, those aspects were interesting to me as a window into the experiences
+of professional developers.  Additionally, coming from a chemical engineering background,
+the pre-mortem and post-mortem concepts reminding me strongly of best practices
+in the chemical process industry: respectively, the
+[Process Hazard Analysis](https://www.fauske.com/blog/qa-on-pha-the-who-what-where-when-and-why-of-process-hazards-analysis)
+conducted during the design phase of a new process, and the
+[Near-Miss Analysis](https://riskcenter.wharton.upenn.edu/wp-content/uploads/2014/07/03-01-JP.pdf)
+(Phimister et al. *Risk Analysis* **23**(3): 445, 2003).
+In both contexts, the pre-mortem seeks to answer the question
+*What all could go wrong, and how can we minimize that likelihood?*,
+and the post-mortem tries to answer
+*What went wrong here, and how can we try to avoid it happening in the future?*.
+Very good talk; the emphasis on facilitating non-accusatory post-mortems
+was especially important, I think.
 
 
 - ["Escape from auto-manual testing with Hypothesis!", Zac Hatfield-Dodds](https://youtube.com/watch/v=KcyGUVzL7HA) (Sun PM) --
