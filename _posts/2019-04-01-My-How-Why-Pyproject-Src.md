@@ -435,6 +435,11 @@ with open(osp.join(*["src", "stdio_mgr", "version.py"])) as f:
     exec(f.read())
 ```
 
+**NOTE (2019-06-12):** I realized recently that the above construction
+is unnecessarily complicated---the unpacking of the list literal is superfluous.
+Should be `.join("src", "stdio_mgr", "version.py")`.
+I think the unpacking must have been left over from something else I was fiddling with...?
+
 I could have moved a bunch of the configuration options to `setup` into `setup.cfg`, but I'd rather not
 create yet another new file for only this single purpose. If `setuptools` gets an update such that
 arguments to `setup` could be sited in `pyproject.toml`, I would strongly consider shifting them over there.
