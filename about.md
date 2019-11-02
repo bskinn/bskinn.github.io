@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-<img src="{{ site.baseurl }}/images/brian_skinn_436x574.jpg" alt="Brian Skinn headshot" style="width: 160px;"/>
+<img src="{{ site.baseurl }}/images/bskinn_2019.jpg" alt="Brian Skinn headshot" style="width: 200px;"/>
 
 Hi! I'm Brian.
 
