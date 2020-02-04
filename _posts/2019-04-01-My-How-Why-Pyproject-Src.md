@@ -4,6 +4,19 @@ title: 'My How and Why: pyproject.toml &amp; the &#39;src&#39; Project Structure
 tags: python how-why packaging testing
 ---
 
+**UPDATE 3 (4 Feb 2020):** It's been brought to my attention that Google is returning
+this post near the top of the results list for a variety of Python packaging-related
+keywords (ummm...yikes?!). As the post is written assuming a fair bit of Python
+packaging knowledge, here are a few links to some introductory material for the unfamiliar:
+
+- [Python Modules and Packages: An Introduction](https://realpython.com/courses/python-modules-packages/), article series on [Real Python](https://realpython.com/)
+- [How to Publish Your Own Python Package to PyPI](https://realpython.com/courses/how-to-publish-your-own-python-package-pypi/), article series on Real Python
+- [Python Packaging Tutorial](https://packaging.python.org/tutorials/packaging-projects/), Python Packaging Authority (PyPA)
+- [Python Packaging User Guide](https://packaging.python.org/), PyPA
+- [About the PyPA](https://www.pypa.io/en/latest/)
+- [Projects under the PyPA Umbrella](https://github.com/pypa/)
+
+
 **UPDATE 2 (16 May 2019):** With the release of pip v19.1.1
 {% include pypi.html project="pip" version="19.1.1" %}, editable installs are
 again allowed in the presence of `pyproject.toml`. Both the `pip install -e .` and
@@ -77,12 +90,14 @@ developer mode as part of my dev virtualenv. Thus, I only need to invoke one com
 `pip install -r requirements-dev.txt`, to set up the virtualenv, instead of having to
 then follow with a `pip install -e .` (I'm sticking with the `requirements.txt` paradigm
 mainly because I don't know how otherwise to specify custom dependencies for
-Read the Docs builds.) **UPDATE:** With the `pip` 19.1 behavior change, I have **removed**
-`-e .` from my requirements files, and instead run `python setup.py develop` to install
+Read the Docs builds.) 
+
+<em>(While dealing with the `pip` 19.1 behavior change, I **removed**
+`-e .` from my requirements files, and instead ran `python setup.py develop` to install
 the package working tree into the relevant environment after calling `pip install`.
-For my local working directory, I just run the command manually; for CI, I insert it as a
+For my local working directory, I just ran the command manually; for CI, I inserted it as a
 [separate command](https://github.com/bskinn/stdio-mgr/blob/dff9f326528aac67d7ca0dc0a86ce3dffa3e0d39/.travis.yml#L4)
-in the pre-test phase of the build (`install` for Travis).
+in the pre-test phase of the build (`install` for Travis).)</em>
 
 Below is some commentary on the various files relevant to the changes I made.
 The files below are in the state of
@@ -227,7 +242,7 @@ Obtaining file:///... (from -r requirements-dev.txt (line 12))
 Command "python setup.py egg_info" failed with error code 1 in /.../
 ```
 
-**UPDATE:** As noted above, the strict enforcement of PEP517 in `pip` 19.1 disallows editable installs:
+As noted above, the strict enforcement of PEP517 in `pip` 19.1 disallowed editable installs:
 
 ```
 >pip install -e .
@@ -238,7 +253,7 @@ toml file with a "build-backend" key in the "build_system" value. See PEP 517 fo
 fication.
 ```
 
-In some (many? most?) cases, a separate invocation of `python setup.py develop` will work as
+In some (many? most?) cases, a separate invocation of `python setup.py develop` appeared to work as
 an alternative to the `pip`-mediated `-e .` editable install:
 
 ```
@@ -266,11 +281,13 @@ Using c:\...\stdiomgr\env\lib\site-packages
 Finished processing dependencies for stdio-mgr==1.0.2.dev1
 ```
 
-So far, this approach has worked smoothly for both of my projects that I've already converted
-to the `src` layout and PEP517 build system. As noted above, I've just run the `setup.py develop` command
-manually for my local development trees, and added it as an extra `install` step in
+This approach worked smoothly for both of my projects that I'd already converted
+to the `src` layout and PEP517 build system. As noted above, I would just run the `setup.py develop` command
+manually for my local development trees, and had added it as an extra `install` step in
 [`.travis.yml`](https://github.com/bskinn/stdio-mgr/blob/dff9f326528aac67d7ca0dc0a86ce3dffa3e0d39/.travis.yml#L4)
 for CI.
+
+For `pip` versions 19.1.1 and above, the `pip install -e .` approach again works without issue.
 
 -----
 
@@ -435,10 +452,10 @@ with open(osp.join(*["src", "stdio_mgr", "version.py"])) as f:
     exec(f.read())
 ```
 
-**NOTE (2019-06-12):** I realized recently that the above construction
+(**NOTE (2019-06-12):** I realized recently that the above construction
 is unnecessarily complicated---the unpacking of the list literal is superfluous.
-Should be `.join("src", "stdio_mgr", "version.py")`.
-I think the unpacking must have been left over from something else I was fiddling with...?
+This would be much more cleanly written as `.join("src", "stdio_mgr", "version.py")`.
+I think the unpacking must have been left over from something else I was fiddling with...?)
 
 I could have moved a bunch of the configuration options to `setup` into `setup.cfg`, but I'd rather not
 create yet another new file for only this single purpose. If `setuptools` gets an update such that
