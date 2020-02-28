@@ -1,11 +1,13 @@
 ---
 layout: post
-title: 'My How and Why: Per-User "bin" Directories'
+title: 'My How and Why: Custom Executables & Shortcuts'
 tags: how-why cli bash cmd
 ---
 
+***ALL THIS INTRO NEEDS REWRITING***
+
 I spend a decent amount of time at the commandline, for various reasons.
-At work, it's usually at Windows ``cmd``; at home, it's either Windows ``cmd``
+At work, it's usually at Windows ``cmd``; at home, it's either ``cmd``
 or ``bash`` on Debian. In both places, a major activity is working with Python;
 on the Linux box, I'm also doing a wide variety of other stuff (details?).
 
@@ -13,37 +15,86 @@ Regardless, as is pretty common, I have a bunch of things that I want
 to not have to type out in full every time. Shorter ones of these I handle by
 defining aliases for in Linux (e.g., helper for activating virtual environments),
 but some things work better with symlinks than with aliases (linking
-to various user-installed Pythons being one major example); and, 
+to various user-installed Pythons being one major example);
+
+I did a bit of research in the course of writing this post... 
 while ``cmd`` does now support symlinks, they don't play nicely with
 running Pythons (appears to be a path/working dir problem --example--),
 and defining persistent aliases requires some
 [registry fiddling](https://stackoverflow.com/questions/20530996/aliases-in-windows-command-prompt)
-that, all things considered, I'd rather not mess with it... and, it has
+that, all things considered, I'd rather not mess with it... and, it
+looks like it has
 similar path/working dir problems to the symlinks (--example--).
+
+So, for now, I'll be sticking with my bin-folder-full-of-scripts approach on ``cmd``.
 
 Linux
 -----
 
 **Aliases**
 
-Don't actually use these -- don't take arguments, static abbreviations.
-Should define some for things like df -h and du -sh, though:
+[``bash`` aliases](https://ss64.com/bash/alias.html) let you define static abbreviations
+for shell commands (both builtins and executables). I've most often seen them used
+to avoid needing to supply flags/arguments that are used on ~every invocation:
 
 ```
+$ du -s
+16720220        .
+$ alias du="du -h"
+$ du -s
+16G     .
+$ alias pyc="python3 -c"
+$ pyc 'print("Hello!")'
+Hello!
+```
+
+I actually hadn't used any of these before researching them for this post;
+but, now that I've looked closely at them, I've added a few to
+a new ``~/.bash_aliases``:
+
+```
+# ls, full listing & show dotfiles
+alias lla="ls -la"
+
+# ls, minimal display
+alias l1="ls -1"
+
+# Always human-readable du
+alias du="du -h"
+
+# Always human-readable df
 alias df="df -h"
+
+# Quick access to apt update and upgrade
+alias aptupd="sudo apt-get update"
+alias aptupg="sudo apt-get upgrade"
 ```
 
-Can define an alias that masks another command/executable, as in the above,
-or can define a new name:
+Note that it *does* work fine to 'redefine' an existing command to include default
+options/flags, as was done above for ``du`` and ``df``---``alias`` doesn't
+recurse its substitutions. In situations like this, the original command
+can be accessed by enclosing it in quotes:
 
 ```
-alias dfh="df -h"
+$ du -s
+16G     .
+$ "du" -s
+16695720        .
 ```
 
-I generally would define a new name, so that I can get at the
-original form if I want it.
+However, as I did for ``lla`` and ``l1``,
+in most cases I expect I will generally define my aliases as new names,
+so that I can get at the original commands without quoting them, if I want to. 
+
+Note also that aliases **cannot** contain explicit positional arguments.
+Any arguments passed to the alias get transferred directly to the tail
+of the expanded command.
+
 
 **Functions**
+
+``bash`` functions are a considerably more flexible means for defining
+custom commands. 
 
 Defined in the shell, take arguments.
 Typically use if I'm not passing arguments through
