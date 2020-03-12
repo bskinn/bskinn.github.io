@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 'My How and Why: Custom Executables & Shortcuts'
+title: 'My How and Why: Aliases, Functions, Symlinks and Shortcuts'
 tags: how-why cli bash cmd
 ---
 
@@ -28,8 +28,8 @@ similar path/working dir problems to the symlinks (--example--).
 
 So, for now, I'll be sticking with my bin-folder-full-of-scripts approach on ``cmd``.
 
-Linux
------
+``bash`` (Debian Linux)
+-----------------------
 
 **Aliases**
 
@@ -50,7 +50,8 @@ Hello!
 
 I actually hadn't used any of these before researching them for this post;
 but, now that I've looked closely at them, I've added a few to
-a new ``~/.bash_aliases``:
+a new ``~/.bash_aliases`` (they could also be added directly into
+``~/.bashrc`` or ``~/.profile``):
 
 ```
 # ls, full listing & show dotfiles
@@ -64,6 +65,10 @@ alias du="du -h"
 
 # Always human-readable df
 alias df="df -h"
+
+# Grepped history and ps
+alias hg="history | grep "
+alias psag="ps aux | grep "
 
 # Quick access to apt update and upgrade
 alias aptupd="sudo apt-get update"
@@ -83,53 +88,112 @@ $ "du" -s
 ```
 
 However, as I did for ``lla`` and ``l1``,
-in most cases I expect I will generally define my aliases as new names,
-so that I can get at the original commands without quoting them, if I want to. 
+in most cases I expect I'll define aliases as new names,
+so that I can get at the original commands without quoting them.
 
 Note also that aliases **cannot** contain explicit positional arguments.
-Any arguments passed to the alias get transferred directly to the tail
+Any arguments passed to the alias alwyays get transferred directly to the tail
 of the expanded command.
 
 
 **Functions**
 
-``bash`` functions are a considerably more flexible means for defining
-custom commands. 
-
-Defined in the shell, take arguments.
-Typically use if I'm not passing arguments through
-wholesale to a downstream executable. Typically use for things where I'm
-interacting with system builtins, rather than executables on the
-filesystem. Quicker contractions of frequently used commands.
-
-Examples -- vact, hg, psag
-
+``bash`` functions (*LINK TO SS64*) are a considerably more flexible means for defining
+custom commands.  They can enclose multi-line commands, and can use
+arguments in arbitrary ways. The syntax is a bit unusual, as can be
+seen in this function for activating a python virtual environment
+in a sub-directory of the current working directory:
 
 ```
-{example}
+vact () {
+  source "env$1/bin/activate"
+}
 ```
 
-Can put directly into ``~/.profile`` or ``~/.bashrc``,
-or keep segregated in ``~/.bash_aliases``.
+The parentheses will *always* be empty; they're purely
+a syntactic marker to tell ``bash`` that you're defining a function.
+Note that even though this function is only a single command,
+it could not be implemented as an alias, since the argument
+has to be substituted into the middle of the command.
+(Most of the time, I use this function without an argument, which
+will activate the environment in ``env``; however, if I define
+multiple environments in a common location, this lets me activate
+a specific environment: ``$ vact foo`` would activate
+an environment residing in ``envfoo``.)
+
+As with aliases, functions can put directly into
+``~/.profile`` or ``~/.bashrc``,
+or kept segregated in ``~/.bash_aliases``.
 
 
 **Executable Symlinks**
 
-Create ``~/bin``; prepend ``/home/username/bin`` to ``PATH``
-(show syntax as in ``.bashrc``); add symlinks to binaries
-of interest in that folder. Use most extensively for
-different user-installed, locally-compiled Pythons.
+Aliases and functions are great for abbreviating direct invocations
+from the command line, but they have some disadvantages
+as compared to symlinks (created with ``ln`` **SS64 link to ln?**).
+One significant disadvantage is the fact that aliases and functions
+are defined per-user, whereas symlinks exist on the filesystem
+and (given suitable permissions) can thus be used by anyone
+logged in to the machine. Also, since symlinks provide an
+effectively invisible pass-through to the target executable,
+they can be used in complex invocations in ways that
+aliases and functions might not support.
 
-Build custom Python with ``./configure --prefix=/home/username/python/x.y.z/``,
-then ``make && make install``.
+That said, to date I've pretty much always created my symlinks
+in a per-user fashion, placing them in a ``~/bin`` directory.
+I've done this even though I'm using multiple logins
+(to keep various responsibilities separated), because most of the
+commands are specific to each login. However, for my custom Python
+builds, as described below, I'm considering moving to a centralized location
+such as ``/usr/custom``, so that they're readily accessible
+to all logins. I would still curate the symlinks per-user, though,
+in ``~/bin``.
 
-Then, symlink in ``~/bin`` (CHECK THESE PATHS):
+In order to make the symlinks available for execution,
+I just add a command in ``~/.bashrc`` to prepend ``~/bin``
+to ``PATH``:
 
 ```
-$ cd /home/username/bin
-$ ln -s /home/username/python/x.y.z/bin/pythonx.y pythonx.y
+export PATH="/home/usr/bin:$PATH"
 ```
 
+On all subsequent logins with ``user``, these symlinks will be available
+for direct execution in the shell.
+
+My main current use for these symlinks is to allow easy access to multiple
+user-compiled versions of Python. While there are tools
+out there that provide for automatic management of Python
+versions, I would rather have more direct control over
+what's installed and how it's compiled. For per-user installs,
+I install my custom
+Pythons into ``~/python/x.y.z/``, and then
+create symlinks in ``~/bin``:
+
+```
+$ cd /home/user/bin
+$ ln -s /home/user/python/3.8.0/bin/python3.8 python3.8
+```
+
+This setup works really well with ``tox`` **LINK**, such that the Python
+executables can be set just as:
+
+```
+ADD STUFF FROM TOX.INI
+```
+
+The packages associated with each Python version can be changed with:
+
+```
+$ python3.8 -m pip ...
+```
+
+And, new virtual environments can be created with a given Python version
+(after a ``python3.x -m pip install virtualenv``, since I typically
+use that rather than ``venv`` from the standard library) via:
+
+```
+$ python3.8 -m virtualenv env --prompt="(envname) "
+```
 
 
 Windows
@@ -137,18 +201,25 @@ Windows
 
 All user bin-folder batch files. Add to PATH.
 
+Despite doskey aliases and the new symlink capability in Windows 10,
+this approach is the only practical one I've found for Pythons
+(as of the last time I tried them, doskey/symlinks don't handle 
+path-setting correctly, so even ``python3.8 -m pip ...`` doesn't
+execute correctly. Also, doskey syntax is clunky, and
+elevated priviges are required to create symlinks (*MAYBE REMOVE SENTENCE*).
+
+{description of PATH setting and where ``bin`` gets created and
+syntax of e.g. ``vact`` vs ``python3.x``}
 
 
-Can do doskey aliases, 
+Doskey aliases -- sort of a partial cross of bash aliases and functions.
+
+Can do doskey aliases, but the syntax is clunky and
+[it can handle at most nine arguments](https://ss64.com/nt/doskey.html). **CAN IT HANDLE SOMETHING LIKE $*???**
+Also, they  
 
 
-
-**How I was doing it before; what I'm switching to?**
-
-
-But, it's so clean, now I think I might switch to it?
 
 But, no, they're one-liners? No, can use ``$T`` to run multiple commands.
 
-Biggest limitation might be that [it's capped at nine arguments](https://ss64.com/nt/doskey.html).
 
