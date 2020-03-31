@@ -49,7 +49,7 @@ Hello!
 ```
 
 I actually hadn't used any of these before researching them for this post;
-but, now that I've looked closely at them, I've added a few to
+but, now that I've looked closely, I've added a few to
 a new ``~/.bash_aliases`` (they could also be added directly into
 ``~/.bashrc`` or ``~/.profile``):
 
@@ -98,7 +98,8 @@ of the expanded command.
 
 **Functions**
 
-``bash`` functions (*LINK TO SS64*) are a considerably more flexible means for defining
+[``bash`` functions](https://ss64.com/bash/function.html)
+are a considerably more flexible means for defining
 custom commands.  They can enclose multi-line commands, and can use
 arguments in arbitrary ways. The syntax is a bit unusual, as can be
 seen in this function for activating a python virtual environment
@@ -114,12 +115,30 @@ The parentheses will *always* be empty; they're purely
 a syntactic marker to tell ``bash`` that you're defining a function.
 Note that even though this function is only a single command,
 it could not be implemented as an alias, since the argument
+indicating which environment to activate
 has to be substituted into the middle of the command.
 (Most of the time, I use this function without an argument, which
 will activate the environment in ``env``; however, if I define
 multiple environments in a common location, this lets me activate
 a specific environment: ``$ vact foo`` would activate
 an environment residing in ``envfoo``.)
+
+Note that, unlike with aliases, arguments passed to a function call
+are **NOT** automatically passed through to any particular command
+inside the function body---you have to specifically indicate
+where they should be used:
+
+```
+$ pygood () { python3 $*; }
+$ pybad () { python3; }
+$ pygood -c "print('Hi')"
+Hi
+$ pybad -c "print('Hi')"
+Python 3.7.3 (default, Apr  3 2019, 05:39:12)
+[GCC 8.3.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>>
+```
 
 As with aliases, functions can put directly into
 ``~/.profile`` or ``~/.bashrc``,
@@ -130,7 +149,7 @@ or kept segregated in ``~/.bash_aliases``.
 
 Aliases and functions are great for abbreviating direct invocations
 from the command line, but they have some disadvantages
-as compared to symlinks (created with ``ln`` **SS64 link to ln?**).
+as compared to symlinks ([created with ``ln``](https://ss64.com/bash/ln.html)).
 One significant disadvantage is the fact that aliases and functions
 are defined per-user, whereas symlinks exist on the filesystem
 and (given suitable permissions) can thus be used by anyone
@@ -138,14 +157,52 @@ logged in to the machine. Also, since symlinks provide an
 effectively invisible pass-through to the target executable,
 they can be used in complex invocations in ways that
 aliases and functions might not support.
+Initially, I thought that piped command sequences were one
+example of this, but it turns out that both aliases and functions
+handle pipes and input redirects just fine:
 
-That said, to date I've pretty much always created my symlinks
-in a per-user fashion, placing them in a ``~/bin`` directory.
+```
+$ alias py="python3"
+$ py3 () { python3 $*; }
+$ echo "print('Hi')" | python3
+Hi
+$ echo "print('Hi')" | py
+Hi
+$ echo "print('Hi')" | py3
+Hi
+$ echo "print('Hi')" > in
+$ py < in
+Hi
+$ py3 < in
+Hi
+```
+
+Depending on your needs, it may make sense to put some symlinks in
+a common location that won't conflict with the system
+package manager (e.g., ``/usr/custom/bin`` is what I would use,
+though there may be a convention here that I don't know about).
+All of the symlinks I use with regularity I just put in a 
+per-user ``~/bin`` directory, however.
+
+
+[**LINK TO /usr/local/bin INFO**](https://unix.stackexchange.com/q/4186/95427)
+
+[more context on /bin &c.](https://askubuntu.com/q/406250/364673)
+
+
+**REWRITE WHOLE PARAGRAPH** That said, since all of my Linux sysadmin experience to date
+has been on systems where I'm the only user,
+I've pretty much always created my symlinks
+in a per-user fashion, placing them in a ``~/bin`` directory,
+since I don't need to make them accessible to others.
 I've done this even though I'm using multiple logins
 (to keep various responsibilities separated), because most of the
-commands are specific to each login. However, for my custom Python
-builds, as described below, I'm considering moving to a centralized location
-such as ``/usr/custom``, so that they're readily accessible
+commands are specific to each of the different logins I use
+to keep concerns segregated. However, for my custom Python
+builds, as described below, I'm considering moving the
+installation locations to a centralized location
+such as ``/usr/custom``, and switching to building with
+the superuser, so that they're readily accessible
 to all logins. I would still curate the symlinks per-user, though,
 in ``~/bin``.
 
