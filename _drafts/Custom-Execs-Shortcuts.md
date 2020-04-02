@@ -28,10 +28,11 @@ similar path/working dir problems to the symlinks (--example--).
 
 So, for now, I'll be sticking with my bin-folder-full-of-scripts approach on ``cmd``.
 
-``bash`` (Debian Linux)
------------------------
+## ``bash`` (Debian Linux)
 
-**Aliases**
+
+### Aliases
+
 
 [``bash`` aliases](https://ss64.com/bash/alias.html) let you define static abbreviations
 for shell commands (both builtins and executables). I've most often seen them used
@@ -96,7 +97,7 @@ Any arguments passed to the alias alwyays get transferred directly to the tail
 of the expanded command.
 
 
-**Functions**
+### Functions
 
 [``bash`` functions](https://ss64.com/bash/function.html)
 are a considerably more flexible means for defining
@@ -145,11 +146,12 @@ As with aliases, functions can put directly into
 or kept segregated in ``~/.bash_aliases``.
 
 
-**Executable Symlinks**
+### Executable Symlinks
 
 Aliases and functions are great for abbreviating direct invocations
 from the command line, but they have some disadvantages
-as compared to symlinks ([created with ``ln``](https://ss64.com/bash/ln.html)).
+as compared to symlinks
+([created with ``ln -s [target] [new link]``](https://ss64.com/bash/ln.html)).
 One significant disadvantage is the fact that aliases and functions
 are defined per-user, whereas symlinks exist on the filesystem
 and (given suitable permissions) can thus be used by anyone
@@ -178,47 +180,47 @@ Hi
 ```
 
 Depending on your needs, it may make sense to put some symlinks in
-a common location that won't conflict with the system
-package manager (e.g., ``/usr/custom/bin`` is what I would use,
-though there may be a convention here that I don't know about).
-All of the symlinks I use with regularity I just put in a 
-per-user ``~/bin`` directory, however.
+a central location that won't conflict with the system
+package manager. It sounds like
+[``/usr/local/bin``](https://unix.stackexchange.com/q/4186/95427)
+is a pretty standard location for things like this, and looks to be included
+on ``PATH`` by default. If you would want any of these symlinks to
+be available to users only if they want to opt-in to them,
+something non-standard like ``/usr/custom/bin`` is what I would use.
+(For more information on the various ``bin`` directories,
+see [here](https://askubuntu.com/q/406250/364673).)
 
-
-[**LINK TO /usr/local/bin INFO**](https://unix.stackexchange.com/q/4186/95427)
-
-[more context on /bin &c.](https://askubuntu.com/q/406250/364673)
-
-
-**REWRITE WHOLE PARAGRAPH** That said, since all of my Linux sysadmin experience to date
-has been on systems where I'm the only user,
+For my use cases to date, though,
 I've pretty much always created my symlinks
 in a per-user fashion, placing them in a ``~/bin`` directory,
-since I don't need to make them accessible to others.
+since I haven't needed to make them accessible to others.
 I've done this even though I'm using multiple logins
 (to keep various responsibilities separated), because most of the
 commands are specific to each of the different logins I use
 to keep concerns segregated. However, for my custom Python
-builds, as described below, I'm considering moving the
-installation locations to a centralized location
+builds, as described below, I'm considering moving their
+installation locations to someplace centralized,
 such as ``/usr/custom``, and switching to building with
-the superuser, so that they're readily accessible
-to all logins. I would still curate the symlinks per-user, though,
+the superuser. This would in particular avoid the need to rebuild
+Python for each user. I would still curate the symlinks per-user, though,
 in ``~/bin``.
 
 In order to make the symlinks available for execution,
 I just add a command in ``~/.bashrc`` to prepend ``~/bin``
-to ``PATH``:
+(in its fully expanded form) to ``PATH``:
 
 ```
-export PATH="/home/usr/bin:$PATH"
+export PATH="/home/username/bin:$PATH"
 ```
 
-On all subsequent logins with ``user``, these symlinks will be available
-for direct execution in the shell.
+Other paths, such as ``/usr/local/bin``, can be added to
+``PATH`` in the same fashion.
+On all subsequent logins with ``username``, these symlinks will be available
+for direct execution in the shell. 
 
-My main current use for these symlinks is to allow easy access to multiple
-user-compiled versions of Python. While there are tools
+As noted above, my main current use for these symlinks
+is to allow easy access to multiple
+locally-compiled versions of Python. While there are tools
 out there that provide for automatic management of Python
 versions, I would rather have more direct control over
 what's installed and how it's compiled. For per-user installs,
@@ -227,34 +229,50 @@ Pythons into ``~/python/x.y.z/``, and then
 create symlinks in ``~/bin``:
 
 ```
-$ cd /home/user/bin
-$ ln -s /home/user/python/3.8.0/bin/python3.8 python3.8
+$ cd /home/username/bin
+$ ln -s /home/username/python/3.8.0/bin/python3.8 python3.8
 ```
 
-This setup works really well with ``tox`` **LINK**, such that the Python
-executables can be set just as:
+This setup works really well with
+[``tox``](https://github.com/bskinn/sphobjinv/blob/v2.0.1/tox.ini#L62-L69),
+such that the Python executables can be set just as:
 
 ```
-ADD STUFF FROM TOX.INI
+[testenv:linux]
+platform=linux
+basepython=
+    py39: python3.9
+    py38: python3.8
+    py37: python3.7
+    py36: python3.6
+    py35: python3.5
 ```
 
-The packages associated with each Python version can be changed with:
+The packages associated with each Python version can be changed
+with ``pip`` per usual:
 
 ```
 $ python3.8 -m pip ...
 ```
 
 And, new virtual environments can be created with a given Python version
-(after a ``python3.x -m pip install virtualenv``, since I typically
-use that rather than ``venv`` from the standard library) via:
+via one of:
 
 ```
 $ python3.8 -m virtualenv env --prompt="(envname) "
 ```
 
+or
 
-Windows
--------
+```
+$ python3.8 -m venv env --prompt="envname"
+```
+
+Obviously, the first option only works after a ``python3.x -m pip install virtualenv``.
+
+
+## Windows
+
 
 All user bin-folder batch files. Add to PATH.
 
