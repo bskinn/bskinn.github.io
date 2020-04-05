@@ -273,6 +273,86 @@ Obviously, the first option only works after a ``python3.x -m pip install virtua
 
 ## Windows
 
+Prior to doing the research for this post, as far as I knew
+Windows ``cmd`` wasn't nearly as flexible an environment for defining
+these sorts of helpers---the only option was to use batch files.
+One alternative might have been to switch to PowerShell, but ``cmd``
+was working well enough for me and I had no real desire to take the time
+to learn a completely new (and apparently *crushingly verbose*) syntax.
+
+So, my approach for this has always been to add a per-user ``bin`` directory
+and put it on ``%PATH%``, in a fashion directly analogous to the above approach
+for ``bash``.  The Windows 10 equivalent of ``~`` is usually
+``C:\Users\Username``, but whatever the location of the home directory
+for a user actually is, it's stored in the environment variables as
+``%USERPROFILE``. Once created, that directory needs to be added to ``%PATH%``;
+Windows defines both a system-wide and a user-specific ``PATH``, and since
+I'm usually creating a user-specific ``%USERPROFILE\bin``, I usually
+add it to the user-specific ``%PATH%``. There's a good discussion
+of ``%PATH%`` and how to add entries
+[here on SuperUser](https://superuser.com/a/284351/400170).
+
+With the ``bin`` directory created and on ``%PATH%``, 
+I just create batch files for everything I want to streamline in there.
+For functionality that's like a ``bash`` alias or symlink, the batch files
+typically are simple two-liners. For commands that lead to further
+interaction at the command line, I'll use:
+
+```
+%USERPROFILE%\bin\python3.8.bat
+===============================
+
+@echo off
+
+C:\Python\python38\python.exe %*
+
+```
+
+For commands that kick off a GUI application (e.g., WordPad),
+or an application that I *always* want to run in the background as a new process,
+I'll use:
+
+```
+%USERPROFILE%\bin\wordpad.bat
+
+@echo off
+
+start "C:\Program Files\Windows NT\Accessories\wordpad.exe" %*
+```
+
+In these, [``@echo off``](https://ss64.com/nt/echo.html) is the first line used in *basically every
+DOS/Windows batch script ever* (WHY is echo ***on*** by default???),
+to turn off echoing to ``stdout`` of the commands executed by the script;
+and, the [``%*`` argument](https://ss64.com/nt/syntax-args.html)
+passes the entire set of arguments provided to the script (if any)
+through to the command to be run.
+
+For actions that are more complex, analogous to the use-case of ``bash`` functions,
+the script is just structured differently, and sometimes ends up being longer.
+For example, this is my Windows equivalent of that ``vact`` helper for
+activating virtual environments:
+
+```
+%USERPROFILE%\bin\vact.bat
+==========================
+
+@echo off
+
+env%1\scripts\activate
+```
+
+So, you can't do *every*thing with batch files in ``cmd`` that you can
+in ``bash``, but it comes pretty close. The main thing this approach
+doesn't allow is piping the output from another command into, e.g., Python.
+However, ***RESUME***
+
+----
+
+*Having said all of the above*, in the course of researching, I discovered that apparently
+Windows [*does* support symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/),
+and has since Windows Vista! However, they don't seem to work correctly out of the box
+for (at minimum) executing Python. 
+
 
 All user bin-folder batch files. Add to PATH.
 
