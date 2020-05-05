@@ -4,6 +4,13 @@ title: 'My How and Why: pyproject.toml &amp; the &#39;src&#39; Project Structure
 tags: python how-why packaging testing
 ---
 
+**UPDATE 4 (5 May 2020):** In addition to the links below,
+Brett Cannon {% include tw.html user="brettsky" %} wrote a
+[new post](https://snarky.ca/what-the-heck-is-pyproject-toml/)
+in March 2020 providing further background on PEP517/518
+and `pyproject.toml`, and showing a couple of examples of
+minimal configurations for using `setuptools` with `pyproject.toml`.
+
 **UPDATE 3 (4 Feb 2020):** It's been brought to my attention that Google is returning
 this post near the top of the results list for a variety of Python packaging-related
 keywords (ummm...yikes?!). As the post is written assuming a fair bit of Python
@@ -15,7 +22,6 @@ packaging knowledge, here are a few links to some introductory material for the 
 - [Python Packaging User Guide](https://packaging.python.org/), PyPA
 - [About the PyPA](https://www.pypa.io/en/latest/)
 - [Projects under the PyPA Umbrella](https://github.com/pypa/)
-
 
 **UPDATE 2 (16 May 2019):** With the release of pip v19.1.1
 {% include pypi.html project="pip" version="19.1.1" %}, editable installs are
