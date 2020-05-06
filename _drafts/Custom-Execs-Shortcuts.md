@@ -285,9 +285,9 @@ and put it on ``%PATH%``, in a fashion directly analogous to the above approach
 for ``bash``.  The Windows 10 equivalent of ``~`` is usually
 ``C:\Users\Username``, but whatever the location of the home directory
 for a user actually is, it's stored in the environment variables as
-``%USERPROFILE``. Once created, that directory needs to be added to ``%PATH%``;
+``%USERPROFILE%``. Once created, that directory needs to be added to ``%PATH%``;
 Windows defines both a system-wide and a user-specific ``PATH``, and since
-I'm usually creating a user-specific ``%USERPROFILE\bin``, I usually
+I'm usually creating a user-specific ``%USERPROFILE%\bin``, I usually
 add it to the user-specific ``%PATH%``. There's a good discussion
 of ``%PATH%`` and how to add entries
 [here on SuperUser](https://superuser.com/a/284351/400170).
@@ -320,15 +320,15 @@ I'll use:
 start "C:\Program Files\Windows NT\Accessories\wordpad.exe" %*
 ```
 
-In these, [``@echo off``](https://ss64.com/nt/echo.html) is the first line used in *basically every
-DOS/Windows batch script ever* (WHY is echo ***on*** by default???),
-to turn off echoing to ``stdout`` of the commands executed by the script;
-and, the [``%*`` argument](https://ss64.com/nt/syntax-args.html)
+In these, [``@echo off``](https://ss64.com/nt/echo.html) is the first line used in basically every
+DOS/Windows batch script ever (*why* is echo ***on*** by default?!),
+to turn off echoing to ``stdout`` of the commands executed by the script.
+The [``%*`` argument](https://ss64.com/nt/syntax-args.html)
 passes the entire set of arguments provided to the script (if any)
 through to the command to be run.
 
 For actions that are more complex, analogous to the use-case of ``bash`` functions,
-the script is just structured differently, and sometimes ends up being longer.
+the script typically ends up structured differently, and sometimes ends up being longer.
 For example, this is my Windows equivalent of that ``vact`` helper for
 activating virtual environments:
 
@@ -344,13 +344,19 @@ env%1\scripts\activate
 So, you can't do *every*thing with batch files in ``cmd`` that you can
 in ``bash``, but it comes pretty close. The main thing this approach
 doesn't allow is piping the output from another command into, e.g., Python.
-However, ***RESUME***
+However, given that `cmd` currently doesn't have anywhere near as robust
+a set of command-line tools as compared to `bash` (as far as I know, at least),
+this isn't a major problem for me.
 
 ----
 
-*Having said all of the above*, in the course of researching, I discovered that apparently
-Windows [*does* support symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/),
-and has since Windows Vista! However, they don't seem to work correctly out of the box
+*Having said all of the above*, in the course of researching for this post,
+I discovered that apparently Windows *does* support both
+[symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/)
+(since Windows Vista!) and
+aliases
+
+ However, they don't seem to work correctly out of the box
 for (at minimum) executing Python. 
 
 
