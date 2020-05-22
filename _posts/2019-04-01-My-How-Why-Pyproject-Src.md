@@ -206,10 +206,10 @@ include LICENSE.txt README.rst CHANGELOG.md pyproject.toml
 
 As noted above, since my build requirements are now successfully specified
 in `pyproject.toml`, and `pyproject.toml` is bundled with the sdist by
-being included in `MANIFEST.in` (or by default), I <strike>can</strike> used to be able to include `-e .` in my
+being included in `MANIFEST.in` (or by default), I can include `-e .` in my
 `requirements-xyz.txt`s and (barring some weird compatibility issues with old
 versions of Python/`pip`/`setuptools` I've encountered on CI) a
-`pip install -r requirements-dev.txt` just <strike><em>works</em></strike> *worked*:
+`pip install -r requirements-dev.txt` just *works*:
 
 ```
 (fresh-env) $ pip install -r requirements-dev.txt
@@ -228,7 +228,7 @@ Successfully installed {packages} stdio-mgr {more packages}
 ```
 
 
-OTOH, if I delete `pyproject.toml` and try to install, it <strike>does</strike> did *NOT* work:
+OTOH, if I delete `pyproject.toml` and try to install, it does *NOT* work:
 
 ```
 (fresh-env) $ pip install -r requirements-dev.txt
