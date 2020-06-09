@@ -322,7 +322,8 @@ start "C:\Program Files\Windows NT\Accessories\wordpad.exe" %*
 ```
 
 In these, [``@echo off``](https://ss64.com/nt/echo.html) is the first line used in basically every
-DOS/Windows batch script ever (*why* is echo ***on*** by default?!),
+DOS/Windows batch script ever
+([*why* is echo ***on*** by default?!](https://retrocomputing.stackexchange.com/q/15137/3919)),
 to turn off echoing to ``stdout`` of the commands executed by the script.
 The [``%*`` argument](https://ss64.com/nt/syntax-args.html)
 passes the entire set of arguments provided to the script (if any)
@@ -338,11 +339,9 @@ fine with the above ``python3.8.bat``:
 ```
 C:\Temp>type test.py
 import sys
-
-print(sys.version_info)
-
 from pathlib import Path
 
+print(sys.version_info)
 print(str(Path().resolve()))
 
 C:\Temp>type test.py | python3.8
@@ -370,7 +369,7 @@ env%1\scripts\activate
 
 So, while I can't do *every*thing with batch files in ``cmd`` that I can
 in ``bash``, I can get pretty darn close---certainly enough to handle
-all routine tasks, and even most non-routine ones.
+all of my routine tasks, and even most non-routine ones.
 
 ----
 
@@ -378,42 +377,71 @@ In the course of researching for this post,
 I discovered that apparently Windows *does* support functionality for
 [symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/)
 (since Windows Vista!), and provides the
-[``DOSKEY``](https://ss64.com/nt/doskey.html) macro mechanism that mimics ``bash`` aliases.
+[``DOSKEY``](https://ss64.com/nt/doskey.html) macro mechanism that
+behaves somewhat similar to ``bash`` aliases.
 They both have significant downsides/problems, though, that make me
 strongly prefer the batch-file approach. 
 
-***Symlinks*** don't seem to work correctly out of the box
-for executing Python, one of my must-have use cases---it appears that they
+***Symlinks*** don't seem to work correctly out of the box in all situations
+for executing Python, one of my must-have use cases---it appears that they sometimes
 don't set various elements of the execution context correctly, at minimum the path.
 They are created with the `mklink` command, which has to be run in
 a console with administrator privileges (a further annoyance;
 press <kbd>Win</kbd>+<kbd>R</kbd> to open the "Run" dialog, type ``cmd``,
-then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> to execute):
+then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> for elevated execution):
 
 ```
 C:\Users\Username\bin>mklink python3.8-sl C:\Python\Python38\python.exe
 symbolic link created for python3.8-sl <<===>> C:\Python\Python38\python.exe
 ```
 
-***--------However, when try run...***:
+However, execution of Python via this symlink doesn't work reliably.
+It functions okay on my work PC, but when I try something like this
+at home...
 
 ```
-C:\Temp>cd \temp
+C:\Users\Username\bin>cd \temp
 
 C:\Temp>python3.8-sl test.py
 ```
 
-***------------Error occurs (img fields needs filing in):***
+... I get a system error:
 
-{% include img.html path="howwhy-general/symlink-pyerror.png" %}
+{% include img.html path="howwhy-general/symlink-pyerror.png" alt="System error from symlink" %}
+
+So, not knowing exactly what's going on here, and given the friction involved in creating
+the things, I'll be continuing to avoid Windows symlinks for the time being.
+
+***``DOSKEY`` aliases*** work for a subset of applications, but have a number
+of key limitations. They're created and used using a syntax similar to ``bash``'s:
+
+```
+C:\Temp>doskey python38=C:\Python\Python38\python.exe $*
+
+C:\Temp>python38
+Python 3.8.0 (tags/v3.8.0:fa919fd, Oct 14 2019, 19:37:50) [MSC v.1916 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+>>> ^Z
 
 
-***Aliases*** *DOSKEYs...
-Make CLI demo of creating and using one
-Can't pipe to them (demo), so not as complete as BATs. ALSO (per same SU link),
-can't use the aliases in batch files (only parsed directly at the ``cmd`` prompt,
-sounds like).*
+C:\Temp>python38 -c "print('HELLO WORLD')"
+HELLO WORLD
+```
 
-*ALso have to [muck with registry to have on startup](https://superuser.com/a/1134468/400170)?*
+The ``$*`` argument serves the same role as in ``bash`` functions, passing through
+to the expanded command all arguments provided to the alias/macro.
+
+Unfortunately, unlike with batch scripts, you can't pipe text into a ``DOSKEY`` macro:
+
+```
+C:\Temp>type test.py | python38
+'python38' is not recognized as an internal or external command,
+operable program or batch file.
+```
+
+Also, per [here](https://superuser.com/a/1134468/400170), ``DOSKEY`` macros can't
+be used within batch files, and setting them up to be loaded at the start
+of every console session requires a registry modification. So, batch files again
+remain my preferred Windows solution.
 
 
