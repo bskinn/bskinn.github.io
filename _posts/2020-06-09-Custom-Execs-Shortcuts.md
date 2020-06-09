@@ -4,32 +4,24 @@ title: 'My How and Why: Aliases, Functions, Symlinks and Shortcuts'
 tags: how-why cli bash cmd
 ---
 
-***ALL THIS INTRO NEEDS REWRITING***
-
 I spend a decent amount of time at the commandline, for various reasons.
-At work, it's usually at Windows ``cmd``; at home, it's either ``cmd``
-or ``bash`` on Debian. In both places, a major activity is working with Python;
-on the Linux box, I'm also doing a wide variety of other stuff (details?).
+At work, it's usually at Windows ``cmd``; at home, it's either ``cmd``,
+or ``bash`` on Debian. In both places, a major activity is working with Python,
+virtual environments, git, etc.;
+on the Linux box, I'm also doing a variety of other stuff as well.
+On both platforms I have a bunch of shell invocations that I don't
+want to have to type out in full every time. This post lays out some ways
+that I've found to implement these sorts of shortcuts, and which of these
+approaches I currently prefer to use.
 
-Regardless, as is pretty common, I have a bunch of things that I want
-to not have to type out in full every time. Shorter ones of these I handle by
-defining aliases for in Linux (e.g., helper for activating virtual environments),
-but some things work better with symlinks than with aliases (linking
-to various user-installed Pythons being one major example);
 
-I did a bit of research in the course of writing this post... 
-while ``cmd`` does now support symlinks, they don't play nicely with
-running Pythons (appears to be a path/working dir problem --example--),
-and defining persistent aliases requires some
-[registry fiddling](https://stackoverflow.com/questions/20530996/aliases-in-windows-command-prompt)
-that, all things considered, I'd rather not mess with it... and, it
-looks like it has
-similar path/working dir problems to the symlinks (--example--).
+----
 
-So, for now, I'll be sticking with my bin-folder-full-of-scripts approach on ``cmd``.
 
 ## ``bash`` (Debian Linux)
 
+Prior to writing this post, I had only been using symlinks and functions;
+now, I'm using some custom-defined aliases as well.
 
 ### Aliases
 
@@ -93,7 +85,7 @@ in most cases I expect I'll define aliases as new names,
 so that I can get at the original commands without quoting them.
 
 Note also that aliases **cannot** contain explicit positional arguments.
-Any arguments passed to the alias alwyays get transferred directly to the tail
+Any arguments passed to the alias always get transferred directly to the tail
 of the expanded command.
 
 
@@ -103,7 +95,7 @@ of the expanded command.
 are a considerably more flexible means for defining
 custom commands.  They can enclose multi-line commands, and can use
 arguments in arbitrary ways. The syntax is a bit unusual, as can be
-seen in this function for activating a python virtual environment
+seen in this function I wrote for activating a python virtual environment
 in a sub-directory of the current working directory:
 
 ```
@@ -222,7 +214,10 @@ As noted above, my main current use for these symlinks
 is to allow easy access to multiple
 locally-compiled versions of Python. While there are tools
 out there that provide for automatic management of Python
-versions, I would rather have more direct control over
+versions
+(e.g., `pyenv` {% include gh.html user="pyenv" repo="pyenv" %}
+and `pyflow` {% include gh.html user="David-OConnor" repo="pyflow" %}),
+I would rather have more direct control over
 what's installed and how it's compiled. For per-user installs,
 I install my custom
 Pythons into ``~/python/x.y.z/``, and then
@@ -271,6 +266,9 @@ $ python3.8 -m venv env --prompt="envname"
 Obviously, the first option only works after a ``python3.x -m pip install virtualenv``.
 
 
+----
+
+
 ## Windows
 
 Prior to doing the research for this post, as far as I knew
@@ -280,7 +278,7 @@ One alternative might have been to switch to PowerShell, but ``cmd``
 was working well enough for me and I had no real desire to take the time
 to learn a completely new (and from what I could tell *crushingly verbose*) syntax.
 
-So, my approach for this has always been to add a per-user ``bin`` directory
+So, my approach for this on Windows has always been to add a per-user ``bin`` directory
 and put it on ``%PATH%``, in a fashion directly analogous to the above approach
 for ``bash``.  The Windows 10 equivalent of ``~`` is usually
 ``C:\Users\Username``, but whatever the location of the home directory
