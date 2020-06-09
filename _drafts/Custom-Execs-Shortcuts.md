@@ -278,7 +278,7 @@ Windows ``cmd`` wasn't nearly as flexible an environment for defining
 these sorts of helpers---the only option was to use batch files.
 One alternative might have been to switch to PowerShell, but ``cmd``
 was working well enough for me and I had no real desire to take the time
-to learn a completely new (and apparently *crushingly verbose*) syntax.
+to learn a completely new (and from what I could tell *crushingly verbose*) syntax.
 
 So, my approach for this has always been to add a per-user ``bin`` directory
 and put it on ``%PATH%``, in a fashion directly analogous to the above approach
@@ -314,6 +314,7 @@ I'll use:
 
 ```
 %USERPROFILE%\bin\wordpad.bat
+=============================
 
 @echo off
 
@@ -326,6 +327,32 @@ to turn off echoing to ``stdout`` of the commands executed by the script.
 The [``%*`` argument](https://ss64.com/nt/syntax-args.html)
 passes the entire set of arguments provided to the script (if any)
 through to the command to be run.
+
+Another thing that I learned in the course of researching this post is that
+``cmd`` batch files *do* handle content either piped in from a preceding command
+or redirected from a file on disk. Per [here](https://stackoverflow.com/q/55692516/4376000),
+this content stream is implicitly provided to the first command of the batch
+file that is capable of processing it. Thus, both of these invocation cases work
+fine with the above ``python3.8.bat``:
+
+```
+C:\Temp>type test.py
+import sys
+
+print(sys.version_info)
+
+from pathlib import Path
+
+print(str(Path().resolve()))
+
+C:\Temp>type test.py | python3.8
+sys.version_info(major=3, minor=8, micro=1, releaselevel='final', serial=0)
+C:\Temp
+
+C:\Temp>python3.8 < test.py
+sys.version_info(major=3, minor=8, micro=1, releaselevel='final', serial=0)
+C:\Temp
+```
 
 For actions that are more complex, analogous to the use-case of ``bash`` functions,
 the script typically ends up structured differently, and sometimes ends up being longer.
@@ -341,46 +368,52 @@ activating virtual environments:
 env%1\scripts\activate
 ```
 
-So, you can't do *every*thing with batch files in ``cmd`` that you can
-in ``bash``, but it comes pretty close. The main thing this approach
-doesn't allow is piping the output from another command into, e.g., Python.
-However, given that `cmd` currently doesn't have anywhere near as robust
-a set of command-line tools as compared to `bash` (as far as I know, at least),
-this isn't a major problem for me.
+So, while I can't do *every*thing with batch files in ``cmd`` that I can
+in ``bash``, I can get pretty darn close---certainly enough to handle
+all routine tasks, and even most non-routine ones.
 
 ----
 
-*Having said all of the above*, in the course of researching for this post,
-I discovered that apparently Windows *does* support both
+In the course of researching for this post,
+I discovered that apparently Windows *does* support functionality for
 [symlinks](https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/)
-(since Windows Vista!) and
-aliases
+(since Windows Vista!), and provides the
+[``DOSKEY``](https://ss64.com/nt/doskey.html) macro mechanism that mimics ``bash`` aliases.
+They both have significant downsides/problems, though, that make me
+strongly prefer the batch-file approach. 
 
- However, they don't seem to work correctly out of the box
-for (at minimum) executing Python. 
+***Symlinks*** don't seem to work correctly out of the box
+for executing Python, one of my must-have use cases---it appears that they
+don't set various elements of the execution context correctly, at minimum the path.
+They are created with the `mklink` command, which has to be run in
+a console with administrator privileges (a further annoyance;
+press <kbd>Win</kbd>+<kbd>R</kbd> to open the "Run" dialog, type ``cmd``,
+then press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>Enter</kbd> to execute):
+
+```
+C:\Users\Username\bin>mklink python3.8-sl C:\Python\Python38\python.exe
+symbolic link created for python3.8-sl <<===>> C:\Python\Python38\python.exe
+```
+
+***--------However, when try run...***:
+
+```
+C:\Temp>cd \temp
+
+C:\Temp>python3.8-sl test.py
+```
+
+***------------Error occurs (img fields needs filing in):***
+
+{% include img.html path="howwhy-general/symlink-pyerror.png" %}
 
 
-All user bin-folder batch files. Add to PATH.
+***Aliases*** *DOSKEYs...
+Make CLI demo of creating and using one
+Can't pipe to them (demo), so not as complete as BATs. ALSO (per same SU link),
+can't use the aliases in batch files (only parsed directly at the ``cmd`` prompt,
+sounds like).*
 
-Despite doskey aliases and the new symlink capability in Windows 10,
-this approach is the only practical one I've found for Pythons
-(as of the last time I tried them, doskey/symlinks don't handle 
-path-setting correctly, so even ``python3.8 -m pip ...`` doesn't
-execute correctly. Also, doskey syntax is clunky, and
-elevated priviges are required to create symlinks (*MAYBE REMOVE SENTENCE*).
-
-{description of PATH setting and where ``bin`` gets created and
-syntax of e.g. ``vact`` vs ``python3.x``}
-
-
-Doskey aliases -- sort of a partial cross of bash aliases and functions.
-
-Can do doskey aliases, but the syntax is clunky and
-[it can handle at most nine arguments](https://ss64.com/nt/doskey.html). **CAN IT HANDLE SOMETHING LIKE $*???**
-Also, they  
-
-
-
-But, no, they're one-liners? No, can use ``$T`` to run multiple commands.
+*ALso have to [muck with registry to have on startup](https://superuser.com/a/1134468/400170)?*
 
 
