@@ -25,4 +25,4 @@ on the topic.
 ### Contact me
 
 Feel free to [email me](mailto:bskinn@alum.mit.edu), or reach out
-on LinkedIn or Twitter.
+on [LinkedIn](https://linkedin.com/in/bskinn) or [Twitter](https://twitter.com/btskinn).
