@@ -9,7 +9,8 @@ tags: tweepy python
 YOUR OWN TIMELINE; APPRECIABLE OTHER STEPS ARE REQUIRED FOR 3RD PARTY INTERACTIONS.*** 
 
 ***THIS APPEARS INCORRECT -- LOOKS LIKE YOU CAN AUTHENTICATE *ANY* TWITTER ACCOUNT
-AT THE STEP OF .GET_AUTHORIZATION_URL() OR WHATEVER***
+AT THE STEP OF .GET_AUTHORIZATION_URL() OR WHATEVER...THE MANUAL TOKEN GENERATION IS
+JUST CLUNKY AND IMPRACTICAL FOR PRODUCTION USE FOR OTHERS TO USE AN APP.***
 
 I recently wanted to set up `tweepy`, to drive a little content-feed [Twitter bot](https://twitter.com/Flake8Plugins) via [Github Action](https://github.com/bskinn/list-of-flake8-entrypoints). The `tweepy` docs have a pretty thorough [how-to for setting up authentication](http://docs.tweepy.org/en/v3.9.0/auth_tutorial.html), but it seemed pretty complicated and daunting, and seemed to be targeted at someone needing to authenticate for an arbitrary other Twitter account. Since all I needed was to authenticate for an account under my control, I went looking for a simpler way. Searching around, I came across a [Gist](https://gist.github.com/davej/113241) for deleting old tweets, and also there was this [Python Bytes](https://pythonbytes.fm/episodes/show/192/calculations-by-hand-but-in-the-compter-with-handcalcs) item on it. After a moderate bit of fiddling, I figured out what I think is a minimal set of steps to get `tweepy` set up for manual exploration, interacting with a Twitter account that you control.
 
@@ -21,7 +22,7 @@ Finally, note that Twitter's Developer dashboard and v2 API are under active dev
 
 ### 1. Activate Developer Account
 
-The first step is to create a Twitter developer account, if you don't have one already. I *think*  developer accounts are always tied to a specific username on the main site...regardless, it's much simpler to work with a developer account tied to your Twitter account.
+The first step is to create a Twitter developer account, if you don't have one already. I *think* developer accounts are always tied to a specific username on the main site...regardless, it's much simpler to work with a developer account tied to your Twitter account.
 
 Log in to Twitter using the main account, and then navigate to developer.twitter.com and follow the Getting Started pathway. This process involves a bunch of questions, most of which I didn't really have detailed answers to. But, answering everything along the lines of  "I want to fiddle with the API" seemed to work fine.
 
@@ -89,28 +90,29 @@ Then, you have to use `auth` to request an authentication URL:
 
 ```
 
-`{TOKEN}` will actually be a token hash; I've sanitized it just in case.
+`{OATH_TOKEN}` will actually be a token hash; I've redacted it here.
 
-***NEEDS TO BE CLEANED UP FROM HERE --- CAN ACTUALLY AUTH ANY TWITTER ACCOUNT HERE*** Using a browser logged in to the Twitter account you
-want to work with, navigate to this authorization URL. 
+Using a browser logged in to the Twitter account you
+want to use with `tweepy`, navigate to this authorization URL.
+You should see an authorization confirmation page like the following:
+
+{% include img.html path="tweepy-quickstart/authorize-url.png" width="400px" clicknote="1" %}
+
+Click to authorize, and Twitter will supply a numerical PIN (redacted here):
 
 **IMAGE**
 
-Click to authorize, and will return a numerical PIN.
-
-**IMAGE**
-
-Return to Python and use that PIN to request the access tokens:
+Return to Python and use that numeric PIN (passed as a **string**) to request the access tokens:
 
 ```
 
->>> auth.get_access_token({PIN})
-({USER_TOKEN}, {USER_SECRET_TOKEN})
+>>> auth.get_access_token("{PIN}")
+('{USER_TOKEN}', '{USER_SECRET_TOKEN}')
 
 ```
 
-Save these! As, e.g., `TWITTER_TOKEN` and `TWITTER_SECRET_TOKEN`.
-
+`{USER_TOKEN}` and `{USER_SECRET_TOKEN}` will both be hashes. Save them!
+I used the `TWITTER_TOKEN` and `TWITTER_SECRET_TOKEN` environment variables.
 
 
 ### 6. Using the Stored Secrets to Bootstrap tweepy
