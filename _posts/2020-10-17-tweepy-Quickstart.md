@@ -87,7 +87,7 @@ Then, you have to use `auth` to request an authentication URL:
 
 ```
 
-`{OATH_TOKEN}` will actually be a token hash; I've redacted it here.
+`{OAUTH_TOKEN}` will actually be a token hash; I've redacted it here.
 
 Using a browser logged in to the Twitter account you
 want to use with `tweepy`, navigate to this authorization URL.
