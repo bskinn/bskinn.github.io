@@ -5,40 +5,59 @@ tags: python sphobjinv release
 ---
 
 *Well, seems I haven't posted here since that last `sphobjinv` release post, for
-v2.1. Been busy writing code in my spare time, for the most part.*
+v2.1 ... been focused on writing code.*
 
-Anyways -- `sphobjinv` v2.3 is out!
+Anyways---`sphobjinv` v2.3 is out!
 
-(I skipped writing up anything for v2.2, because ... well, it was a release that
-I was disappointed that I had to make. When I implemented the `suggest`
-functionality, I had included a recent `fuzzywuzzy` as a dependency. As it turns
-out, ever since `fuzzywuzzy` implemented an interface with `python-Levenshtein`
-it's been licensed GPL. Not at all compatible with the MIT License on
-`sphobjinv`. So, the big change in v2.2 was removing that dependency, and
-instead vendoring a copy of `fuzzywuzzy` from back when it *was* MIT licensed.
-Bummer, because speed is good.)
+---
 
-So, yeah -- v2.3. The big changes here are to the `suggest` CLI, which now provides a **LOT** more information about the `objects.inv`.
+Although---first, an aside: I skipped writing up anything for v2.2, because ...
+well, it was a release that I was disappointed that I had to make. When I
+implemented the `suggest` functionality, I had included `fuzzywuzzy` as a
+dependency. As it turns out, ever since `fuzzywuzzy` implemented its interface
+with `python-Levenshtein` it's been licensed GPL. Not at all compatible with the
+MIT License on `sphobjinv`. For users only of the CLI, it doesn't matter much;
+but for anyone using the `sphobjinv` API, it was an important fix.
 
-v2.2.2 output:
+So, the big change in v2.2 was removing that dependency, and instead vendoring a
+copy of `fuzzywuzzy` from back when it *was* MIT licensed, modified to be Python
+3-compatible. (The need for those modifications made it impossible to just pin
+to that early version.) Was a bummer, because speed is good. I have an idea for
+how to regain some of that performance (see
+[#178](https://github.com/bskinn/sphobjinv/issues/178)), which is a big focus of
+my plan for v2.4. Not sure how long that'll take, though.)
+
+---
+
+So, yeah---v2.3!
+
+The big changes here are to the `suggest` CLI, which now provides a **LOT** more information about the `objects.inv`.
+
+Previous v2.2.2 output:
 
 ```
->sphobjinv suggest -u https://sphobjinv.readthedocs.io/en/v2.3/ suggest -st99
+$ sphobjinv su https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html#sphobjinv.inventory.Inventory.count suggest -ust99
 
 No inventory at provided URL.
+Attempting "https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html/objects.inv" ...
+Attempting "https://sphobjinv.readthedocs.io/en/v2.3/api/objects.inv" ...
 Attempting "https://sphobjinv.readthedocs.io/en/v2.3/objects.inv" ...
 Remote inventory found.
 
 No results found.
 ```
 
-v2.3 output:
+New v2.3 output:
 
 ```
->sphobjinv suggest -u https://sphobjinv.readthedocs.io/en/v2.3/ suggest -st99
+$ sphobjinv su https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html#sphobjinv.inventory.Inventory.count suggest -ust99
 
-Attempting https://sphobjinv.readthedocs.io/en/v2.3/ ...
+Attempting https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html#sphobjinv.inventory.Inventory.count ...
   ... no recognized inventory.
+Attempting "https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html/objects.inv" ...
+  ... HTTP error: 404 Not Found.
+Attempting "https://sphobjinv.readthedocs.io/en/v2.3/api/objects.inv" ...
+  ... HTTP error: 404 Not Found.
 Attempting "https://sphobjinv.readthedocs.io/en/v2.3/objects.inv" ...
   ... inventory found.
 
@@ -50,4 +69,21 @@ Version: 2.3
 No results found with score at/above current threshold of 99.
 ```
 
-[list of all of them]
+The `suggest` CLI output now contains:
+
+- For the `--url` mode:
+  - More details of what occurred while trying to locate the `objects.inv` file
+- For all modes:
+  - The project and version information for the `objects.inv`
+  - The total number of objects present in the `objects.inv`
+  - The search score threshold value, and the number of results found for the
+    given search term satisfying that value
+
+In addition to the expanded preamble output, v2.3 also adds a new option to the
+`suggest` CLI: `--paginate`, or `-p` for short. Enabling this features makes it
+so that long lists of results are only displayed one terminal screen at a time:
+
+[terminalizer]
+
+Hopefully all of these changes will provide a welcome improvement to the
+`suggest` CLI experience!
