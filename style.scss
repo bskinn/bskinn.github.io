@@ -30,6 +30,13 @@ body {
   width: 100%;
 }
 
+div.copyright {
+  font-size: 65%;
+  color: $gray;
+  font-style: italic;
+  text-align: center
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
   color: $darkerGray;
