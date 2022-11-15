@@ -110,6 +110,13 @@ img {
   max-width: 100%;
 }
 
+hr {
+  border-color: $hrBorderGreen;
+  border-width: 1.5px;
+  border-radius: 0.75px;
+  box-shadow: 0.5px 0.5px $hrShadowGray;
+}
+
 // Fixes images in popup boxes from Google Translate
 .gmnoprint img {
   max-width: none;
@@ -122,12 +129,12 @@ img {
 
 // Specify the color of the selection
 ::-moz-selection {
-  color: $white;
-  background: $dragonGreen;
+  color: $highlightTextGray;
+  background: $highlightGreen;
 }
 ::selection {
-  color: $white;
-  background: $dragonGreen;
+  color: $highlightTextGray;
+  background: $highlightGreen;
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -273,8 +280,8 @@ nav {
 
 .wrapper-footer {
   margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid $footerBorderGray;
+  border-bottom: 1px solid $footerBorderGray;
   background-color: $lightGray;
 }
 
@@ -285,14 +292,14 @@ footer {
 
 .taglist {
   font-size: 80%;
-  color: #0f3b21;
+  color: $tagTextGreen;
   letter-spacing: 1px;
 }
 
 .tagsingle {
   white-space: nowrap;
   hyphens: none;
-  background-color: #effadc;
+  background-color: $tagBackgroundGreen;
 }
 
 a.tag {
@@ -306,12 +313,12 @@ a.tag {
 kbd {
   border-style: outset;
   border-width: 2px;
-  border-color: #999999;
+  border-color: $kbdBorderGray;
   border-radius: 6px;
   padding: 3px;
   font-size: 75%;
   font-weight: 475;
-  background-color: #f0f0f0;
+  background-color: $kbdBackgroundGray;
   margin: 2px;
   white-space: nowrap;
 }
