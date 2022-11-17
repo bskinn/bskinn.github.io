@@ -24,5 +24,5 @@ on the topic.
 
 ### Contact me
 
-Feel free to [email me](mailto:bskinn@alum.mit.edu), or reach out
+Feel free to [email me](mailto:brian.skinn@gmail.com), or reach out
 on [LinkedIn](https://linkedin.com/in/bskinn) or [Twitter](https://twitter.com/btskinn).

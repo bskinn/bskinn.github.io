@@ -5,6 +5,7 @@
 
 // Colors
 $blue: #4183C4;
+$darkBlue: rgb(33, 97, 156);
 
 // Grays
 $black: #000;
@@ -13,6 +14,25 @@ $darkGray: #333;
 $gray: #666;
 $lightGray: #eee;
 $white: #fff;
+$footerBorderGray: #ddd;
+$kbdBackgroundGray: #f0f0f0;
+$kbdBorderGray: #999999;
+$highlightTextGray: #ddd;
+
+
+// Greens
+$highlightGreen: #0a3a00;
+$dragonGreen: #185e34;
+$tagBackgroundGreen: #effadc;
+$tagTextGreen: #0f3b21;
+
+// <hr>
+$hrBorderGreen: rgb(168, 185, 168);
+$hrShadowGray: #bbb;
+
+// Link colors
+$stdLinkColor: $blue;
+$visitedLinkColor: #209c52;
 
 // Font stacks
 $helvetica: Helvetica, Arial, sans-serif;

@@ -30,6 +30,13 @@ body {
   width: 100%;
 }
 
+div.copyright {
+  font-size: 65%;
+  color: $gray;
+  font-style: italic;
+  text-align: center
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: $helveticaNeue;
   color: $darkerGray;
@@ -48,6 +55,12 @@ h1 {
   font-size: 30px;
   a {
     color: inherit;
+    &:visited {
+      color: inherit;
+    }
+    &:hover {
+      color: $stdLinkColor;
+    }
   }
 }
 
@@ -69,11 +82,14 @@ p {
 }
 
 a {
-  color: $blue;
+  color: $stdLinkColor;
   text-decoration: none;
 	cursor: pointer;
+  &:visited {
+    color: $visitedLinkColor;
+  }
   &:hover, &:active {
-    color: $blue;
+    color: $stdLinkColor;
   }
 }
 
@@ -110,6 +126,12 @@ img {
   max-width: 100%;
 }
 
+hr {
+  border-color: $hrBorderGreen;
+  border-width: 1.5px;
+  border-radius: 0.75px;
+}
+
 // Fixes images in popup boxes from Google Translate
 .gmnoprint img {
   max-width: none;
@@ -122,12 +144,12 @@ img {
 
 // Specify the color of the selection
 ::-moz-selection {
-  color: $black;
-  background: $lightGray;
+  color: $highlightTextGray;
+  background: $highlightGreen;
 }
 ::selection {
-  color: $black;
-  background: $lightGray;
+  color: $highlightTextGray;
+  background: $highlightGreen;
 }
 
 // Nicolas Gallagher's micro clearfix hack
@@ -230,6 +252,13 @@ nav {
     font-weight: 300;
     letter-spacing: 1px;
 
+    &:visited {
+      color: inherit;
+    }
+
+    &:hover {
+      color: $stdLinkColor
+    }
     @include mobile {
       margin: 0 10px;
       color: $blue;
@@ -273,8 +302,8 @@ nav {
 
 .wrapper-footer {
   margin-top: 50px;
-  border-top: 1px solid #ddd;
-  border-bottom: 1px solid #ddd;
+  border-top: 1px solid $footerBorderGray;
+  border-bottom: 1px solid $footerBorderGray;
   background-color: $lightGray;
 }
 
@@ -285,14 +314,14 @@ footer {
 
 .taglist {
   font-size: 80%;
-  color: #0f3b21;
+  color: $tagTextGreen;
   letter-spacing: 1px;
 }
 
 .tagsingle {
   white-space: nowrap;
   hyphens: none;
-  background-color: #effadc;
+  background-color: $tagBackgroundGreen;
 }
 
 a.tag {
@@ -306,12 +335,12 @@ a.tag {
 kbd {
   border-style: outset;
   border-width: 2px;
-  border-color: #999999;
+  border-color: $kbdBorderGray;
   border-radius: 6px;
   padding: 3px;
   font-size: 75%;
   font-weight: 475;
-  background-color: #f0f0f0;
+  background-color: $kbdBackgroundGray;
   margin: 2px;
   white-space: nowrap;
 }
