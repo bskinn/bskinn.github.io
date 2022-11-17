@@ -23,17 +23,80 @@ So, the big change in v2.2 was removing that dependency, and instead vendoring a
 copy of `fuzzywuzzy` from back when it *was* MIT licensed, modified to be Python
 3-compatible. (The need for those modifications made it impossible to just pin
 to that early version.) Was a bummer, because speed is good. I have an idea for
-how to regain some of that performance (see
-[#178](https://github.com/bskinn/sphobjinv/issues/178)), which is a big focus of
-my plan for v2.4. Not sure how long that'll take, though.
+how to regain some of that performance (see [#178][Issue 178]), which is a big
+focus of my plan for v2.4. Not sure how long that'll take, though.
 
 ---
 
 So, yeah---v2.3!
 
-The big changes here are to the `suggest` CLI, which now provides a **LOT** more information about the `objects.inv`.
+The big changes here are to the `suggest` CLI, which now provides a **LOT** more
+information about the `objects.inv`.
 
-Previous v2.2.2 output:
+In particular, the `suggest` CLI output now contains:
+
+- For the `--url` mode:
+  - More details of what occurred while trying to locate the `objects.inv` file
+  - An inferred `intersphinx_mapping` for the documentation set, if possible
+- For all modes:
+  - The project and version information for the `objects.inv`
+  - The total number of objects present in the `objects.inv`
+  - The search score threshold value, and the number of results found for the
+    given search term satisfying that value
+
+
+New v2.3 output:
+
+```
+$ sphobjinv su https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html#sphobjinv.inventory.Inventory.count suggest -us
+
+Attempting https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html#sphobjinv.inventory.Inventory.count ...
+  ... no recognized inventory.
+Attempting "https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html/objects.inv" ...
+  ... HTTP error: 404 Not Found.
+Attempting "https://sphobjinv.readthedocs.io/en/v2.3/api/objects.inv" ...
+  ... HTTP error: 404 Not Found.
+Attempting "https://sphobjinv.readthedocs.io/en/v2.3/objects.inv" ...
+  ... inventory found.
+
+Project: sphobjinv
+Version: 2.3
+
+219 objects in inventory.
+
+20 results found at/above current threshold of 75.
+
+The intersphinx_mapping for this docset is LIKELY:
+
+  (https://sphobjinv.readthedocs.io/en/v2.3/, None)
+
+  Name                                                    Score
+-------------------------------------------------------  -------
+:py:attribute:`sphobjinv.cli.parser.PrsConst.SUGGEST`      90
+:py:module:`sphobjinv.cli.suggest`                         90
+:py:function:`sphobjinv.cli.suggest.do_suggest`            90
+:py:method:`sphobjinv.inventory.Inventory.suggest`         90
+:std:doc:`cli/implementation/suggest`                      90
+:std:doc:`cli/suggest`                                     90
+:std:cmdoption:`sphobjinv-suggest.--all`                   90
+:std:cmdoption:`sphobjinv-suggest.--help`                  90
+:std:cmdoption:`sphobjinv-suggest.--index`                 90
+:std:cmdoption:`sphobjinv-suggest.--score`                 90
+:std:cmdoption:`sphobjinv-suggest.--thresh`                90
+:std:cmdoption:`sphobjinv-suggest.--url`                   90
+:std:cmdoption:`sphobjinv-suggest.-a`                      90
+:std:cmdoption:`sphobjinv-suggest.-h`                      90
+:std:cmdoption:`sphobjinv-suggest.-i`                      90
+:std:cmdoption:`sphobjinv-suggest.-s`                      90
+:std:cmdoption:`sphobjinv-suggest.-t`                      90
+:std:cmdoption:`sphobjinv-suggest.-u`                      90
+:std:cmdoption:`sphobjinv-suggest.infile`                  90
+:std:cmdoption:`sphobjinv-suggest.search`                  90
+```
+
+
+
+Previous v2.2.2 output for a search with no results:
 
 ```
 $ sphobjinv su https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html#sphobjinv.inventory.Inventory.count suggest -ust99
@@ -47,7 +110,7 @@ Remote inventory found.
 No results found.
 ```
 
-New v2.3 output:
+New v2.3 output for a search with no results:
 
 ```
 $ sphobjinv su https://sphobjinv.readthedocs.io/en/v2.3/api/inventory.html#sphobjinv.inventory.Inventory.count suggest -ust99
@@ -69,19 +132,14 @@ Version: 2.3
 No results found with score at/above current threshold of 99.
 ```
 
-The `suggest` CLI output now contains:
+(Note: This last example *should* still print an inferred `intersphinx_mapping`,
+even though all of the results were filtered out, but there's a glitch in my
+logic. I've already created [#262][Issue 262] for it. v2.3.1, here I come!)
 
-- For the `--url` mode:
-  - More details of what occurred while trying to locate the `objects.inv` file
-- For all modes:
-  - The project and version information for the `objects.inv`
-  - The total number of objects present in the `objects.inv`
-  - The search score threshold value, and the number of results found for the
-    given search term satisfying that value
-
-In addition to the expanded preamble output, v2.3 also adds a new option to the
-`suggest` CLI: `--paginate`, or `-p` for short. Enabling this features makes it
-so that long lists of results are only displayed one terminal screen at a time:
+In addition to this expanded `suggest` output, v2.3 also adds a new option to
+the `suggest` CLI: `--paginate`, or `-p` for short. Enabling this features makes
+it so that long lists of results are only displayed one terminal screen at a
+time:
 
 
 ```
@@ -110,6 +168,7 @@ Cannot infer intersphinx_mapping from a local objects.inv.
 :py:function:`sphobjinv.cli.suggest.do_suggest`                     90
 :py:function:`sphobjinv.cli.suggest.generate_index_lines`           90
 Press Enter to continue...
+... (more results) ...
 ```
 
 <br />
@@ -118,3 +177,7 @@ Hopefully all of these changes will provide a welcome improvement to the
 `suggest` CLI experience!
 
 <br />
+
+
+[Issue 178]: https://github.com/bskinn/sphobjinv/issues/178
+[Issue 262]: https://github.com/bskinn/sphobjinv/issues/262
