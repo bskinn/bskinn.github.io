@@ -55,6 +55,12 @@ h1 {
   font-size: 30px;
   a {
     color: inherit;
+    &:visited {
+      color: inherit;
+    }
+    &:hover {
+      color: $stdLinkColor;
+    }
   }
 }
 
@@ -76,11 +82,14 @@ p {
 }
 
 a {
-  color: $blue;
+  color: $stdLinkColor;
   text-decoration: none;
 	cursor: pointer;
+  &:visited {
+    color: $visitedLinkColor;
+  }
   &:hover, &:active {
-    color: $blue;
+    color: $stdLinkColor;
   }
 }
 
@@ -243,6 +252,13 @@ nav {
     font-weight: 300;
     letter-spacing: 1px;
 
+    &:visited {
+      color: inherit;
+    }
+
+    &:hover {
+      color: $stdLinkColor
+    }
     @include mobile {
       margin: 0 10px;
       color: $blue;
