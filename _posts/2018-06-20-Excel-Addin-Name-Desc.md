@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Excel Addins: Setting the Name & Description'
-tags: excel vba add-ins
+tags: [excel, vba, add-ins]
 ---
 
 When creating an Excel add-in, it's useful to be able to configure
@@ -10,9 +10,9 @@ how it will appear in the Add-Ins management dialog.
 `File > Options > Add-Ins`; select `Excel Add-ins` next to `Manage:`
 and click `Go...`:
 
-{% include img.html path="excel/addin-name-description.png" alt="View of Addin dialog" width="330px" %}
+{% include "img.html", path: "excel/addin-name-description.png", alt: "View of Addin dialog", width: "330px" %}
 
-For the add-in that's highlighted in the image, I had to manually set both its name, *CSV Exporter v1.0* {% include gh.html user="bskinn" repo="excel-csvexporter" %} and the description text, *Automated export of an array of cells.*  I can't remember where I initially found out how to set these, but it's really non-obvious what you need to do.
+For the add-in that's highlighted in the image, I had to manually set both its name, *CSV Exporter v1.0* {% include "gh.html", user: "bskinn", repo: "excel-csvexporter" %} and the description text, *Automated export of an array of cells.*  I can't remember where I initially found out how to set these, but it's really non-obvious what you need to do.
 
 Both of these values are read from "built-in document properties" on the `.xlam` file of the add-in itself. To set them, start by opening Excel and making sure the add-in is loaded.  Then, in the VBA Editor (<kbd>Alt</kbd>+<kbd>F11</kbd>), open the `Immediate` pane (<kbd>Ctrl</kbd>+<kbd>G</kbd>) and use something like the following:
 

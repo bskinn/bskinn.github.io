@@ -1,10 +1,10 @@
 ---
 layout: post
 title: 'Programmatic Inspection of IPython Histories'
-tags: python
+tags: [python]
 ---
 
-Today I needed to look back deeply into my IPython history, to find out exactly how I'd calculated some timings for one of my side projects, `sphobjinv` {% include gh.html user="bskinn" repo="sphobjinv" %} {% include rtd.html project="sphobjinv" %} {% include pypi.html project="sphobjinv" %}.  Complicating matters was the fact that the particular IPython history I needed was both on a *different computer* than the one I was working on, and also on an *entirely different network*. Capping off the challenge was the fact that I didn't have convenient shell access to it (it's a Windows machine).
+Today I needed to look back deeply into my IPython history, to find out exactly how I'd calculated some timings for one of my side projects, `sphobjinv` {% include "gh.html", user: "bskinn", repo: "sphobjinv" %} {% include "rtd.html", project: "sphobjinv" %} {% include "pypi.html", project: "sphobjinv" %}.  Complicating matters was the fact that the particular IPython history I needed was both on a *different computer* than the one I was working on, and also on an *entirely different network*. Capping off the challenge was the fact that I didn't have convenient shell access to it (it's a Windows machine).
 
 Fortunately, I *do* have the ability to SSH into a Linux box on the same network, and thus can  use a combination of `ssh`, `scp`, and `smbclient` to retrieve files from it. The first task was identifying where the history is kept. Per [this handy Stack Overflow comment](https://stackoverflow.com/questions/25124037/ipython-print-complete-history-not-just-current-session#comment39103510_25124037), IPython typically keeps its history in `~/.ipython/profile_default` (or `%USERPROFILE%/.ipython/profile_default` on Windows), in a file named `history.sqlite`. Unfortunately, as betrayed by the file extension, the history is stored in an SQL database.
 
@@ -56,5 +56,5 @@ The result returned from the `ha.get_tail()` call is an iterator of tuples of th
 ```
 What I was looking for was the context and form of the `timeit` command of line 17, so I could accurately describe the timing information I had collected and tucked into an Excel file some months ago. Success!
 
-{% include stackedit.html %}
+{% include "stackedit.html" %}
 

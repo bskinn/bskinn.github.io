@@ -1,0 +1,16 @@
+{
+  "name": "bskinn.github.io",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Eleventy build for bskinn.github.io",
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\"",
+    "build:site": "eleventy",
+    "build": "run-s clean build:site",
+    "dev": "eleventy --serve"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "npm-run-all2": "^8.0.4"
+  }
+}

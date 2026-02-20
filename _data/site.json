@@ -1,0 +1,24 @@
+{
+  "name": "from python import logging",
+  "description": "Thoughts and notes of a Python hobbyist",
+  "avatar": "http://bskinn.github.io/images/pyish-dragon.png",
+  "url": "http://bskinn.github.io",
+  "baseurl": "",
+  "disqus": null,
+  "google_analytics": null,
+  "footerLinks": {
+    "dribbble": null,
+    "email": "brian.skinn@gmail.com",
+    "facebook": null,
+    "flickr": null,
+    "github": "bskinn",
+    "instagram": null,
+    "linkedin": "bskinn",
+    "pinterest": null,
+    "rss": "fpil",
+    "twitter": "pylogging",
+    "stackoverflow": "users/4376000/hby2py",
+    "youtube": null,
+    "googleplus": null
+  }
+}

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Outlook VBA: Automatic Calendar Export'
-tags: outlook vba
+tags: [outlook, vba]
 ---
 
 While I'm sure there's a way to set up Outlook and Google Calendar to sync in such a way that I can see my work schedule on GCal, I haven't figured out how yet. ([Suggestions welcome!](https://twitter.com/pylogging)) As a stopgap, I'm exporting my Outlook calendar to `.ics` and importing into a GCal dedicated to the purpose.

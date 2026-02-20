@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+    <title>{% if title %}{{ title }} &ndash; {% endif %}{{ site.name }} &ndash; {{ site.description }}</title>
 
-    {% include meta.html %}
+    {% include "meta.html" %}
 
     <!--[if lt IE 9]>
       <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -41,7 +41,7 @@
     <div class="wrapper-footer">
       <div class="container">
         <footer class="footer">
-          {% include svg-icons.html %}
+          {% include "svg-icons.html" %}
         </footer>
       </div>
     </div>
@@ -55,11 +55,10 @@
         Please report any broken links <a href="https://twitter.com/pylogging">@pylogging</a>
       </p>
       <p>
-        © Copyright 2018-2022 Brian Skinn &nbsp;&mdash;&nbsp; All content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> (CC BY 4.0).
+        &copy; Copyright 2018-2022 Brian Skinn &nbsp;&mdash;&nbsp; All content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> (CC BY 4.0).
       </p>
     </div>
 
-    {% include analytics.html %}
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
   </body>
 </html>

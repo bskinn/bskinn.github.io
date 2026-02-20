@@ -1,13 +1,13 @@
 ---
 layout: post
 title: 'VBA: "Budget Backup" Project & Static Variables'
-tags: vba xl-budgetbackup excel
+tags: [vba, xl-budgetbackup, excel]
 ---
 
 Lately I've been working on my ["Budget Backup" VBA project](https://github.com/bskinn/excel-budgetbackup), which helps to organize the 'backup' files that I have to submit with proposal budgets.  These files map one-to-one with the itemized materials budget of each proposal, and so they need to be bookkept in the same order. Prior to putting it together, I had to manually curate these files, which involved a *LOT* of painfully slow renaming. The tool handles all of the numbering and renaming automatically.
 
 
-{% include img.html path="vba/budgetbackup_form_general.png" alt="View of Budget Backup form" width="350px" clicknote="1" %}
+{% include "img.html", path: "vba/budgetbackup_form_general.png", alt: "View of Budget Backup form", width: "350px", clicknote: "1" %}
 
 In addition, I have to submit an Excel sheet with the backup files summarizing the overall cost.  The tool handles this for me, too; I've defined a standard syntax for the filenames that the tool can parse and extract the vendor, description, unit price, quantity, etc., to use to populate the summary sheet.
 

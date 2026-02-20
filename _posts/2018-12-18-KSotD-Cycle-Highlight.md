@@ -1,16 +1,16 @@
 ---
 layout: post
 title: 'KSotD (Word): Rotate Highlight Color -- Ctrl+Alt+Shift+H'
-tags: ksotd word
+tags: [ksotd, word]
 ---
 
 When writing just about anything, I use highlights heavily for a variety of reasons: marking something that needs more attention later, flagging things for someone else to look at, tagging placeholders for figure references and whatnot, whatever.  As of Office 2010, Word supports a handful of highlight colors; enough for what I need, but altogether fewer than I'd like:
 
-{% include img.html path="ksotd/CAS_H-1.png" alt="Highlight colors menu" %}
+{% include "img.html", path: "ksotd/CAS_H-1.png", alt: "Highlight colors menu" %}
 
 One of my biggest frustrations with highlights for quite a while was the really klunky keyboard shortcut setup. You'd have to navigate through the Ribbon with individual keystrokes: start with <kbd>Alt</kbd>-<kbd>H</kbd>-<kbd>I</kbd> to access the highlight options, then navigate to the desired color with the cursor keys and hit <kbd>Enter</kbd> to apply the highlight.  Really slow, and really annoying, so most of the time I just clicked through I wanted something better.
 
-So, I wrote the following macro and [bound it]({% post_url 2018-06-27-KSotD-Custom-Word-Shortcuts %}) to <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd>:
+So, I wrote the following macro and [bound it](/KSotD-Custom-Word-Shortcuts/) to <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd>:
 
 ```
 Sub RotateHighlight()
@@ -43,8 +43,8 @@ End Sub
 
 With it, just select whatever text you want highlighted, press the shortcut key however many times, and boom: highlighted:
 
-{% include img.html path="ksotd/CAS_H-2.png" alt="Progression of highlights" width="500px" %}
+{% include "img.html", path: "ksotd/CAS_H-2.png", alt: "Progression of highlights", width: "500px" %}
 
 Further, if you want to remove the highlighting from anything, just select the highlighted text plus a bit of additional content before or after it and then press the shortcut key:
 
-{% include img.html path="ksotd/CAS_H-3.png" alt="Showing quick highlight removal" width="430px" %}
+{% include "img.html", path: "ksotd/CAS_H-3.png", alt: "Showing quick highlight removal", width: "430px" %}

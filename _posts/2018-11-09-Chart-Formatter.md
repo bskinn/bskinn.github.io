@@ -1,13 +1,12 @@
 ---
 layout: post
 title: 'Excel: Macro for Automatic Chart Re-formatting'
-tags: excel vba visualization
+tags: [excel, vba, visualization]
 ---
 
 Excel's default chart formatting is ... not amazing.
 
-{% include img.html path="excel/chartformat-defaultchart.png"
-alt="Sample default chart" width="480px" %}
+{% include "img.html", path: "excel/chartformat-defaultchart.png", alt: "Sample default chart", width: "480px" %}
 
 While aesthetic preferences differ, to my eye I'd far rather it have:
 
@@ -95,7 +94,7 @@ End Sub
 
 After running the macro, the chart looks like this:
 
-{% include img.html path="excel/chartformat-finalchart.png" alt="View of reformatted chart" width="400px"%}
+{% include "img.html", path: "excel/chartformat-finalchart.png", alt: "View of reformatted chart", width: "400px" %}
 
 Now that I look at it, it might be a little tall -- a `co.Height` of `220` or
 so might be preferable. But, that's easy enough to change. I could also always
@@ -105,15 +104,15 @@ before doing the reformatting.
 The initial trawl through the object hierarchy is probably the least obvious part
 of the whole thing; everything else is a pretty straightforward modification
 of properties.
-{% include gsrch_ms.html text="`ActiveChart`" term="activechart" %}
+{% include "gsrch_ms.html", text: "`ActiveChart`", term: "activechart" %}
 yields the relevant
-{% include gsrch_ms.html text="`Chart`" term="excel chart object" %} object,
+{% include "gsrch_ms.html", text: "`Chart`", term: "excel chart object" %} object,
 which then exposes the needed
-{% include gsrch_ms.html text="`PlotArea`" term="excel chart.plotarea property" %}
+{% include "gsrch_ms.html", text: "`PlotArea`", term: "excel chart.plotarea property" %}
 and
-{% include gsrch_ms.html text="`ChartArea`" term="excel chart.chartarea property" %}
+{% include "gsrch_ms.html", text: "`ChartArea`", term: "excel chart.chartarea property" %}
 properties. Resizing the overall chart requires access to the containing
-{% include gsrch_ms.html text="`ChartObject`" term="excel chartobject" %},
+{% include "gsrch_ms.html", text: "`ChartObject`", term: "excel chartobject" %},
 which is accessed through `ActiveChart.Parent`.
 
 

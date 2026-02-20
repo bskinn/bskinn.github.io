@@ -1,20 +1,20 @@
 ---
 layout: post
 title: 'KSotD (Word): Toggle Split Screen -- Ctrl+Alt+S'
-tags: ksotd word
+tags: [ksotd, word]
 ---
 
 Going back at least the past several versions of Office, Word has implemented a split-screen
 editing mode, where the top and bottom portions can be scrolled independently
 to different portions of the open document:
 
-{% include img.html path="ksotd/CA_S-1.png" width="600px" clicknote="1" %}
+{% include "img.html", path: "ksotd/CA_S-1.png", width: "600px", clicknote: "1" %}
 
 Historically (Office 2013 and earlier), there was always a little drag handle above the
 scroll bar that I could pull down to split the screen, but that fiddly bit seems
 to have been removed in Word 2019:
 
-{% include img.html path="ksotd/CA_S-2.png" width="300px" %}
+{% include "img.html", path: "ksotd/CA_S-2.png", width: "300px" %}
 
 Fortunately, the `DocSplit` command is available for keyboard shortcut assignment;
 I can't remember now whether it was already defined by default, or if I had to

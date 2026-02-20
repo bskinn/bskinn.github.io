@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Excel: Series Rendering Order'
-tags: excel visualization
+tags: [excel, visualization]
 ---
 
 Excel renders series in a chart in the order they're listed in the `Select Data Source` dialog:
@@ -26,5 +26,5 @@ To my eye, the second figure is much less visually intuitive and much harder to 
 
 Proper selection of the series rendering order allows tweaking figures to exploit this sort of thing.
 
-{% include stackedit.html %}
+{% include "stackedit.html" %}
 

@@ -1,13 +1,13 @@
 ---
 layout: post
 title: 'Testing CLI Scripts in Python & Sphinx doctest'
-tags: testing python sphinx cli stdio-mgr
+tags: [testing, python, sphinx, cli, stdio-mgr]
 ---
 
 I have a couple of Python projects that implement
-CLIs: `sphobjinv` {% include gh.html user="bskinn" repo="sphobjinv" %} and `h5cube` {% include gh.html user="bskinn" repo="h5cube" %}.
+CLIs: `sphobjinv` {% include "gh.html", user: "bskinn", repo: "sphobjinv" %} and `h5cube` {% include "gh.html", user: "bskinn", repo: "h5cube" %}.
 For both of these, I have automated tests/documentation in place checking/illustrating the CLI commands
-(e.g., for `sphobjinv v1.0` {% include rtd.html project="sphobjinv" ver="v1.0.post1" %}).
+(e.g., for `sphobjinv v1.0` {% include "rtd.html", project: "sphobjinv", ver: "v1.0.post1" %}).
 The [`doctest` module](https://docs.python.org/3.6/library/doctest.html) in the Python standard library 
 and the [`doctest` extension ](http://www.sphinx-doc.org/en/stable/ext/doctest.html)
 within Sphinx work really well for testing REPL code snippets, but these are intrinsically "API-like" interactions and I haven't
@@ -55,7 +55,7 @@ Most of this isn't particularly novel or fancy. It just imports the module conta
 ```
 
 The big advantage over anything else I've seen comes from using `stdio_mgr`
-{% include gh.html user="bskinn" repo="stdio-mgr" %}{% include pypi.html project="stdio-mgr" %}, which I just put together recently. In addition to allowing mocking of both `stdout` and `stderr` (via `o_` and `e_`), it provides a means for mocking `stdin` (via `i_`) as well. Thus, if you want to test a portion of your CLI that involves user input at the console, `stdio-mgr` provides a clean, concise way to do this. As a specific example, a 'Y/N' confirmation for overwriting a file is what I'll be using it on shortly in the `sphobjinv` docs {% include rtd.html project="sphobjinv" %}--the `doctest` source will probably end up looking something like:
+{% include "gh.html", user: "bskinn", repo: "stdio-mgr" %}{% include "pypi.html", project: "stdio-mgr" %}, which I just put together recently. In addition to allowing mocking of both `stdout` and `stderr` (via `o_` and `e_`), it provides a means for mocking `stdin` (via `i_`) as well. Thus, if you want to test a portion of your CLI that involves user input at the console, `stdio-mgr` provides a clean, concise way to do this. As a specific example, a 'Y/N' confirmation for overwriting a file is what I'll be using it on shortly in the `sphobjinv` docs {% include "rtd.html", project: "sphobjinv" %}--the `doctest` source will probably end up looking something like:
 
 ```
 >>> cli_run('sphobjinv convert plain objects_attrs.inv', inp='y\n')

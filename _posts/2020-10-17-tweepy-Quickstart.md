@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'tweepy Quickstart: Basic App Creation, Configuration and Manual Authentication'
-tags: tweepy python
+tags: [tweepy, python]
 ---
 
 
@@ -9,13 +9,13 @@ I recently wanted to set up `tweepy`, to drive a little content-feed [Twitter bo
 
 
 Since all I needed was to authenticate for an account under my control, I went looking for a simpler way. Searching around, I first came across a [Gist](https://gist.github.com/davej/113241) showing a method for deleting old tweets. Shortly after that, there was actually a similar item on Python Bytes 
-{% include tw.html user="pythonbytes" %}
+{% include "tw.html", user: "pythonbytes" %}
 ([Episode 192, Item 5](https://pythonbytes.fm/episodes/show/192/calculations-by-hand-but-in-the-compter-with-handcalcs)) about a different [Gist](https://gist.github.com/chrisalbon/b9bd4a6309c9f5f5eeab41377f27a670) with a similar purpose. After some fiddling, I boiled the process down to a minimal procedure for setting up a `tweepy.API` instance for manual use, interacting with a Twitter account that you control.
 
 High-level, you need to (1) authenticate an app attached to a Twitter developer account, and (2) authenticate for interactions with a specific Twitter account/timeline. For this purpose, the Twitter app defines the specific read/write permissions to be permitted to `tweepy`. In more advanced uses, the app also is where you define things like callback endpoints for 3rd-party authentication. 
 
 Note that as of this writing (Oct 2020), Twitter's Developer dashboard and new v2 API are under active development, so some of the details here may become incorrect over time. Feel free to ping @pylogging
-{% include tw.html user="pylogging" %} if these instructions ever stop working.
+{% include "tw.html", user: "pylogging" %} if these instructions ever stop working.
 
 ----
 
@@ -32,15 +32,15 @@ As of Oct 2020, an app can live in one of two  contexts: standalone, or as part 
 
 1) Navigate to the Developer Portal from the landing page  
    &nbsp;  
-   {% include img.html path="tweepy-quickstart/to-dev-portal.png" width="400px" alt="Snip showing 'developer portal' link" %}
+   {% include "img.html", path: "tweepy-quickstart/to-dev-portal.png", width: "400px", alt: "Snip showing 'developer portal' link" %}
 
 2) Navigate to the Projects & Apps > Overview dashboard page  
    &nbsp;  
-   {% include img.html path="tweepy-quickstart/to-overview-page.png" width="250px" alt="Snip showing 'Overview' link" %}
+   {% include "img.html", path: "tweepy-quickstart/to-overview-page.png", width: "250px", alt: "Snip showing 'Overview' link" %}
 
 3) Scroll to the bottom of the Overview page and click the "Create App" button  
    &nbsp;  
-   {% include img.html path="tweepy-quickstart/create-app.png" width="400px" clicknote="1" alt="View of Apps Dashboard" %}
+   {% include "img.html", path: "tweepy-quickstart/create-app.png", width: "400px", clicknote: "1", alt: "View of Apps Dashboard" %}
 
 4) Choose an app name and click "Complete"
 
@@ -58,7 +58,7 @@ If all you want to do is retrieve tweets, then no specific configuration of the 
 
 If you *do* want to post and delete tweets, you have to go into the app settings and upgrade the app permissions from "Read" to "Read and Write." If you want the app to have access to your DMs, then you have to bump the permissions all the way to "Read + Write + Direct Messages."
 
-{% include img.html path="tweepy-quickstart/set-rw-perms.png" width="400px" alt="View of app read/write settings" %}
+{% include "img.html", path: "tweepy-quickstart/set-rw-perms.png", width: "400px", alt: "View of app read/write settings" %}
 
 You can also customize the text description of the app, if you want. I typically haven't bothered.
 
@@ -93,11 +93,11 @@ Using a browser logged in to the Twitter account you
 want to use with `tweepy`, navigate to this authorization URL.
 You should see an authorization confirmation page like the following:
 
-{% include img.html path="tweepy-quickstart/authorize-url.png" width="400px" clicknote="1" alt="View of Twitter access authorization page" %}
+{% include "img.html", path: "tweepy-quickstart/authorize-url.png", width: "400px", clicknote: "1", alt: "View of Twitter access authorization page" %}
 
 Click to authorize, and Twitter will supply a numerical PIN (redacted here):
 
-{% include img.html path="tweepy-quickstart/auth-pin.png" width="400px" clicknote="1" alt="View of Twitter authorization PIN page" %}
+{% include "img.html", path: "tweepy-quickstart/auth-pin.png", width: "400px", clicknote: "1", alt: "View of Twitter authorization PIN page" %}
 
 Return to Python and use that numeric PIN (passed as a **string**) to request the access tokens:
 
@@ -150,5 +150,5 @@ Happy tweeping!
 
 &nbsp;
 
-{% include stackedit.html %}
+{% include "stackedit.html" %}
 
