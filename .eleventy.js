@@ -41,6 +41,10 @@ module.exports = function (eleventyConfig) {
     return [...tags].sort((a, b) => a.localeCompare(b));
   });
 
+  eleventyConfig.addCollection("posts", (collectionApi) => {
+    return collectionApi.getFilteredByTag("post").reverse();
+  });
+
   eleventyConfig.addFilter("initial", (value) => {
     if (!value) {
       return "";

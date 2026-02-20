@@ -3,7 +3,7 @@ layout: default
 ---
 
 {% assign shown_posts = 10 %}
-{% assign sorted_posts = collections.post | reverse %}
+{% assign sorted_posts = collections.posts %}
 
 <div class="posts">
   {% for post in sorted_posts limit:shown_posts %}
