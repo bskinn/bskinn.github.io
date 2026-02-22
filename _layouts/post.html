@@ -2,24 +2,24 @@
 layout: default
 ---
 
-<article class="post">
+<article>
   <h1>{{ title }}</h1>
 
   {% if tags and tags.size > 0 %}
     {% assign taglist = tags | sort %}
-    <span class="taglist">[{% for tag in taglist %} 
+    <span class="text-[80%] tracking-[1px] text-[#0f3b21]">[{% for tag in taglist %} 
       {% if tag != "post" %}
-      <a class="tag" href="{{ site.baseurl }}/tags/{{ tag }}/"><span class="tagsingle">{{ tag }}</span></a>
+      <a class="text-inherit" href="{{ site.baseurl }}/tags/{{ tag }}/"><span class="whitespace-nowrap bg-[#effadc] [hyphens:none]">{{ tag }}</span></a>
       {% endif %}
       {% endfor %}]
       </span>
   {% endif %}
 
-  <div class="entry">
+  <div class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
     {{ content }}
   </div>
 
-  <div class="date">
+  <div class="italic text-[#666]">
     Written on {{ date | date: "%B %e, %Y" }}
   </div>
 

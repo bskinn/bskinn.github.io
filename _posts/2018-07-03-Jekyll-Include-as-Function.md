@@ -23,7 +23,7 @@ The contents of `_includes/img.html` as of this writing are:
 ```
 {% raw %}[<img src="{{ site.baseurl }}/images/{{ include.path }}" alt="{{ include.alt }}" width="{% if include.width %}{{ include.width }}{% else %}400px{% endif %}"/>]
 ({{ site.baseurl }}/images/{{ include.path }})<br>&nbsp;&nbsp;
-{% if include.clicknote %}<span style="font-style: italic; font-size: 65%;">(Click to enlarge)</span>{% endif %}{% endraw %}
+{% if include.clicknote %}<span class="text-[65%] italic">(Click to enlarge)</span>{% endif %}{% endraw %}
 ```
 
 Since this `include` is inserting Markdown, all of the above content is actually entered on one line in `img.html`, as otherwise spurious extra newlines would be inserted.

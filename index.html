@@ -5,23 +5,23 @@ layout: default
 {% assign shown_posts = 10 %}
 {% assign sorted_posts = collections.posts %}
 
-<div class="posts">
+<div>
   {% for post in sorted_posts limit:shown_posts %}
-    <article class="post">
+    <article class="border-b border-[#eee] pb-8 last:border-b-0 last:pb-4">
 
       <h1><a href="{{ site.baseurl }}{{ post.url }}">{{ post.data.title }}</a></h1>
 
-      <div class="entry">
+      <div class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
         {{ post.templateContent | split: "</p>" | first | append: "</p>" }}
       </div>
 
-      <a href="{{ site.baseurl }}{{ post.url }}" class="read-more">Read More</a>
+      <a href="{{ site.baseurl }}{{ post.url }}" class="text-[15px] uppercase">Read More</a>
     </article>
   {% endfor %}
 </div>
 {% if sorted_posts.size > shown_posts %}
   <br />
-  <div class="older-posts-note">
+  <div class="text-[80%] italic">
     For older posts, search via the <a href="{{ site.baseurl }}/tags/"> Tags page</a>.
   </div>
 {% endif %}
