@@ -13,8 +13,6 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy("favicon.ico");
   eleventyConfig.addPassthroughCopy("CNAME");
   eleventyConfig.addPassthroughCopy("notes");
-  eleventyConfig.addPassthroughCopy("style.css");
-  eleventyConfig.addPassthroughCopy("style.css.map");
   eleventyConfig.addPassthroughCopy(".nojekyll");
 
   eleventyConfig.ignores.add("node_modules/**");

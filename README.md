@@ -18,14 +18,16 @@ npm run dev
 ```
 
 - `npm run build` writes output to `_site/`.
-- `npm run dev` serves locally (default `http://localhost:8080`).
+- `npm run dev` serves locally (default `http://localhost:8080`) and watches Tailwind CSS changes.
 
 ## Content Layout
 
 - Posts: `_posts/`
 - Layouts: `_layouts/`
 - Includes/partials: `_includes/`
-- Static assets: `images/`, `style.css`, `favicon.ico`, `CNAME`
+- Tailwind source: `style.src.css`
+- Generated CSS output: `_site/style.css`
+- Static assets: `images/`, `favicon.ico`, `CNAME`
 
 ## URL Behavior
 
