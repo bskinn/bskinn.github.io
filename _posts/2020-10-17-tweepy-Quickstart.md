@@ -5,7 +5,7 @@ tags: [tweepy, python]
 ---
 
 
-I recently wanted to set up `tweepy`, to drive a little content-feed [Twitter bot](https://twitter.com/Flake8Plugins) via [Github Action](https://github.com/bskinn/list-of-flake8-entrypoints). The `tweepy` docs have a pretty thorough [how-to for setting up authentication](http://docs.tweepy.org/en/v3.9.0/auth_tutorial.html), but it seemed pretty complicated and daunting, and seemed to be targeted at someone needing to set up automated 3rd-party app authentication for users.
+I recently wanted to set up `tweepy`, to drive a little content-feed [Twitter bot](https://twitter.com/Flake8Plugins) via [Github Action](https://github.com/bskinn/list-of-flake8-entrypoints). The `tweepy` docs have a pretty thorough [how-to for setting up authentication](https://docs.tweepy.org/en/v3.9.0/auth_tutorial.html), but it seemed pretty complicated and daunting, and seemed to be targeted at someone needing to set up automated 3rd-party app authentication for users.
 
 
 Since all I needed was to authenticate for an account under my control, I went looking for a simpler way. Searching around, I first came across a [Gist](https://gist.github.com/davej/113241) showing a method for deleting old tweets. Shortly after that, there was actually a similar item on Python Bytes 
@@ -127,7 +127,7 @@ Once you have the secrets from steps 3 and 5 stored in environment variables, bo
 ```
 
 This will give you a fully authenticated `api` instance, from which you can do
-(most?) all the [`tweepy` things](http://docs.tweepy.org/en/latest/getting_started.html).
+(most?) all the [`tweepy` things](https://docs.tweepy.org/en/latest/getting_started.html).
 The main methods I've used are:
 
 

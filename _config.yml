@@ -9,7 +9,7 @@ name: from python import logging
 description: Thoughts and notes of a Python hobbyist
 
 # URL of your avatar or profile pic (you could use your GitHub profile pic)
-avatar: http://bskinn.github.io/images/pyish-dragon.png
+avatar: https://bskinn.github.io/images/pyish-dragon.png
 # https://i.imgur.com/HCs3op4.jpg
 # From here: https://pixabay.com/en/dragon-cartoon-reptile-snake-baby-2023884/ (CC0 license)
 
@@ -41,13 +41,13 @@ disqus:
 # Enter your Google Analytics web tracking code (e.g. UA-2110908-2) to activate tracking
 google_analytics: 
 
-# Your website URL (e.g. http://barryclark.github.io or http://www.barryclark.co)
+# Your website URL (e.g. https://barryclark.github.io or https://www.barryclark.co)
 # Used for Sitemap.xml and your RSS feed
-url: http://bskinn.github.io
+url: https://bskinn.github.io
 
 # If you're hosting your site at a Project repository on GitHub pages
-# (http://yourusername.github.io/repository-name)
-# and NOT your User repository (http://yourusername.github.io)
+# (https://yourusername.github.io/repository-name)
+# and NOT your User repository (https://yourusername.github.io)
 # then add in the baseurl here, like this: "/repository-name"
 baseurl: ""
 

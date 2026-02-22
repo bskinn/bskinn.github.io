@@ -9,7 +9,7 @@ CLIs: `sphobjinv` {% include "gh.html", user: "bskinn", repo: "sphobjinv" %} and
 For both of these, I have automated tests/documentation in place checking/illustrating the CLI commands
 (e.g., for `sphobjinv v1.0` {% include "rtd.html", project: "sphobjinv", ver: "v1.0.post1" %}).
 The [`doctest` module](https://docs.python.org/3.6/library/doctest.html) in the Python standard library 
-and the [`doctest` extension ](http://www.sphinx-doc.org/en/stable/ext/doctest.html)
+and the [`doctest` extension ](https://www.sphinx-doc.org/en/stable/ext/doctest.html)
 within Sphinx work really well for testing REPL code snippets, but these are intrinsically "API-like" interactions and I haven't
 been able to find anything particularly satisfying for doctesting CLI invocations.
 So, I put something together myself.  To illustrate here, I'll focus on Sphinx `doctest`--if you're interested in how I set up things on the testing side, see
