@@ -1,7 +1,1 @@
-{%- if project -%}
-  <a href="https://{{- project -}}.readthedocs.io
-  {%- if ver -%}
-    {{- ver | prepend: "/en/" | append: "/" -}}
-  {%- endif -%}
-  "><img src="{{- site.baseurl -}}/images/rtd_icon.png" width="16"></a>
-{%- endif -%}
+{%- if project -%}<a href="https://{{- project -}}.readthedocs.io{%- if ver -%}{{- ver | prepend: "/en/" | append: "/" -}}{%- endif -%}"><img class="inline-block align-middle" src="{{- site.baseurl -}}/images/rtd_icon.png" width="16"></a>{%- endif -%}
