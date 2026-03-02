@@ -4,7 +4,7 @@ layout: default
 <div>
 <h1>Tag: {{ tag }}</h1>
 <p><em>{% include "tagdesc.html", tagname: tag %}</em></p>
-<ul class="my-[15px] pl-[30px] list-disc">
+<ul class="my-3.75 pl-7.5 list-disc">
 {% assign tagged_posts = collections[tag] | reverse %}
 {% for post in tagged_posts %}
   <li><a href="{{ post.url }}">{{ post.data.title }}</a> ({{ post.data.date | date: "%d %b %Y" }})</li>

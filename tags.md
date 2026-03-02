@@ -11,7 +11,7 @@ permalink: /tags/
   {%- for tagname in taglist -%}
     {%- assign curr_initial = tagname | initial -%}
     {%- if prev_initial != curr_initial -%}
-      <div class="mt-[12px] border-b border-[#e5e7eb] pt-[12px] text-[105%]"><strong>{{- curr_initial | upcase -}}</strong></div>
+      <div class="mt-3 border-b border-[#e5e7eb] pt-3 text-[105%]"><strong>{{- curr_initial | upcase -}}</strong></div>
     {%- endif -%}
     {%- assign numposts = collections[tagname] | size -%}
     <p class="text-[90%] tracking-[1px] text-[#0f3b21]">
