@@ -1,7 +1,1 @@
-{%- if include.user -%}
-  <a href="https://twitter.com/{{- include.user -}}
-  {%- if include.id -%}
-    {{- include.id | prepend: "/status/" -}}
-  {%- endif -%}
-  "><img src="{{- site.baseurl -}}/images/twitter_icon.png" width="16"></a>
-{%- endif -%}
+{%- if user -%}<a href="https://twitter.com/{{- user -}}{%- if id -%}{{- id | prepend: "/status/" -}}{%- endif -%}"><img class="inline-block align-middle" src="{{- site.baseurl -}}/images/twitter_icon.png" width="16"></a>{%- endif -%}

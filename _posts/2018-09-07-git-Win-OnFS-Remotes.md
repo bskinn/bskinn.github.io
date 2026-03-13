@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'git: Working with On-Filesystem Remotes in Windows'
-tags: git
+tags: [git]
 ---
 
 I do some development work in Linux, but the majority of the time I'm working on a Windows machine, especially at the office, where there's no Linux to be found at all. Thus, I have to figure out how to make all of my tooling behave properly in Windows.  Like a good dev, I'm source-controlling everythng I can, for the usual dual purposes of history tracking and code backup.  git is my source-control tool of choice---and FWIW, I'm a big fan of the Git Bash that's integrated into [Git for Windows](https://gitforwindows.org/), as it exposes quite a few of the handy *nix CLI tools that I'm familiar with, while behaving well interacting with the underlying Windows system.
@@ -112,5 +112,5 @@ $ cat config
         merge = refs/heads/master
 ```
 
-{% include stackedit.html %}
+{% include "stackedit.html" %}
 

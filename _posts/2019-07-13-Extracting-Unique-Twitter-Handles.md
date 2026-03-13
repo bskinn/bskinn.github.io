@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Extracting Unique Twitter handles from Custom Jekyll Include Tags'
-tags: bash regex jekyll
+tags: [bash, regex, jekyll]
 ---
 
 While I work mainly on Windows, I've also been using Debian Linux for quite a while,
@@ -12,13 +12,13 @@ I currently am maintaining a dual quad-core Xeon Dell PowerEdge
 (purportedly a cast-off from a Facebook server farm, interestingly...)
 that's running `stretch`, which I'm using for development and for running some
 odds-and-ends quantum chemical calculations.
-In the course of finalizing my [PyCon 2019 recap post]({% post_url 2019-06-26-PyCon-2019-Recap %}),
+In the course of finalizing my [PyCon 2019 recap post](/PyCon-2019-Recap/),
 I had reason to use some of the Linux/Unix CLI tooling in a way I hadn't had to before.
 I imagine most of this post will not be particularly novel to many,
 but I was pleased at how quickly I was able to get the info I needed.
 
 As part of adapting Barry Clark's
-`jekyll-now` {% include gh.html user="barryclark" repo="jekyll-now" %} to make this blog,
+`jekyll-now` {% include "gh.html", user: "barryclark", repo: "jekyll-now" %} to make this blog,
 I've created a number of [custom includes](https://github.com/bskinn/bskinn.github.io/tree/master/_includes)
 to streamline the writing process.  For example, the GitHub repo link icon above
 was created using a [`gh.html`](https://github.com/bskinn/bskinn.github.io/blob/0a2938955ed779c4b65b008c59c073f8f05bc328/_includes/gh.html) include;
@@ -123,4 +123,4 @@ $ grep -E 'tw.html.+\^' 2019-06-26-PyCon-2019-Recap.md | wc -l
 And, indeed it did. All good!
 
 
-{% include stackedit.html %}
+{% include "stackedit.html" %}

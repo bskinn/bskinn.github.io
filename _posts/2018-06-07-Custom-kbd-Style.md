@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'Custom &lt;kbd&gt; style for Jekyll / Github Pages'
-tags: jekyll
+tags: [jekyll]
 ---
 
 Lots of sites that use Markdown define a  `<kbd>...</kbd>` tag for formatting keypresses, with [Stack Exchange](https://meta.stackexchange.com/questions/1939/kbd-elements-are-way-too-intrusive?answertab=oldest#tab-top) and [GitHub](https://github.com/revolunet/sublimetext-markdown-preview/issues/271) being the flavors I have most experience with. However, Jekyll/GitHub Pages doesn't seem to provide such a style by default.
@@ -25,5 +25,5 @@ kbd {
 }
 ```
 
-{% include stackedit.html %}
+{% include "stackedit.html" %}
 

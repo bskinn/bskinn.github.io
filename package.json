@@ -1,0 +1,23 @@
+{
+  "name": "bskinn.github.io",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Eleventy build for bskinn.github.io",
+  "scripts": {
+    "clean": "node -e \"require('fs').rmSync('_site',{recursive:true,force:true})\"",
+    "build:css": "tailwindcss -i ./style.src.css -o ./_site/style.css --minify",
+    "build:site": "eleventy",
+    "build": "run-s clean build:css build:site",
+    "dev:css": "tailwindcss -i ./style.src.css -o ./_site/style.css --watch",
+    "dev:site": "eleventy --serve",
+    "dev": "run-p dev:css dev:site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.2",
+    "@tailwindcss/cli": "^4.2.0",
+    "autoprefixer": "^10.4.24",
+    "npm-run-all2": "^8.0.4",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.2.0"
+  }
+}

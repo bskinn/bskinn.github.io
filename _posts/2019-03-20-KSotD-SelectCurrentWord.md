@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'KSotD (Word): Select Current Word -- Ctrl+Alt+W'
-tags: ksotd word
+tags: [ksotd, word]
 ---
 
 The default Word keyboard shortcuts for cursor movement usually work pretty well for me.
@@ -9,7 +9,7 @@ I realized today that one thing that's really been bugging me is the inefficienc
 selecting the word under the cursor using only the keyboard. I find that I'm often
 wanting to select a specific word to then, e.g., toggle its highlight with my
 <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>Shift</kbd>+<kbd>H</kbd>
-[custom macro]({% post_url 2018-12-18-KSotD-Cycle-Highlight %}). With the mouse, a simple
+[custom macro](/KSotD-Cycle-Highlight/). With the mouse, a simple
 double-left-click is all that's needed; with the keyboard, though, unless there's
 a shortcut/command I don't know about, I have to press at least two key combos:
 

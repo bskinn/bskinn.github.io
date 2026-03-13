@@ -1,0 +1,11 @@
+---
+layout: tagpage
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+eleventyComputed:
+  title: "Tag: {{ tag }}"
+permalink: /tags/{{ tag }}/
+eleventyExcludeFromCollections: true
+---

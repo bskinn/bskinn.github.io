@@ -1,65 +1,110 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{% if page.title %}{{ page.title }} – {% endif %}{{ site.name }} – {{ site.description }}</title>
+    <title>{% if title %}{{ title }} &ndash; {% endif %}{{ site.name }} &ndash; {{ site.description }}</title>
 
-    {% include meta.html %}
+    {% include "meta.html" %}
 
     <!--[if lt IE 9]>
-      <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
     <link rel="stylesheet" type="text/css" href="{{ site.baseurl }}/style.css" />
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }} - {{ site.description }}" href="{{ site.baseurl }}/feed.xml" />
 
-    <!-- Created with Jekyll Now - http://github.com/barryclark/jekyll-now -->
+    <!-- Created with Jekyll Now - https://github.com/barryclark/jekyll-now -->
   </head>
 
-  <body>
-    <div class="wrapper-masthead">
-      <div class="container">
-        <header class="masthead clearfix">
-          <a href="{{ site.baseurl }}/" class="site-avatar"><img src="{{ site.avatar }}" /></a>
+  <body class="bg-white text-base leading-[1.4] text-[#333] font-sans selection:bg-[#0a3a00] selection:text-[#ddd]">
+    <div class="mb-12.5">
+      <div class="mx-auto w-full max-w-185 px-2.5">
+        <header class="border-b border-[#eee] py-5">
+          <div class="flex items-start justify-between gap-4 max-sm:flex-col max-sm:items-center">
+            <div class="flex items-start max-sm:flex-col max-sm:items-center">
+              <a href="{{ site.baseurl }}/" class="mr-3.75 block h-17.5 w-17.5 shrink-0 max-sm:mr-0">
+                <img src="{{ site.avatar }}" class="rounded-[5px]" />
+              </a>
 
-          <div class="site-info">
-            <h1 class="site-name"><a href="{{ site.baseurl }}/">{{ site.name }}</a></h1>
-            <p class="site-description">{{ site.description }}</p>
+              <div>
+                <h1 class="m-0 cursor-pointer text-[28px] font-light tracking-[1px] text-[#333]">
+                  <a href="{{ site.baseurl }}/" class="text-inherit visited:text-inherit hover:text-[#4183c4]">{{ site.name }}</a>
+                </h1>
+                <p class="-mt-1.25 mb-0 text-base text-[#666] max-sm:my-0.75">{{ site.description }}</p>
+              </div>
+            </div>
+
+            <nav class="mt-5.75 text-lg max-sm:mt-2.25 max-sm:text-base">
+              <a href="{{ site.baseurl }}/tags" class="ml-5 text-right font-light tracking-[1px] text-[#333] visited:text-inherit hover:text-[#4183c4] max-sm:mx-2.5 max-sm:ml-0 max-sm:text-[#4183c4]">Tags</a>
+              <a href="{{ site.baseurl }}/about" class="ml-5 text-right font-light tracking-[1px] text-[#333] visited:text-inherit hover:text-[#4183c4] max-sm:mx-2.5 max-sm:ml-0 max-sm:text-[#4183c4]">About</a>
+            </nav>
           </div>
-
-          <nav>
-            <a href="{{ site.baseurl }}/tags">Tags</a>
-            <a href="{{ site.baseurl }}/about">About</a>
-          </nav>
         </header>
       </div>
     </div>
 
-    <div id="main" role="main" class="container">
+    <div id="main" role="main"
+      class="mx-auto w-full max-w-185 px-2.5
+      [&_a]:cursor-pointer [&_a]:text-[#209c52] [&_a]:no-underline [&_a:visited]:text-[#217433] [&_a:hover]:text-[#41ba63] [&_a:visited:hover]:text-[#41a463] [&_a:active]:text-[#4183c4]
+      [&_h1]:mt-[1em] [&_h1]:mb-3.75 [&_h1]:p-0 [&_h1]:text-3xl [&_h1]:font-bold [&_h1]:leading-[1.7] [&_h1]:text-[#222]
+      [&_h2]:mt-[1em] [&_h2]:mb-3.75 [&_h2]:p-0 [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:leading-[1.7] [&_h2]:text-[#222]
+      [&_h3]:mt-[1em] [&_h3]:mb-3.75 [&_h3]:p-0 [&_h3]:text-xl [&_h3]:font-bold [&_h3]:leading-[1.7] [&_h3]:text-[#222]
+      [&_h4]:mt-[1em] [&_h4]:mb-3.75 [&_h4]:p-0 [&_h4]:text-lg [&_h4]:font-bold [&_h4]:leading-[1.7] [&_h4]:text-[#666]
+      [&_h5]:mt-[1em] [&_h5]:mb-3.75 [&_h5]:p-0 [&_h5]:font-bold [&_h5]:leading-[1.7] [&_h5]:text-[#222]
+      [&_h6]:mt-[1em] [&_h6]:mb-3.75 [&_h6]:p-0 [&_h6]:font-bold [&_h6]:leading-[1.7] [&_h6]:text-[#222]
+      max-sm:[&_h1]:leading-[1.4] max-sm:[&_h2]:leading-[1.4] max-sm:[&_h3]:leading-[1.4] max-sm:[&_h4]:leading-[1.4] max-sm:[&_h5]:leading-[1.4] max-sm:[&_h6]:leading-[1.4]
+      [&_p]:my-3.75
+      [&_ul]:my-3.75 [&_ul]:pl-7.5 [&_ul]:list-disc
+      [&_ol]:my-3.75 [&_ol]:pl-7.5 [&_ol]:list-decimal
+      [&_ol_ul]:my-0 [&_ul_ol]:my-0 [&_ul_ul]:my-0 [&_ol_ol]:my-0
+      [&_ul_ul]:list-[circle] [&_ol_ul]:list-[circle]
+      [&_img]:max-w-full [&_.gmnoprint_img]:max-w-none
+      [&_hr]:border-[1.5px] [&_hr]:border-[#a8b9a8] [&_hr]:rounded-[0.75px]
+      [&_pre]:my-5 [&_pre]:overflow-x-auto [&_pre]:overflow-y-hidden [&_pre]:border [&_pre]:border-[#ddd] [&_pre]:bg-[#efefef] [&_pre]:text-[85%] [&_pre]:shadow-[3px_3px_rgba(0,0,0,0.1)] [&_pre]:pt-1.75 [&_pre]:pr-1.75 [&_pre]:pb-1.75 [&_pre]:pl-2.5
+      [&_pre_code]:inline-block [&_pre_code]:min-w-full [&_pre_code]:whitespace-pre [&_pre_code]:pr-[0.5em]
+      [&_code]:font-mono
+      [&_kbd]:m-0.5 [&_kbd]:bg-[#f0f0f0] [&_kbd]:border-2 [&_kbd]:border-[#999] [&_kbd]:rounded-md [&_kbd]:[border-style:outset] [&_kbd]:p-0.75 [&_kbd]:text-[75%] [&_kbd]:font-[475] [&_kbd]:whitespace-nowrap
+      [&_blockquote]:my-[1.8em] [&_blockquote]:mx-[0.8em] [&_blockquote]:border-l-2 [&_blockquote]:border-[#666] [&_blockquote]:px-[1em] [&_blockquote]:py-[0.1em] [&_blockquote]:text-[22px] [&_blockquote]:italic [&_blockquote]:text-[#666]
+      [&_.highlight]:my-5 [&_.highlight]:overflow-scroll [&_.highlight]:border [&_.highlight]:border-[#ddd] [&_.highlight]:bg-[#efefef] [&_.highlight]:text-[85%] [&_.highlight]:shadow-[3px_3px_rgba(0,0,0,0.1)] [&_.highlight]:pt-1.75 [&_.highlight]:pr-1.75 [&_.highlight]:pb-1.75 [&_.highlight]:pl-2.5
+      [&_.highlight_.c]:text-[#586e75] [&_.highlight_.err]:text-[#93a1a1] [&_.highlight_.g]:text-[#93a1a1] [&_.highlight_.k]:text-[#859900] [&_.highlight_.l]:text-[#93a1a1]
+      [&_.highlight_.n]:text-[#93a1a1] [&_.highlight_.o]:text-[#859900] [&_.highlight_.x]:text-[#cb4b16] [&_.highlight_.p]:text-[#93a1a1] [&_.highlight_.cm]:text-[#586e75]
+      [&_.highlight_.cp]:text-[#859900] [&_.highlight_.c1]:text-[#586e75] [&_.highlight_.cs]:text-[#859900] [&_.highlight_.gd]:text-[#2aa198] [&_.highlight_.ge]:text-[#93a1a1] [&_.highlight_.ge]:italic
+      [&_.highlight_.gr]:text-[#dc322f] [&_.highlight_.gh]:text-[#cb4b16] [&_.highlight_.gi]:text-[#859900] [&_.highlight_.go]:text-[#93a1a1] [&_.highlight_.gp]:text-[#93a1a1]
+      [&_.highlight_.gs]:text-[#93a1a1] [&_.highlight_.gs]:font-bold [&_.highlight_.gu]:text-[#cb4b16] [&_.highlight_.gt]:text-[#93a1a1] [&_.highlight_.kc]:text-[#cb4b16]
+      [&_.highlight_.kd]:text-[#268bd2] [&_.highlight_.kn]:text-[#859900] [&_.highlight_.kp]:text-[#859900] [&_.highlight_.kr]:text-[#268bd2] [&_.highlight_.kt]:text-[#dc322f]
+      [&_.highlight_.ld]:text-[#93a1a1] [&_.highlight_.m]:text-[#2aa198] [&_.highlight_.s]:text-[#2aa198] [&_.highlight_.na]:text-[#93a1a1] [&_.highlight_.nb]:text-[#b58900]
+      [&_.highlight_.nc]:text-[#268bd2] [&_.highlight_.no]:text-[#cb4b16] [&_.highlight_.nd]:text-[#268bd2] [&_.highlight_.ni]:text-[#cb4b16] [&_.highlight_.ne]:text-[#cb4b16]
+      [&_.highlight_.nf]:text-[#268bd2] [&_.highlight_.nl]:text-[#93a1a1] [&_.highlight_.nn]:text-[#93a1a1] [&_.highlight_.nx]:text-[#555] [&_.highlight_.py]:text-[#93a1a1]
+      [&_.highlight_.nt]:text-[#268bd2] [&_.highlight_.nv]:text-[#268bd2] [&_.highlight_.ow]:text-[#859900] [&_.highlight_.w]:text-[#93a1a1] [&_.highlight_.mf]:text-[#2aa198]
+      [&_.highlight_.mh]:text-[#2aa198] [&_.highlight_.mi]:text-[#2aa198] [&_.highlight_.mo]:text-[#2aa198] [&_.highlight_.sb]:text-[#586e75] [&_.highlight_.sc]:text-[#2aa198]
+      [&_.highlight_.sd]:text-[#93a1a1] [&_.highlight_.s2]:text-[#2aa198] [&_.highlight_.se]:text-[#cb4b16] [&_.highlight_.sh]:text-[#93a1a1] [&_.highlight_.si]:text-[#2aa198]
+      [&_.highlight_.sx]:text-[#2aa198] [&_.highlight_.sr]:text-[#dc322f] [&_.highlight_.s1]:text-[#2aa198] [&_.highlight_.ss]:text-[#2aa198] [&_.highlight_.bp]:text-[#268bd2]
+      [&_.highlight_.vc]:text-[#268bd2] [&_.highlight_.vg]:text-[#268bd2] [&_.highlight_.vi]:text-[#268bd2] [&_.highlight_.il]:text-[#2aa198]">
       {{ content }}
     </div>
 
-    <div class="wrapper-footer">
-      <div class="container">
-        <footer class="footer">
-          {% include svg-icons.html %}
+    <div class="mt-12.5 border-y border-[#ddd] bg-[#eee]">
+      <div class="mx-auto w-full max-w-185 px-2.5">
+        <footer class="py-5 text-center">
+          <div class="flex flex-wrap items-center justify-center gap-2">
+            {% include "svg-icons.html" %}
+          </div>
         </footer>
       </div>
     </div>
     
-    <div class="container copyright">
-      <p>
+    <div class="mx-auto w-full max-w-185 px-2.5 text-center text-[65%] italic text-[#666] [&_a]:text-[#4183c4] [&_a:visited]:text-[#209c52] [&_a:hover]:text-[#4183c4] [&_a:active]:text-[#4183c4] [&_p]:my-3.75">
+      <p class="my-3.75">
         Avatar image from
         <a href="https://pixabay.com/en/dragon-cartoon-reptile-snake-baby-2023884/">here</a>,
         licensed Creative Commons Zero
         &nbsp;&#8212;&nbsp;
         Please report any broken links <a href="https://twitter.com/pylogging">@pylogging</a>
       </p>
-      <p>
-        © Copyright 2018-2022 Brian Skinn &nbsp;&mdash;&nbsp; All content licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> (CC BY 4.0).
+      <p class="my-3.75">
+        &copy; Copyright 2018-2026 Brian Skinn &nbsp;&mdash;&nbsp; All content licensed under a <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a> (CC BY 4.0).
       </p>
     </div>
 
-    {% include analytics.html %}
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML" type="text/javascript"></script>
   </body>
 </html>

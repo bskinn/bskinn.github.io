@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'My How and Why: Aliases, Functions, Symlinks and Shortcuts'
-tags: how-why cli bash cmd
+tags: [how-why, cli, bash, cmd]
 ---
 
 I spend a decent amount of time at the commandline, for various reasons.
@@ -215,8 +215,8 @@ is to allow easy access to multiple
 locally-compiled versions of Python. While there are tools
 out there that provide for automatic management of Python
 versions
-(e.g., `pyenv` {% include gh.html user="pyenv" repo="pyenv" %}
-and `pyflow` {% include gh.html user="David-OConnor" repo="pyflow" %}),
+(e.g., `pyenv` {% include "gh.html", user: "pyenv", repo: "pyenv" %}
+and `pyflow` {% include "gh.html", user: "David-OConnor", repo: "pyflow" %}),
 I would rather have more direct control over
 what's installed and how it's compiled. For per-user installs,
 I install my custom
@@ -405,7 +405,7 @@ C:\Temp>python3.8-sl test.py
 
 ... I get a system error:
 
-{% include img.html path="howwhy-general/symlink-pyerror.png" alt="System error from symlink" %}
+{% include "img.html", path: "howwhy-general/symlink-pyerror.png", alt: "System error from symlink" %}
 
 So, not knowing exactly what's going on here, and given the friction involved in creating
 the things, I'll be continuing to avoid Windows symlinks for the time being.

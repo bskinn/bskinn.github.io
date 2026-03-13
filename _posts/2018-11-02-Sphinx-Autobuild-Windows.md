@@ -1,19 +1,19 @@
 ---
 layout: post
 title: Setting up sphinx-autobuild on Windows
-tags: sphinx
+tags: [sphinx]
 ---
 
 I write the documentation for [all of my side projects](https://readthedocs.org/profiles/bskinn/) in
-Sphinx {% include pypi.html project="sphinx" %}
-{% include gh.html user="sphinx-doc" repo="sphinx" %},
+Sphinx {% include "pypi.html", project: "sphinx" %}
+{% include "gh.html", user: "sphinx-doc", repo: "sphinx" %},
 as it's more or less the standard for Python docs.
 One of the ongoing pain points has been having to
 re-run `make`/`make.bat` every time I want to view
 the rendered docs after an edit.
 I don't recall where I came across it, but I've found
-`sphinx-autobuild` {% include pypi.html project="sphinx-autobuild" %}
-{% include gh.html user="GaretJax" repo="sphinx-autobuild" %} to work
+`sphinx-autobuild` {% include "pypi.html", project: "sphinx-autobuild" %}
+{% include "gh.html", user: "GaretJax", repo: "sphinx-autobuild" %} to work
 quite nicely, as the name suggests,
 to automatically rebuild the docset every time I
 save changes to the source. However, the README for the project only has instructions for
@@ -48,7 +48,7 @@ if errorlevel 9009 (
 	echo.may add the Sphinx directory to PATH.
 	echo.
 	echo.If you don't have Sphinx installed, grab it from
-	echo.http://sphinx-doc.org/
+	echo.https://sphinx-doc.org/
 	exit /b 1
 )
 

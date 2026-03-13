@@ -1,11 +1,11 @@
 ---
 layout: post
 title: 'My How and Why: pyproject.toml &amp; the &#39;src&#39; Project Structure'
-tags: python how-why packaging testing
+tags: [python, how-why, packaging, testing]
 ---
 
 **UPDATE 4 (5 May 2020):** In addition to the links below,
-Brett Cannon {% include tw.html user="brettsky" %} wrote a
+Brett Cannon {% include "tw.html", user: "brettsky" %} wrote a
 [new post](https://snarky.ca/what-the-heck-is-pyproject-toml/)
 in March 2020 providing further background on PEP517/518
 and `pyproject.toml`, and showing a couple of examples of
@@ -24,7 +24,7 @@ packaging knowledge, here are a few links to some introductory material for the 
 - [Projects under the PyPA Umbrella](https://github.com/pypa/)
 
 **UPDATE 2 (16 May 2019):** With the release of pip v19.1.1
-{% include pypi.html project="pip" version="19.1.1" %}, editable installs are
+{% include "pypi.html", project: "pip", version: "19.1.1" %}, editable installs are
 again allowed in the presence of `pyproject.toml`. Both the `pip install -e .` and
 `python setup.py develop` approaches should now work.
 [Discussion is ongoing](https://discuss.python.org/t/specification-of-editable-installation/1564)
@@ -44,14 +44,14 @@ At various points over the last year or so, I'd heard or seen various things
 about the new `pyproject.toml` file and how it interacts with Python packaging---in
 particular, I'd listened to the
 [Python Bytes](https://pythonbytes.fm/episodes/show/100/the-big-100-with-special-guests)
-{% include tw.html user="pythonbytes" %}
+{% include "tw.html", user: "pythonbytes" %}
 and [Test and Code](https://testandcode.com/52)
-{% include tw.html user="testandcode" %} episodes that covered it.
+{% include "tw.html", user: "testandcode" %} episodes that covered it.
 I'd also paid passing attention to the various debates about the merits of
 the `src` and non-`src` approaches to structuring projects.
 The most compelling argument I'd seen for `src` was made by
 [Hynek Schlawack](https://hynek.me/articles/testing-packaging/)
-{% include tw.html user="hynek" %}:
+{% include "tw.html", user: "hynek" %}:
 
 <img src="https://i.imgflip.com/2u49r0.jpg"
 title="You /dev/null-ed my father. Prepare to die."
@@ -67,8 +67,8 @@ on the state of Python packaging (covered not long ago on
 though, it got me curious enough to seriously attempt a conversion both to
 `pyproject.toml` and a `src` project layout. I needed to tweak one of my
 Python packages and put out a new patch version anyways (`stdio-mgr`
-{% include pypi.html project="stdio-mgr" %}
-{% include gh.html user="bskinn" repo="stdio-mgr" %}),
+{% include "pypi.html", project: "stdio-mgr" %}
+{% include "gh.html", user: "bskinn", repo: "stdio-mgr" %}),
 so it seemed like a natural time
 to put in the work to get these in place. The main
 resources I used in this process were Bernat's series, the above

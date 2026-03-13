@@ -2,23 +2,26 @@
 layout: default
 ---
 
-<article class="post">
-  <h1>{{ page.title }}</h1>
+<article>
+  <h1>{{ title }}</h1>
 
-  {% if page.tags.size > 0 %}
-    {% assign taglist = page.tags | sort %}
-    <span class="taglist">[{% for tag in taglist %} 
-      <a class="tag" href="{{ site.baseurl }}/tag/{{ tag }}"><span class="tagsingle">{{ tag }}</span></a> {% endfor %}]
+  {% if tags and tags.size > 0 %}
+    {% assign taglist = tags | sort %}
+    <span class="text-[80%] tracking-[1px] text-[#0f3b21]">[{% for tag in taglist %} 
+      {% if tag != "post" %}
+      <a class="text-inherit" href="{{ site.baseurl }}/tags/{{ tag }}/"><span class="whitespace-nowrap bg-[#effadc] [hyphens:none]">{{ tag }}</span></a>
+      {% endif %}
+      {% endfor %}]
       </span>
   {% endif %}
 
-  <div class="entry">
+  <div class="[&>*:first-child]:mt-0 [&>*:last-child]:mb-0">
     {{ content }}
   </div>
 
-  <div class="date">
-    Written on {{ page.date | date: "%B %e, %Y" }}
+  <div class="italic text-[#666]">
+    Written on {{ date | date: "%B %e, %Y" }}
   </div>
 
-  {% include disqus.html %}
+  {% include "disqus.html" %}
 </article>

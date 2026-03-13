@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'KSotD (Word): Paste As Text -- Ctrl+Alt+Shift+Space'
-tags: ksotd word
+tags: [ksotd, word]
 ---
 
 I do a lot of writing at work. 
@@ -12,7 +12,7 @@ Proposals... reports... emails, you name it. And, in many cases I'm copying cont
 
 Buuuut, a lot of the time it's *not* what I want. I just want the text, without the snappy font and oh-so-carefully-chosen background shading color. So, I use the `Keep Text Only` paste mode quite a bit, to discard all of the formatting:
 
-{% include img.html path="ksotd/CAS_Space-1.png" width="246px" alt="Screenshot of 'Keep Text Only' context menu" %}
+{% include "img.html", path: "ksotd/CAS_Space-1.png", width: "246px", alt: "Screenshot of 'Keep Text Only' context menu" %}
 
 In addition to this being one of the choices in the `Paste Options` section of the context menu, there's also an old-style, sequential-press keyboard shortcut to get to it: <kbd>Alt</kbd>-<kbd>H</kbd>-<kbd>V</kbd>-<kbd>T</kbd>, which I use heavily. It's been a *really* long time since I've worked with a pre-Ribbon version of Office, so I have no clue why the first keypress is `H`. But, I assume `V` was associated with the <kbd>Ctrl</kbd>+<kbd>V</kbd> of `Paste` or `Paste Special`, straightforwardly enough, and `T` makes sense for a `Text Only` option.
 

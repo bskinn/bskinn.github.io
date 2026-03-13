@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 'numpy 2-D Array Axis Ordering & meshgrid Behavior'
-tags: python numpy visualization
+tags: [python, numpy, visualization]
 ---
 
 I've been working lately with data generated from an optical profilometer ([this one](https://nanovea.com/wp-content/themes/wp-nanovea/images/images/ST400.jpg)), which consists of an array of $$z$$ values mapped across a 2-D grid in $$x$$ and $$y$$. I'm needing to manipulate it in various ways in Python---plotting, leveling, fitting, etc.---and many of these operations require the underlying grid to be explicitly specified.  [`numpy.meshgrid`](https://docs.scipy.org/doc/numpy/reference/generated/numpy.meshgrid.html) is a handy function for this, but its axis ordering assumptions have been somewhat awkward to keep straight.

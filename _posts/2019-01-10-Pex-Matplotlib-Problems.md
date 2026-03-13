@@ -1,18 +1,18 @@
 ---
 layout: post
 title: 'Bootstrap Problems in pex Packages'
-tags: packaging pex python
+tags: [packaging, pex, python]
 ---
 
-In [this post]({% post_url 2018-12-04-First-Attempt-pex %}), I laid out an initial attempt
-at a `pex` {% include pypi.html project="pex" %} workflow for packaging data analysis
+In [this post](/First-Attempt-pex/), I laid out an initial attempt
+at a `pex` {% include "pypi.html", project: "pex" %} workflow for packaging data analysis
 code for easy use by others.  I still stand by the method in general; however, I ran into
 some problems with this particular application.
 
 For reasons I don't fully understand (and which **MAY** be fixable with, say, the correct
 `pex` options, or a more tightly/fully specified `requirements-pex.txt`, or a precise
 Python version match, or ...), when unpacking `matplotlib`
-{% include pypi.html project="matplotlib" %} on a user's machine, `pex` fails
+{% include "pypi.html", project: "matplotlib" %} on a user's machine, `pex` fails
 to populate various critical resource directories (at all? in the right sequence?).
 This leads to a `FileNotFoundError` being raised during what appears to be the initial
 activation of the packaged environment:
@@ -72,7 +72,7 @@ sre_constants.error: bad escape \p at position 11
 ```
 
 A similar explosion happened with a `.pex` containing just `requests`
-{% include pypi.html project="requests" %} and dependencies. So, seems `pex`
+{% include "pypi.html", project: "requests" %} and dependencies. So, seems `pex`
 is not as straightforward as I first thought.  Too bad, it seemed very promising!
 
 

@@ -4,38 +4,19 @@ title: Tags
 permalink: /tags/
 ---
 
-{% for tag in site.tags %}
-  {% assign taglist = taglist | append: tag[0] | append: " " %}
-{% endfor %}
+{% assign taglist = collections.tagList %}
 
-{% assign taglist = taglist | strip | split: " " | sort %}
-
-<div class="tagpage">
-{%- assign prev_initial = "!" -%}
-{%- assign prev_is_colored = 0 -%}<div>
-{%- for tagname in taglist -%}
-  {%- assign curr_initial = tagname | slice: 0 -%}
-  {%- if prev_initial != curr_initial -%}
-    {% if prev_is_colored == 0 %}
-      </div>
-      <div style="background-color: #f8fff8;">{%- assign prev_is_colored = 1 -%}
-    {% else %}
-      </div>
-      <div>{%- assign prev_is_colored = 0 -%}
-    {% endif %}
-    <div style="padding-top: 12px;"><span style="font-size: 105%;"><strong>{{- curr_initial | upcase -}}</strong></span></div>
-  {%- endif -%}
-  {%- for tp in site.tagpages -%}
-    {%- if tp.tag == tagname -%}{%- assign tagurl = tp.url -%}{%- endif -%}
+<div class="leading-[80%]">
+  {%- assign prev_initial = "!" -%}
+  {%- for tagname in taglist -%}
+    {%- assign curr_initial = tagname | initial -%}
+    {%- if prev_initial != curr_initial -%}
+      <div class="mt-3 border-b border-[#e5e7eb] pt-3 text-[105%]"><strong>{{- curr_initial | upcase -}}</strong></div>
+    {%- endif -%}
+    {%- assign numposts = collections[tagname] | size -%}
+    <p class="text-[90%] tracking-[1px] text-[#0f3b21]">
+      <a class="text-inherit" href="/tags/{{- tagname -}}/"><span class="whitespace-nowrap bg-[#effadc] [hyphens:none]"><strong>{{- tagname -}}</strong></span> <em>{%- render "tagdesc.html", tagname: tagname %} ({{- numposts -}})</em></a>
+    </p>
+    {%- assign prev_initial = curr_initial -%}
   {%- endfor -%}
-  {%- for t in site.tags -%}
-    {%- if t[0] == tagname -%}{%- assign numposts = t[1] | size -%}{%- endif -%}
-  {%- endfor %}
-  <p class="taglist" style="font-size: 90%;">
-  <a class="tag" href="{{- tagurl -}}"><span class="tagsingle"><strong>{{- tagname -}}</strong></span> <em> {%- include tagdesc.html tagname=tagname %} ({{- numposts -}})</em></a>
-  </p>
-  {%- assign prev_initial = curr_initial -%}
-{%- endfor -%}
 </div>
-</div>
-
