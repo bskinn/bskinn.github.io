@@ -1,6 +1,6 @@
 {
   "name": "from python import logging",
-  "description": "Thoughts and notes of a Python hobbyist",
+  "description": "Thoughts and notes of a Python polyglot",
   "avatar": "https://bskinn.github.io/images/pyish-dragon.png",
   "url": "https://bskinn.github.io",
   "baseurl": "",
@@ -14,9 +14,10 @@
     "github": "bskinn",
     "instagram": null,
     "linkedin": "bskinn",
+    "mastodon": "fosstodon.org/@btskinn",
     "pinterest": null,
     "rss": "fpil",
-    "twitter": "pylogging",
+    "twitter": null,
     "stackoverflow": "users/4376000/hby2py",
     "youtube": null,
     "googleplus": null
